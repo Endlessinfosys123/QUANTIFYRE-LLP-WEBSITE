@@ -36,9 +36,9 @@ export default function Navbar() {
                 <div className="flex justify-between items-center">
                     {/* Logo */}
                     <Link href="/" className="relative z-10 flex items-center gap-2">
-                        <div className="relative w-40 h-10">
+                        <div className="relative w-44 h-11">
                             <Image
-                                src="https://quantifyrellp.vercel.app/logo.png"
+                                src="/logo-navbar.png"
                                 alt="QUANTIFYRE Logo"
                                 fill
                                 className="object-contain"
