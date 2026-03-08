@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import ThemeProvider from '@/components/layout/ThemeProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,13 +23,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body className={`${inter.className} bg-background text-foreground min-h-screen flex flex-col`}>
-        <Navbar />
-        <main className="flex-grow pt-0">
-          {children}
-        </main>
-        <Footer />
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <body className={`${inter.className} min-h-screen flex flex-col`} style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-foreground)' }}>
+        <ThemeProvider>
+          <Navbar />
+          <main className="flex-grow pt-0">
+            {children}
+          </main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

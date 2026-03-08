@@ -1,8 +1,74 @@
 @import "tailwindcss";
 
+/* =========================================
+   DARK THEME (default)
+   ========================================= */
+:root,
+.dark {
+  --color-background: #080C12;
+  --color-background-2: #0D1420;
+  --color-foreground: #E8F0FF;
+  --color-foreground-muted: rgba(232, 240, 255, 0.55);
+  --color-primary: #1B6D85;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #0E4D5C;
+  --color-accent: #3CCF6D;
+  --color-accent-foreground: #000000;
+  --color-card-bg: rgba(255, 255, 255, 0.025);
+  --color-card-border: rgba(27, 109, 133, 0.22);
+  --color-card-hover-bg: rgba(27, 109, 133, 0.1);
+  --color-card-hover-border: rgba(60, 207, 109, 0.5);
+  --color-glass-bg: rgba(8, 12, 18, 0.82);
+  --color-glass-border: rgba(255, 255, 255, 0.06);
+  --color-divider: rgba(255, 255, 255, 0.07);
+  --color-badge-bg: rgba(60, 207, 109, 0.08);
+  --color-badge-border: rgba(60, 207, 109, 0.35);
+  --color-input-bg: rgba(255, 255, 255, 0.05);
+  --color-input-border: rgba(255, 255, 255, 0.1);
+  --color-input-text: #E8F0FF;
+  --color-input-placeholder: rgba(232, 240, 255, 0.25);
+  --color-section-alt: rgba(0, 0, 0, 0.35);
+  --shadow-glow-primary: 0 0 40px rgba(27, 109, 133, 0.4);
+  --shadow-glow-accent: 0 0 30px rgba(60, 207, 109, 0.3);
+}
+
+/* =========================================
+   LIGHT THEME
+   ========================================= */
+.light {
+  --color-background: #F2F6FF;
+  --color-background-2: #FFFFFF;
+  --color-foreground: #0A1628;
+  --color-foreground-muted: rgba(10, 22, 40, 0.62);
+  --color-primary: #155F74;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #0B3D4D;
+  --color-accent: #18A74A;
+  --color-accent-foreground: #ffffff;
+  --color-card-bg: rgba(255, 255, 255, 0.9);
+  --color-card-border: rgba(27, 109, 133, 0.15);
+  --color-card-hover-bg: rgba(27, 109, 133, 0.05);
+  --color-card-hover-border: rgba(21, 95, 116, 0.4);
+  --color-glass-bg: rgba(242, 246, 255, 0.9);
+  --color-glass-border: rgba(21, 95, 116, 0.15);
+  --color-divider: rgba(10, 22, 40, 0.09);
+  --color-badge-bg: rgba(21, 95, 116, 0.08);
+  --color-badge-border: rgba(21, 95, 116, 0.28);
+  --color-input-bg: rgba(255, 255, 255, 0.95);
+  --color-input-border: rgba(21, 95, 116, 0.2);
+  --color-input-text: #0A1628;
+  --color-input-placeholder: rgba(10, 22, 40, 0.35);
+  --color-section-alt: rgba(21, 95, 116, 0.05);
+  --shadow-glow-primary: 0 8px 32px rgba(21, 95, 116, 0.2);
+  --shadow-glow-accent: 0 8px 24px rgba(24, 167, 74, 0.2);
+}
+
+/* =========================================
+   TAILWIND COLOR TOKENS
+   ========================================= */
 @theme {
-  --color-background: #0B0F14;
-  --color-foreground: #ffffff;
+  --color-background: #080C12;
+  --color-foreground: #E8F0FF;
   --color-primary: #1B6D85;
   --color-primary-foreground: #ffffff;
   --color-secondary: #0E4D5C;
@@ -10,37 +76,96 @@
   --color-accent-foreground: #000000;
 }
 
+/* =========================================
+   BASE STYLES
+   ========================================= */
 @layer base {
+  * {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.25s ease, box-shadow 0.3s ease;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     @apply antialiased;
   }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-background);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 3px;
+  }
 }
 
+/* =========================================
+   GLASSMORPHISM COMPONENTS
+   ========================================= */
 .glass {
-  background: rgba(11, 15, 20, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  border-bottom: 1px solid var(--color-glass-border);
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(27, 109, 133, 0.2);
-  border-radius: 1.25rem;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--color-card-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--color-card-border);
+  border-radius: 1.5rem;
+  transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+  color: var(--color-foreground);
 }
 
 .glass-card:hover {
-  background: rgba(27, 109, 133, 0.1);
-  border-color: rgba(60, 207, 109, 0.5);
-  box-shadow: 0 8px 30px rgba(27, 109, 133, 0.15), 0 0 15px rgba(60, 207, 109, 0.1);
+  background: var(--color-card-hover-bg);
+  border-color: var(--color-card-hover-border);
+  box-shadow: 0 12px 40px rgba(27, 109, 133, 0.15), 0 0 20px rgba(60, 207, 109, 0.06);
   transform: translateY(-5px);
 }
 
+/* =========================================
+   FORMS — THEME AWARE
+   ========================================= */
+.theme-input {
+  background: var(--color-input-bg);
+  border: 1px solid var(--color-input-border);
+  color: var(--color-input-text);
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.theme-input::placeholder {
+  color: var(--color-input-placeholder);
+}
+
+.theme-input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 2px rgba(27, 109, 133, 0.2);
+}
+
+/* =========================================
+   SECTION ALT BACKGROUND
+   ========================================= */
+.section-alt {
+  background: var(--color-section-alt);
+  border-top: 1px solid var(--color-divider);
+  border-bottom: 1px solid var(--color-divider);
+}
+
+/* =========================================
+   TYPOGRAPHY UTILITIES
+   ========================================= */
 .gradient-text {
   background-clip: text;
   -webkit-background-clip: text;
@@ -48,6 +173,182 @@
   background-image: linear-gradient(135deg, #3CCF6D 0%, #1B6D85 100%);
 }
 
+.light .gradient-text {
+  background-image: linear-gradient(135deg, #155F74 0%, #18A74A 100%);
+}
+
 .gradient-bg {
-  background: linear-gradient(135deg, rgba(27, 109, 133, 0.2) 0%, rgba(11, 15, 20, 1) 100%);
+  background: linear-gradient(135deg, rgba(27, 109, 133, 0.15) 0%, var(--color-background) 100%);
+}
+
+.text-muted {
+  color: var(--color-foreground-muted);
+}
+
+.text-fg {
+  color: var(--color-foreground);
+}
+
+.border-divider {
+  border-color: var(--color-divider);
+}
+
+/* =========================================
+   ANIMATED FLOATING ELEMENTS
+   ========================================= */
+.float-animate {
+  animation: floatUpDown 4s ease-in-out infinite;
+}
+
+.float-animate-delay {
+  animation: floatUpDown 5s ease-in-out infinite 1s;
+}
+
+.float-animate-slow {
+  animation: floatUpDown 7s ease-in-out infinite 0.5s;
+}
+
+@keyframes floatUpDown {
+
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-16px) rotate(2deg);
+  }
+}
+
+.pulse-ring {
+  animation: pulseRing 2.8s ease-out infinite;
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.7;
+  }
+
+  70% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+}
+
+.shimmer-line {
+  background: linear-gradient(90deg, transparent 0%, rgba(60, 207, 109, 0.5) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.spin-slow {
+  animation: spinSlow 14s linear infinite;
+}
+
+@keyframes spinSlow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.counter-number {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Glow orb backgrounds */
+.orb-primary {
+  background: var(--color-primary);
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.orb-accent {
+  background: var(--color-accent);
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.light .orb-primary {
+  opacity: 0.10;
+}
+
+.light .orb-accent {
+  opacity: 0.08;
+}
+
+/* =========================================
+   SERVICE ICON GLOWS
+   ========================================= */
+.service-glow-marketing {
+  box-shadow: inset 0 0 20px rgba(255, 140, 0, 0.22), 0 0 12px rgba(255, 140, 0, 0.08);
+}
+
+.service-glow-web {
+  box-shadow: inset 0 0 20px rgba(27, 109, 133, 0.3), 0 0 12px rgba(27, 109, 133, 0.12);
+}
+
+.service-glow-software {
+  box-shadow: inset 0 0 20px rgba(160, 32, 240, 0.25), 0 0 12px rgba(160, 32, 240, 0.08);
+}
+
+.service-glow-app {
+  box-shadow: inset 0 0 20px rgba(60, 207, 109, 0.25), 0 0 12px rgba(60, 207, 109, 0.08);
+}
+
+.service-glow-automation {
+  box-shadow: inset 0 0 20px rgba(255, 60, 80, 0.22), 0 0 12px rgba(255, 60, 80, 0.08);
+}
+
+.service-glow-ai {
+  box-shadow: inset 0 0 20px rgba(0, 180, 255, 0.25), 0 0 12px rgba(0, 180, 255, 0.08);
+}
+
+/* =========================================
+   BADGE COMPONENT
+   ========================================= */
+.badge-glow {
+  background: var(--color-badge-bg);
+  border: 1px solid var(--color-badge-border);
+  box-shadow: 0 0 16px rgba(60, 207, 109, 0.1);
+}
+
+/* =========================================
+   MESH GRADIENTS
+   ========================================= */
+.mesh-gradient-dark {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(27, 109, 133, 0.18) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(60, 207, 109, 0.09) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(14, 77, 92, 0.12) 0%, transparent 55%);
+}
+
+.mesh-gradient-light {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(21, 95, 116, 0.1) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(24, 167, 74, 0.07) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(14, 77, 92, 0.06) 0%, transparent 55%);
 }
