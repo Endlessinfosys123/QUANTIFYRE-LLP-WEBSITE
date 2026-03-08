@@ -9,13 +9,43 @@ import { useTheme } from "@/components/layout/ThemeProvider";
 
 export default function ContactPage() {
     const [submitted, setSubmitted] = useState(false);
+    const [sending, setSending] = useState(false);
+    const [error, setError] = useState<string | null>(null);
     const { theme } = useTheme();
     const isLight = theme === "light";
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setSubmitted(true);
-        setTimeout(() => setSubmitted(false), 5000);
+        setSending(true);
+        setError(null);
+
+        const formData = new FormData(e.currentTarget);
+        const data = {
+            name: formData.get("name"),
+            email: formData.get("email"),
+            company: formData.get("company"),
+            message: formData.get("message"),
+        };
+
+        try {
+            const response = await fetch("/api/contact", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            });
+
+            if (response.ok) {
+                setSubmitted(true);
+                // Reset form implicit via setSubmitted hiding the form
+            } else {
+                const errData = await response.json();
+                setError(errData.error || "Failed to send message. Please try again.");
+            }
+        } catch (err) {
+            setError("A network error occurred. Please check your connection.");
+        } finally {
+            setSending(false);
+        }
     };
 
     return (
@@ -90,7 +120,7 @@ export default function ContactPage() {
                                             Full Name
                                         </label>
                                         <input
-                                            required type="text" placeholder="John Doe"
+                                            name="name" required type="text" placeholder="John Doe"
                                             className="theme-input"
                                         />
                                     </div>
@@ -99,7 +129,7 @@ export default function ContactPage() {
                                             Email Address
                                         </label>
                                         <input
-                                            required type="email" placeholder="john@company.com"
+                                            name="email" required type="email" placeholder="john@company.com"
                                             className="theme-input"
                                         />
                                     </div>
@@ -110,7 +140,7 @@ export default function ContactPage() {
                                         Company / Organization
                                     </label>
                                     <input
-                                        type="text" placeholder="Your Company Ltd."
+                                        name="company" type="text" placeholder="Your Company Ltd."
                                         className="theme-input"
                                     />
                                 </div>
@@ -120,21 +150,28 @@ export default function ContactPage() {
                                         How can we help you?
                                     </label>
                                     <textarea
-                                        required rows={4} placeholder="Describe your project, goals, or the solutions you are looking for..."
+                                        name="message" required rows={4} placeholder="Describe your project, goals, or the solutions you are looking for..."
                                         className="theme-input resize-none"
                                     />
                                 </div>
 
+                                {error && (
+                                    <p className="text-red-500 text-sm font-semibold px-1 animate-pulse">
+                                        ⚠️ {error}
+                                    </p>
+                                )}
+
                                 <button
                                     type="submit"
-                                    className="w-full py-4 rounded-xl font-bold text-lg text-white flex justify-center items-center gap-2 group transition-all hover:scale-[1.02]"
+                                    disabled={sending}
+                                    className="w-full py-4 rounded-xl font-bold text-lg text-white flex justify-center items-center gap-2 group transition-all hover:scale-[1.02] disabled:opacity-70 disabled:cursor-not-allowed"
                                     style={{
                                         background: "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
                                         boxShadow: "var(--shadow-glow-primary)"
                                     }}
                                 >
-                                    Send Message
-                                    <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                    {sending ? "Sending..." : "Send Message"}
+                                    {!sending && <Send className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />}
                                 </button>
                             </form>
                         )}

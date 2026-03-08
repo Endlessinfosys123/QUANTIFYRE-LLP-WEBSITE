@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { DbManager } from '@/lib/db/dbManager';
+import { EmailService } from '@/lib/email/emailService';
 
 export async function POST(request: Request) {
     try {
@@ -13,11 +14,22 @@ export async function POST(request: Request) {
             );
         }
 
-        const result = await DbManager.saveContactSubmission(data);
+        // 1. Save to Database (Supabase with MongoDB failover)
+        const dbResult = await DbManager.saveContactSubmission(data);
 
-        if (result.success) {
+        if (dbResult.success) {
+            // 2. Fire-and-forget email notifications (don't block the response)
+            EmailService.sendInquiryNotification({
+                name: data.name,
+                email: data.email,
+                company: data.company,
+                message: data.message,
+            }).catch(emailErr => {
+                console.error('Background Email Error:', emailErr);
+            });
+
             return NextResponse.json(
-                { message: 'Submission successful', source: result.source },
+                { message: 'Submission successful', source: dbResult.source },
                 { status: 200 }
             );
         } else {
