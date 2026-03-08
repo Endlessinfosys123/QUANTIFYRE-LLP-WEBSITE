@@ -33,13 +33,20 @@ export async function POST(request: Request) {
                 { status: 200 }
             );
         } else {
+            console.error('Database Submission Failed:', dbResult.error);
             return NextResponse.json(
-                { error: 'Failed to submit the form. Please try again later.' },
+                {
+                    error: 'Failed to submit the form.',
+                    details: dbResult.error?.message || 'Unknown database error'
+                },
                 { status: 500 }
             );
         }
-    } catch (error) {
+    } catch (error: any) {
         console.error('API Error:', error);
-        return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+        return NextResponse.json({
+            error: 'Internal Server Error',
+            details: error.message
+        }, { status: 500 });
     }
 }

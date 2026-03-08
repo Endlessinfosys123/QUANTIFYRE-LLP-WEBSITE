@@ -13,20 +13,26 @@ export class DbManager {
                 {
                     name: data.name,
                     email: data.email,
-                    phone: data.phone,
+                    company: data.company, // Added company field
+                    phone: data.phone || null, // Handle missing phone
                     message: data.message,
                     created_at: new Date().toISOString(),
                 },
             ]);
 
             if (error) {
-                console.error('Supabase insertion failed:', error);
+                console.error('Supabase insertion error details:', {
+                    message: error.message,
+                    details: error.details,
+                    hint: error.hint,
+                    code: error.code
+                });
                 throw new Error(error.message); // Trigger failover
             }
 
             return { success: true, source: 'supabase' };
-        } catch (supabaseError) {
-            console.warn('Initiating Failover to MongoDB...');
+        } catch (supabaseError: any) {
+            console.warn('Supabase failed, initiating failover to MongoDB. Error:', supabaseError.message);
 
             try {
                 // 2. Fallback to MongoDB
@@ -40,9 +46,10 @@ export class DbManager {
                 });
 
                 return { success: true, source: 'mongodb' };
-            } catch (mongoError) {
-                console.error('MongoDB insertion also failed:', mongoError);
-                return { success: false, source: 'none', error: mongoError };
+            } catch (mongoError: any) {
+                console.error('MongoDB insertion also failed. Error:', mongoError.message);
+                // Return the primary error (Supabase) as it's the main database requested
+                return { success: false, source: 'none', error: supabaseError };
             }
         }
     }
