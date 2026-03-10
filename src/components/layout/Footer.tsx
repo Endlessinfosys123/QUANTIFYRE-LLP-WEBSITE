@@ -185,6 +185,13 @@ export default function Footer() {
                         >
                             Terms of Service
                         </Link>
+                        <Link
+                            href="/data-deletion"
+                            className="text-sm transition-colors"
+                            style={{ color: "var(--color-foreground-muted)", opacity: 0.6 }}
+                        >
+                            Data Deletion
+                        </Link>
                     </div>
                 </div>
             </div>
