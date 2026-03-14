@@ -8,4 +8,6 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY && process.env
     ? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
     : 'placeholder';
 
+console.log('Supabase initialized with URL:', supabaseUrl === 'https://placeholder.supabase.co' ? 'PLACEHOLDER' : 'REAL_URL');
+
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);

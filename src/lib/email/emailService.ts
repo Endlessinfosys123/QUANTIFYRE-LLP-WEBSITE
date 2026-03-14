@@ -8,6 +8,12 @@ const transporter = nodemailer.createTransport({
     },
 });
 
+// Log configuration status (without sensitive data)
+console.log('Email Transport Initialized:', {
+    userSet: !!process.env.GMAIL_USER,
+    passSet: !!process.env.GMAIL_APP_PASSWORD,
+});
+
 const PRIMARY_EMAIL = 'Info.endlessinfosys@gmail.com';
 const SECONDARY_EMAIL = 'contact.quantifyrellp@gmail.com';
 
@@ -43,9 +49,14 @@ export class EmailService {
             const info = await transporter.sendMail(mailOptions);
             console.log('Email sent successfully:', info.messageId);
             return { success: true, messageId: info.messageId };
-        } catch (error) {
-            console.error('Error sending email:', error);
-            return { success: false, error };
+        } catch (error: any) {
+            console.error('Error sending email:', {
+                message: error.message,
+                code: error.code,
+                command: error.command,
+                stack: error.stack
+            });
+            return { success: false, error: error.message };
         }
     }
 }

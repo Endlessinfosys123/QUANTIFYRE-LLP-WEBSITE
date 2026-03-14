@@ -7,7 +7,8 @@ import TiltCard from "@/components/ui/TiltCard";
 import FloatingServiceOrbs from "@/components/ui/FloatingServiceOrbs";
 import Link from 'next/link';
 import { useTheme } from "@/components/layout/ThemeProvider";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
+import PartnerLogos from "@/components/ui/PartnerLogos";
 
 const serviceAccents = ["#FF8C00", "#1B6D85", "#A020F0", "#3CCF6D", "#FF3C50", "#00B4FF"];
 const serviceGlowClass = [
@@ -26,11 +27,43 @@ const processSteps = [
   { icon: TrendingUp, label: "Grow", desc: "Continuous optimisation powered by real-time data and AI insights." },
 ];
 
+const testimonials = [
+  {
+    quote: "QUANTIFYRE transformed our digital presence with their AI-powered solutions. Our conversion rates increased by 300% within just 3 months.",
+    author: "Enterprise Client",
+    role: "Global E-commerce · India",
+    rating: 5,
+    highlight: "300%"
+  },
+  {
+    quote: "The team's expertise in AI automation saved us hundreds of hours in manual processes. They are truly pioneers in neural architectures.",
+    author: "Tech Solutions Inc.",
+    role: "SaaS Provider · USA",
+    rating: 5,
+    highlight: "hundreds of hours"
+  },
+  {
+    quote: "Exceptional quality and speed. They delivered our MVP in record time with a level of sophistication we didn't think possible.",
+    author: "Agile Ventures",
+    role: "Startup Hub · Europe",
+    rating: 5,
+    highlight: "record time"
+  }
+];
+
 export default function Home() {
   const { theme } = useTheme();
   const isLight = theme === "light";
   const processRef = useRef(null);
   const processInView = useInView(processRef, { once: true, margin: "-80px" });
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
 
   const services = [
     { title: 'Digital Marketing', desc: 'AI-driven analytics and strategies that maximise ROI and accelerate brand growth.', icon: <Presentation className="w-10 h-10" />, features: ['SEO & SEM Campaigns', 'Social Media AI', 'Data Analytics'] },
@@ -225,49 +258,66 @@ export default function Home() {
         <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, var(--color-background), transparent, var(--color-background))` }} />
 
         <div className="max-w-4xl mx-auto px-6 relative z-10 text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.92 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.9 }}
-          >
-            <div className="mb-8" style={{ color: "var(--color-accent)" }}>
-              <svg className="w-14 h-14 mx-auto opacity-60" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
-                <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
-              </svg>
-            </div>
+          {testimonials.map((t, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, x: 20 }}
+              animate={activeTestimonial === i ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+              transition={{ duration: 0.8 }}
+              className={activeTestimonial === i ? "block" : "hidden"}
+            >
+              <div className="mb-8" style={{ color: "var(--color-accent)" }}>
+                <svg className="w-14 h-14 mx-auto opacity-60" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                  <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+                </svg>
+              </div>
 
-            <blockquote className="text-2xl md:text-4xl font-light italic leading-relaxed mb-10" style={{ color: "var(--color-foreground)" }}>
-              "QUANTIFYRE transformed our digital presence with their AI-powered solutions. Our conversion rates increased by{" "}
-              <span className="gradient-text font-bold not-italic">300%</span>{" "}
-              within just 3 months."
-            </blockquote>
+              <blockquote className="text-2xl md:text-3xl font-light italic leading-relaxed mb-10" style={{ color: "var(--color-foreground)" }}>
+                "{t.quote.split(t.highlight)[0]}
+                <span className="gradient-text font-bold not-italic">{t.highlight}</span>
+                {t.quote.split(t.highlight)[1]}"
+              </blockquote>
 
-            {/* Star Rating */}
-            <div className="flex justify-center gap-1 mb-6">
-              {[...Array(5)].map((_, i) => (
-                <motion.span
-                  key={i}
-                  initial={{ opacity: 0, scale: 0 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.3 + i * 0.1 }}
-                  className="text-2xl"
-                  style={{ color: "#FFB800" }}
-                >
-                  ★
-                </motion.span>
-              ))}
-            </div>
+              {/* Star Rating */}
+              <div className="flex justify-center gap-1 mb-6">
+                {[...Array(t.rating)].map((_, starIdx) => (
+                  <motion.span
+                    key={starIdx}
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.3 + starIdx * 0.1 }}
+                    className="text-2xl"
+                    style={{ color: "#FFB800" }}
+                  >
+                    ★
+                  </motion.span>
+                ))}
+              </div>
 
-            <div className="flex flex-col items-center gap-1">
-              <div className="w-12 h-[2px] rounded-full mb-4" style={{ background: "var(--color-primary)" }} />
-              <h4 className="font-bold text-lg tracking-wide" style={{ color: "var(--color-foreground)" }}>— Enterprise Client</h4>
-              <p className="text-xs font-semibold tracking-widest uppercase" style={{ color: "var(--color-foreground-muted)" }}>Global E-commerce · India</p>
-            </div>
-          </motion.div>
+              <div className="flex flex-col items-center gap-1">
+                <div className="w-12 h-[2px] rounded-full mb-4" style={{ background: "var(--color-primary)" }} />
+                <h4 className="font-bold text-lg tracking-wide" style={{ color: "var(--color-foreground)" }}>— {t.author}</h4>
+                <p className="text-xs font-semibold tracking-widest uppercase" style={{ color: "var(--color-foreground-muted)" }}>{t.role}</p>
+              </div>
+            </motion.div>
+          ))}
+
+          {/* Testimonial Selectors */}
+          <div className="flex justify-center gap-3 mt-12">
+            {testimonials.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setActiveTestimonial(i)}
+                className={`w-3 h-3 rounded-full transition-all ${activeTestimonial === i ? "w-8" : "opacity-30"}`}
+                style={{ background: "var(--color-primary)" }}
+              />
+            ))}
+          </div>
         </div>
       </section>
+
+      {/* Partner Logos Strip */}
+      <PartnerLogos />
 
       {/* Why Choose Us Strip */}
       <section
