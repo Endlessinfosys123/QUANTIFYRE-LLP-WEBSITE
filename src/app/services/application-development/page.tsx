@@ -5,6 +5,7 @@ import PageHeader from "@/components/ui/PageHeader";
 import TiltCard from "@/components/ui/TiltCard";
 import { Smartphone, MonitorSmartphone, Layers, Fingerprint, Zap, Layers3 } from "lucide-react";
 import Link from "next/link";
+import PartnerLogos from "@/components/ui/PartnerLogos";
 
 export default function ApplicationDevelopmentPage() {
     const features = [
@@ -185,6 +186,9 @@ export default function ApplicationDevelopmentPage() {
                     </div>
                 </div>
             </section>
+
+            {/* Partner Logos Strip */}
+            <PartnerLogos />
 
             {/* CTA Section */}
             <section className="w-full py-32 relative z-10 px-4">

@@ -5,6 +5,7 @@ import PageHeader from "@/components/ui/PageHeader";
 import TiltCard from "@/components/ui/TiltCard";
 import { BrainCircuit, Cpu, Binary, Eye, Speech, Component } from "lucide-react";
 import Link from "next/link";
+import PartnerLogos from "@/components/ui/PartnerLogos";
 
 export default function AIToolsDevelopmentPage() {
     const features = [
@@ -189,6 +190,9 @@ export default function AIToolsDevelopmentPage() {
                     </div>
                 </div>
             </section>
+
+            {/* Partner Logos Strip */}
+            <PartnerLogos />
 
             {/* CTA Section */}
             <section className="w-full py-32 relative z-10 px-4">

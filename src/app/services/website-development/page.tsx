@@ -5,6 +5,7 @@ import PageHeader from "@/components/ui/PageHeader";
 import TiltCard from "@/components/ui/TiltCard";
 import { Zap, Layout, Box, ShoppingCart, MousePointer2, ShieldCheck } from "lucide-react";
 import Link from "next/link";
+import PartnerLogos from "@/components/ui/PartnerLogos";
 
 export default function WebsiteDevelopmentPage() {
     const features = [
@@ -157,6 +158,9 @@ export default function WebsiteDevelopmentPage() {
                     </div>
                 </div>
             </section>
+
+            {/* Partner Logos Strip */}
+            <PartnerLogos />
 
             {/* CTA Section */}
             <section className="w-full py-32 relative z-10 px-4">

@@ -5,6 +5,7 @@ import PageHeader from "@/components/ui/PageHeader";
 import TiltCard from "@/components/ui/TiltCard";
 import { Workflow, Bot, Network, Clock, ShieldAlert, Sparkles } from "lucide-react";
 import Link from "next/link";
+import PartnerLogos from "@/components/ui/PartnerLogos";
 
 export default function AIAutomationsPage() {
     const features = [
@@ -165,6 +166,9 @@ export default function AIAutomationsPage() {
                     </div>
                 </div>
             </section>
+
+            {/* Partner Logos Strip */}
+            <PartnerLogos />
 
             {/* CTA Section */}
             <section className="w-full py-32 relative z-10 px-4">
