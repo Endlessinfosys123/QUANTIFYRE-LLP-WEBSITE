@@ -21,13 +21,20 @@ export class DbManager {
             ]);
 
             if (error) {
+                const isRLSError = error.code === '42501';
                 console.error('Supabase Insertion Error:', {
                     message: error.message,
                     details: error.details,
                     hint: error.hint,
-                    code: error.code
+                    code: error.code,
+                    diagnostics: isRLSError ? 'CRITICAL: Row Level Security (RLS) is blocking inserts. Check Supabase Policies.' : 'Standard database error.'
                 });
-                throw new Error(`Supabase Error: ${error.message}`); // Trigger failover
+                
+                const errorMessage = isRLSError 
+                    ? `RLS Policy Violation: Enable "anon" insert permissions on "contacts" table. (${error.message})`
+                    : `Supabase Error: ${error.message}`;
+                
+                throw new Error(errorMessage); // Trigger failover
             }
 
             console.log('Supabase insertion successful');
