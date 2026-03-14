@@ -45,6 +45,12 @@ export class DbManager {
             try {
                 // 2. Fallback to MongoDB
                 const mongoClient = await clientPromise;
+                
+                if (!mongoClient) {
+                    console.warn('MongoDB failover skipped: MONGODB_URI not configured.');
+                    return { success: false, source: 'none', error: supabaseError };
+                }
+
                 const db = mongoClient.db('quantifyre');
                 const collection = db.collection('contacts');
 

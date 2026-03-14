@@ -9,14 +9,20 @@ const options = {
     },
 };
 
-let client: MongoClient;
-let clientPromise: Promise<MongoClient>;
+const isPlaceholder = !process.env.MONGODB_URI || 
+    process.env.MONGODB_URI.includes('username:password') || 
+    process.env.MONGODB_URI.includes('placeholder');
 
-if (process.env.NODE_ENV === 'development') {
+let client: MongoClient | null = null;
+let clientPromise: Promise<MongoClient | null>;
+
+if (isPlaceholder) {
+    clientPromise = Promise.resolve(null);
+} else if (process.env.NODE_ENV === 'development') {
     // In development mode, use a global variable so that the value
     // is preserved across module reloads caused by HMR (Hot Module Replacement).
     let globalWithMongo = global as typeof globalThis & {
-        _mongoClientPromise?: Promise<MongoClient>;
+        _mongoClientPromise?: Promise<MongoClient | null>;
     };
 
     if (!globalWithMongo._mongoClientPromise) {
