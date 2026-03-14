@@ -18,18 +18,27 @@ export async function POST(request: Request) {
         const dbResult = await DbManager.saveContactSubmission(data);
 
         if (dbResult.success) {
-            // 2. Fire-and-forget email notifications (don't block the response)
-            EmailService.sendInquiryNotification({
-                name: data.name,
-                email: data.email,
-                company: data.company,
-                message: data.message,
-            }).catch(emailErr => {
+            // 2. Await email notification (critical for serverless environments)
+            let emailStatus: any = { success: false, error: 'Not attempted' };
+            try {
+                emailStatus = await EmailService.sendInquiryNotification({
+                    name: data.name,
+                    email: data.email,
+                    company: data.company,
+                    message: data.message,
+                });
+            } catch (emailErr: any) {
                 console.error('Background Email Error:', emailErr);
-            });
+                emailStatus = { success: false, error: emailErr.message };
+            }
 
             return NextResponse.json(
-                { message: 'Submission successful', source: dbResult.source },
+                {
+                    message: 'Submission successful',
+                    source: dbResult.source,
+                    emailSent: emailStatus.success,
+                    emailError: emailStatus.error
+                },
                 { status: 200 }
             );
         } else {

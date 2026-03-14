@@ -21,15 +21,16 @@ export class DbManager {
             ]);
 
             if (error) {
-                console.error('Supabase insertion error details:', {
+                console.error('Supabase Insertion Error:', {
                     message: error.message,
                     details: error.details,
                     hint: error.hint,
                     code: error.code
                 });
-                throw new Error(error.message); // Trigger failover
+                throw new Error(`Supabase Error: ${error.message}`); // Trigger failover
             }
 
+            console.log('Supabase insertion successful');
             return { success: true, source: 'supabase' };
         } catch (supabaseError: any) {
             console.warn('Supabase failed, initiating failover to MongoDB. Error:', supabaseError.message);

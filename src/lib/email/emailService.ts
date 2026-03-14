@@ -1,17 +1,21 @@
 import nodemailer from 'nodemailer';
 
-const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_APP_PASSWORD, // Use an App Password, not your regular password
-    },
-});
-
 // Log configuration status (without sensitive data)
-console.log('Email Transport Initialized:', {
+const isEmailConfigured = !!process.env.GMAIL_USER && !!process.env.GMAIL_APP_PASSWORD;
+
+console.log('Email Configuration Status:', {
     userSet: !!process.env.GMAIL_USER,
     passSet: !!process.env.GMAIL_APP_PASSWORD,
+});
+
+const transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true, // Use SSL
+    auth: {
+        user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_APP_PASSWORD,
+    },
 });
 
 const PRIMARY_EMAIL = 'Info.endlessinfosys@gmail.com';
@@ -24,6 +28,10 @@ export class EmailService {
         company?: string;
         message: string;
     }) {
+        if (!isEmailConfigured) {
+            console.error('Email skipped: Credentials missing. Please set GMAIL_USER and GMAIL_APP_PASSWORD.');
+            return { success: false, error: 'Email service not configured.' };
+        }
         try {
             const mailOptions = {
                 from: `"Quantifyre Website" <${process.env.GMAIL_USER}>`,
