@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import PageHeader from "@/components/ui/PageHeader";
 import TiltCard from "@/components/ui/TiltCard";
 import FloatingServiceOrbs from "@/components/ui/FloatingServiceOrbs";
+import PartnerLogos from "@/components/ui/PartnerLogos";
 import { Presentation, Globe, Code, Brain, Zap, Bot, CheckCircle2 } from "lucide-react";
 import { useTheme } from "@/components/layout/ThemeProvider";
 
@@ -70,9 +71,20 @@ export default function ServicesPage() {
 
     return (
         <div
-            className="flex flex-col items-center overflow-x-hidden min-h-screen pt-20"
+            className="flex flex-col items-center overflow-x-hidden min-h-screen pt-20 relative"
             style={{ background: "var(--color-background)" }}
         >
+            {/* Animated background mesh */}
+            <div className="absolute inset-0 z-0 pointer-events-none opacity-30 overflow-hidden">
+                <div 
+                    className="absolute inset-0"
+                    style={{
+                        backgroundImage: `radial-gradient(circle at 50% 50%, var(--color-primary) 0%, transparent 70%)`,
+                        filter: "blur(120px)",
+                        opacity: 0.1,
+                    }}
+                />
+            </div>
             <PageHeader
                 title="Our"
                 gradientText="Services"
@@ -211,6 +223,9 @@ export default function ServicesPage() {
                     </div>
                 </div>
             </section>
+
+            {/* Partner Logos Strip */}
+            <PartnerLogos />
         </div>
     );
 }

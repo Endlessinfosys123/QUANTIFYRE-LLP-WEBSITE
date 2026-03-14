@@ -5,6 +5,7 @@ import PageHeader from "@/components/ui/PageHeader";
 import FloatingServiceOrbs from "@/components/ui/FloatingServiceOrbs";
 import { Target, Eye, Zap, Shield, Users } from "lucide-react";
 import { useTheme } from "@/components/layout/ThemeProvider";
+import PartnerLogos from "@/components/ui/PartnerLogos";
 
 export default function AboutPage() {
     const { theme } = useTheme();
@@ -270,6 +271,9 @@ export default function AboutPage() {
                     ))}
                 </div>
             </section>
+
+            {/* Partner Logos Strip */}
+            <PartnerLogos />
         </div>
     );
 }

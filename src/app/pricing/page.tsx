@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import PageHeader from "@/components/ui/PageHeader";
 import FloatingServiceOrbs from "@/components/ui/FloatingServiceOrbs";
 import { Check, ShieldAlert, Sparkles, Terminal, ArrowRight } from "lucide-react";
+import PartnerLogos from "@/components/ui/PartnerLogos";
 import Link from 'next/link';
 import { useTheme } from "@/components/layout/ThemeProvider";
 
@@ -90,7 +91,16 @@ export default function PricingPage() {
                             >
                                 {/* Featured glow orb */}
                                 {plan.featured && (
-                                    <div
+                                    <motion.div
+                                        animate={{
+                                            opacity: [0.3, 0.5, 0.3],
+                                            scale: [1, 1.1, 1],
+                                        }}
+                                        transition={{
+                                            duration: 4,
+                                            repeat: Infinity,
+                                            ease: "easeInOut",
+                                        }}
                                         className="absolute top-0 right-0 w-32 h-32 rounded-full blur-[60px] pointer-events-none opacity-40"
                                         style={{ background: plan.color }}
                                     />
@@ -207,6 +217,9 @@ export default function PricingPage() {
                     </div>
                 </motion.div>
             </section>
+
+            {/* Partner Logos Strip */}
+            <PartnerLogos />
 
             {/* FAQ */}
             <section
