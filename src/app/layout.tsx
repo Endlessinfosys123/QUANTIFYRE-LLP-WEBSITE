@@ -5,7 +5,7 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import ThemeProvider from '@/components/layout/ThemeProvider';
 import MouseFollower from '@/components/ui/MouseFollower';
-import { motion } from 'framer-motion';
+import PageTransition from '@/components/layout/PageTransition';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -31,14 +31,9 @@ export default function RootLayout({
           <MouseFollower />
           <Navbar />
           <main className="flex-grow pt-0">
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.4, ease: "easeOut" }}
-            >
+            <PageTransition>
               {children}
-            </motion.div>
+            </PageTransition>
           </main>
           <Footer />
         </ThemeProvider>
