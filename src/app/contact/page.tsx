@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import PageHeader from "@/components/ui/PageHeader";
 import FloatingServiceOrbs from "@/components/ui/FloatingServiceOrbs";
-import { Mail, Phone, MapPin, Send, MessageSquare, CheckCircle2 } from "lucide-react";
+import { Mail, Phone, MapPin, Send, MessageSquare, CheckCircle2, ChevronDown } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { useTheme } from "@/components/layout/ThemeProvider";
 
@@ -150,22 +150,30 @@ export default function ContactPage() {
                                         <label className="text-sm font-semibold pl-1" style={{ color: "var(--color-foreground-muted)" }}>
                                             Mobile Number
                                         </label>
-                                        <div className="flex gap-2">
-                                            <select 
-                                                name="countryCode" 
-                                                className="theme-input w-[100px] text-xs px-2"
-                                                defaultValue="+91"
-                                            >
-                                                <option value="+91">+91 (IN)</option>
-                                                <option value="+1">+1 (US)</option>
-                                                <option value="+44">+44 (UK)</option>
-                                                <option value="+971">+971 (UAE)</option>
-                                                <option value="+61">+61 (AU)</option>
-                                                <option value="+65">+65 (SG)</option>
-                                            </select>
+                                        <div 
+                                            className="flex items-center theme-input p-0 overflow-hidden divide-x group transition-all"
+                                            style={{ borderColor: "var(--color-input-border)" }}
+                                        >
+                                            <div className="relative bg-white/5">
+                                                <select 
+                                                    name="countryCode" 
+                                                    className="bg-transparent h-full w-[85px] text-xs px-3 py-3 pr-7 appearance-none cursor-pointer outline-none"
+                                                    defaultValue="+91"
+                                                    style={{ color: "var(--color-input-text)" }}
+                                                >
+                                                    <option value="+91">+91 (IN)</option>
+                                                    <option value="+1">+1 (US)</option>
+                                                    <option value="+44">+44 (UK)</option>
+                                                    <option value="+971">+971 (UAE)</option>
+                                                    <option value="+61">+61 (AU)</option>
+                                                    <option value="+65">+65 (SG)</option>
+                                                </select>
+                                                <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 pointer-events-none opacity-50" />
+                                            </div>
                                             <input
                                                 name="mobile" required type="tel" placeholder="9876543210"
-                                                className="theme-input flex-1"
+                                                className="bg-transparent flex-1 px-4 py-3 outline-none"
+                                                style={{ color: "var(--color-input-text)" }}
                                             />
                                         </div>
                                     </div>
@@ -175,19 +183,22 @@ export default function ContactPage() {
                                     <label className="text-sm font-semibold pl-1" style={{ color: "var(--color-foreground-muted)" }}>
                                         Interested Service
                                     </label>
-                                    <select
-                                        name="service" required
-                                        className="theme-input appearance-none cursor-pointer"
-                                    >
-                                        <option value="">Select a Service</option>
-                                        <option value="Website Development">Website Development</option>
-                                        <option value="Software Development">Software Development</option>
-                                        <option value="AI Automations">AI Automations</option>
-                                        <option value="AI Tools Development">AI Tools Development</option>
-                                        <option value="Application Development">Application Development</option>
-                                        <option value="Digital Marketing">Digital Marketing</option>
-                                        <option value="Other">Other / Custom Solution</option>
-                                    </select>
+                                    <div className="relative">
+                                        <select
+                                            name="service" required
+                                            className="theme-input appearance-none cursor-pointer pr-10"
+                                        >
+                                            <option value="">Select a Service</option>
+                                            <option value="Website Development">Website Development</option>
+                                            <option value="Software Development">Software Development</option>
+                                            <option value="AI Automations">AI Automations</option>
+                                            <option value="AI Tools Development">AI Tools Development</option>
+                                            <option value="Application Development">Application Development</option>
+                                            <option value="Digital Marketing">Digital Marketing</option>
+                                            <option value="Other">Other / Custom Solution</option>
+                                        </select>
+                                        <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none opacity-50" />
+                                    </div>
                                 </div>
 
                                 <div className="space-y-2">

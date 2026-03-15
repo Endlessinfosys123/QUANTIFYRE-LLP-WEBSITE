@@ -148,6 +148,11 @@
   outline: none;
 }
 
+.theme-input option {
+  background-color: var(--color-background-2);
+  color: var(--color-input-text);
+}
+
 .theme-input::placeholder {
   color: var(--color-input-placeholder);
 }
