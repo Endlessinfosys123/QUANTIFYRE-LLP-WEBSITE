@@ -149,8 +149,19 @@
 }
 
 .theme-input option {
-  background-color: var(--color-background-2);
-  color: var(--color-input-text);
+  display: none; /* Hide native options as we use CustomSelect */
+}
+
+/* Custom scrollbar for dropdowns */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 10px;
 }
 
 .theme-input::placeholder {

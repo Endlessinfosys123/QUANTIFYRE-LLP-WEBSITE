@@ -6,6 +6,7 @@ import FloatingServiceOrbs from "@/components/ui/FloatingServiceOrbs";
 import { Mail, Phone, MapPin, Send, MessageSquare, CheckCircle2, ChevronDown } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { useTheme } from "@/components/layout/ThemeProvider";
+import CustomSelect from "@/components/ui/CustomSelect";
 
 export default function ContactPage() {
     const [submitted, setSubmitted] = useState(false);
@@ -151,25 +152,23 @@ export default function ContactPage() {
                                             Mobile Number
                                         </label>
                                         <div 
-                                            className="flex items-center theme-input p-0 overflow-hidden divide-x group transition-all"
+                                            className="flex items-center theme-input p-0 overflow-hidden group transition-all"
                                             style={{ borderColor: "var(--color-input-border)" }}
                                         >
-                                            <div className="relative bg-white/5">
-                                                <select 
-                                                    name="countryCode" 
-                                                    className="bg-transparent h-full w-[85px] text-xs px-3 py-3 pr-7 appearance-none cursor-pointer outline-none"
-                                                    defaultValue="+91"
-                                                    style={{ color: "var(--color-input-text)" }}
-                                                >
-                                                    <option value="+91">+91 (IN)</option>
-                                                    <option value="+1">+1 (US)</option>
-                                                    <option value="+44">+44 (UK)</option>
-                                                    <option value="+971">+971 (UAE)</option>
-                                                    <option value="+61">+61 (AU)</option>
-                                                    <option value="+65">+65 (SG)</option>
-                                                </select>
-                                                <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-3.5 h-3.5 pointer-events-none opacity-50" />
-                                            </div>
+                                            <CustomSelect 
+                                                name="countryCode"
+                                                className="w-[105px] border-r border-white/10"
+                                                placeholder="+91"
+                                                value="+91"
+                                                options={[
+                                                    { value: "+91", label: "+91 (IN)" },
+                                                    { value: "+1", label: "+1 (US)" },
+                                                    { value: "+44", label: "+44 (UK)" },
+                                                    { value: "+971", label: "+971 (UAE)" },
+                                                    { value: "+61", label: "+61 (AU)" },
+                                                    { value: "+65", label: "+65 (SG)" },
+                                                ]}
+                                            />
                                             <input
                                                 name="mobile" required type="tel" placeholder="9876543210"
                                                 className="bg-transparent flex-1 px-4 py-3 outline-none"
@@ -183,22 +182,19 @@ export default function ContactPage() {
                                     <label className="text-sm font-semibold pl-1" style={{ color: "var(--color-foreground-muted)" }}>
                                         Interested Service
                                     </label>
-                                    <div className="relative">
-                                        <select
-                                            name="service" required
-                                            className="theme-input appearance-none cursor-pointer pr-10"
-                                        >
-                                            <option value="">Select a Service</option>
-                                            <option value="Website Development">Website Development</option>
-                                            <option value="Software Development">Software Development</option>
-                                            <option value="AI Automations">AI Automations</option>
-                                            <option value="AI Tools Development">AI Tools Development</option>
-                                            <option value="Application Development">Application Development</option>
-                                            <option value="Digital Marketing">Digital Marketing</option>
-                                            <option value="Other">Other / Custom Solution</option>
-                                        </select>
-                                        <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none opacity-50" />
-                                    </div>
+                                    <CustomSelect
+                                        name="service"
+                                        placeholder="Select a Service"
+                                        options={[
+                                            { value: "Website Development", label: "Website Development" },
+                                            { value: "Software Development", label: "Software Development" },
+                                            { value: "AI Automations", label: "AI Automations" },
+                                            { value: "AI Tools Development", label: "AI Tools Development" },
+                                            { value: "Application Development", label: "Application Development" },
+                                            { value: "Digital Marketing", label: "Digital Marketing" },
+                                            { value: "Other", label: "Other / Custom Solution" },
+                                        ]}
+                                    />
                                 </div>
 
                                 <div className="space-y-2">
