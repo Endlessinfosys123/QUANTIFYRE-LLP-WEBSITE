@@ -103,53 +103,51 @@ function OrbitalIcon({
     radius: number; startAngle: number; duration: number; isLight: boolean;
 }) {
     const delay = (startAngle / 360) * duration;
+    const tilt = (startAngle % 90) - 45; // Varying tilt for volume
+
     return (
-        <div
+        <motion.div
+            className="absolute flex items-center justify-center pointer-events-none"
+            initial={{ opacity: 0 }}
+            animate={{
+                opacity: [0, 1, 1, 0],
+                rotateY: [0, 360],
+            }}
+            transition={{
+                rotateY: { duration, repeat: Infinity, ease: "linear", delay: -delay },
+                opacity: { duration: duration / 2, repeat: Infinity, ease: "easeInOut", delay: -delay }
+            }}
             style={{
-                position: "absolute",
-                left: "50%", top: "50%",
                 width: 0, height: 0,
-                /* pivot is at the center of the ring */
-                transformOrigin: "0 0",
-                animation: `orbitCW ${duration}s linear infinite`,
-                animationDelay: `-${delay}s`,
+                transformStyle: "preserve-3d",
+                transform: `rotateX(${tilt}deg)`,
             }}
         >
-            {/* translate to ring edge so the icon appears at radius */}
-            <div
+            <motion.div
+                className="absolute flex flex-col items-center justify-center gap-1.5 p-3 rounded-2xl glass-3d"
                 style={{
-                    transform: `translate(${radius}px, -28px)`,
+                    width: 80, height: 80,
+                    left: radius,
+                    background: isLight ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.1)",
+                    border: `1.5px solid ${color}80`,
+                    boxShadow: `0 8px 32px ${color}40`,
+                    rotateY: 0, // Keep icon facing user
                 }}
+                /* Counter-rotate to keep icon perpendicular to viewer if possible, 
+                   but simpler is to just let it rotate for more '3D' feel */
             >
-                {/* counter-rotate so the card stays upright */}
-                <div
-                    style={{
-                        animation: `orbitCCW ${duration}s linear infinite`,
-                        animationDelay: `-${delay}s`,
-                    }}
-                >
-                    <div
-                        className="w-14 h-14 rounded-2xl flex flex-col items-center justify-center gap-1"
-                        style={{
-                            background: isLight ? "rgba(255,255,255,0.82)" : "rgba(255,255,255,0.07)",
-                            backdropFilter: "blur(12px)",
-                            border: `1.5px solid ${color}45`,
-                            boxShadow: `0 4px 24px ${color}35`,
-                        }}
-                    >
-                        <Icon style={{ color, width: 20, height: 20 }} />
-                        <span style={{
-                            color: isLight ? "#0D1B2A" : "rgba(255,255,255,0.65)",
-                            fontSize: 8, fontWeight: 700,
-                            letterSpacing: "0.06em",
-                            textTransform: "uppercase" as const,
-                        }}>
-                            {label}
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
+                <Icon style={{ color, width: 28, height: 28 }} />
+                <span style={{
+                    color: isLight ? "#0D1B2A" : "rgba(255,255,255,0.9)",
+                    fontSize: 9, fontWeight: "bold",
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase" as const,
+                    textAlign: "center"
+                }}>
+                    {label}
+                </span>
+            </motion.div>
+        </motion.div>
     );
 }
 
@@ -243,14 +241,18 @@ export default function AnimatedHero() {
             </motion.div>
 
             {/* ── 3D Tech Sphere / Orbital (desktop only) ── */}
-            <div className="absolute inset-0 pointer-events-none hidden xl:flex items-center justify-center overflow-hidden preserve-3d">
+            <motion.div 
+                className="absolute inset-0 pointer-events-none hidden xl:flex items-center justify-center overflow-hidden preserve-3d"
+                animate={{ rotateY: [0, 360], rotateX: [20, -20, 20] }}
+                transition={{ duration: 100, repeat: Infinity, ease: "linear" }}
+            >
                 {/* Visual dashed rings with 3D tilts */}
-                <div style={{ transform: "rotateX(75deg) rotateY(15deg)" }} className="absolute inset-0 flex items-center justify-center">
+                <div style={{ transform: "rotateX(75deg) rotateY(15deg)", transformStyle: "preserve-3d" }} className="absolute inset-0 flex items-center justify-center">
                     <OrbitalRing radius={450} duration={60} isLight={isLight} />
                     <OrbitalRing radius={300} duration={40} reverse isLight={isLight} />
                 </div>
 
-                <div style={{ transform: "rotateX(-60deg) rotateY(-20deg)" }} className="absolute inset-0 flex items-center justify-center">
+                <div style={{ transform: "rotateX(-60deg) rotateY(-20deg)", transformStyle: "preserve-3d" }} className="absolute inset-0 flex items-center justify-center">
                     <OrbitalRing radius={400} duration={50} isLight={isLight} />
                 </div>
 
@@ -279,7 +281,7 @@ export default function AnimatedHero() {
                         animation: "pulseRing 4s ease-in-out infinite",
                     }}
                 />
-            </div>
+            </motion.div>
 
             {/* ── Main Content ── */}
             <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 flex flex-col items-center gap-7">
