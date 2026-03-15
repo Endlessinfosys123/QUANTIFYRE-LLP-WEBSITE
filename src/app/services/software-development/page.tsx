@@ -2,44 +2,39 @@
 
 import { motion } from "framer-motion";
 import PageHeader from "@/components/ui/PageHeader";
-import TiltCard from "@/components/ui/TiltCard";
-import { Code2, Cpu, Cloud, Database, Lock, Terminal } from "lucide-react";
+import { Code2, Cpu, Cloud, Database, Lock, Terminal, Globe, ShieldCheck, Zap, Layout } from "lucide-react";
 import Link from "next/link";
 import PartnerLogos from "@/components/ui/PartnerLogos";
 import TechFloatingIcons from "@/components/ui/TechFloatingIcons";
 import ThreeDServerBlades from "@/components/ui/services/3DServerBlades";
+import { BentoGrid, BentoGridItem } from "@/components/ui/BentoGrid";
+import MagneticButton from "@/components/ui/MagneticButton";
 
 export default function SoftwareDevelopmentPage() {
     const features = [
         {
-            title: "Custom Architecture",
-            desc: "Bespoke software systems designed from the ground up to solve your unique operational challenges.",
-            icon: <Code2 className="w-8 h-8" />
+            title: "Scalable Architecture",
+            description: "Distributed systems designed to handle millions of requests with zero downtime.",
+            icon: <Globe className="w-6 h-6" />,
+            className: "md:col-span-2",
         },
         {
-            title: "API Integration",
-            desc: "Seamlessly connecting your ecosystem with robust, secure, and documented REST and GraphQL APIs.",
-            icon: <Terminal className="w-8 h-8" />
+            title: "Security by Design",
+            description: "Proactive threat modeling and automated security auditing in every deployment.",
+            icon: <ShieldCheck className="w-6 h-6" />,
+            className: "md:col-span-1",
         },
         {
-            title: "Cloud Infrastructure",
-            desc: "Scalable AWS and Azure deployments ensuring 99.99% uptime and elastic resource allocation.",
-            icon: <Cloud className="w-8 h-8" />
+            title: "Real-time Processing",
+            description: "High-throughput data pipelines built using modern streaming technologies.",
+            icon: <Zap className="w-6 h-6" />,
+            className: "md:col-span-1",
         },
         {
-            title: "Database Engineering",
-            desc: "Optimized relational and NoSQL database models for lightning-fast querying and data integrity.",
-            icon: <Database className="w-8 h-8" />
-        },
-        {
-            title: "System Microservices",
-            desc: "Decoupled monolithic applications into agile, independent services for easier scaling and maintenance.",
-            icon: <Cpu className="w-8 h-8" />
-        },
-        {
-            title: "Enterprise Security",
-            desc: "Implementing zero-trust architectures and continuous vulnerability scanning protocols.",
-            icon: <Lock className="w-8 h-8" />
+            title: "Internal Systems",
+            description: "Bespoke ERP and CRM solutions tailored to your unique business workflows.",
+            icon: <Layout className="w-6 h-6" />,
+            className: "md:col-span-2",
         }
     ];
 
@@ -49,12 +44,12 @@ export default function SoftwareDevelopmentPage() {
             <PageHeader
                 title="Software"
                 gradientText="Engineering"
-                subtitle="Custom software solutions powered by intelligent design and cutting-edge technologies."
+                subtitle="Mission-critical software systems designed for high complexity and massive horizontal scale."
             />
 
-            {/* Core Features Grid */}
-            <section className="w-full py-24 relative z-10 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto">
+            {/* Core Features Grid - Bento Style */}
+            <section className="w-full py-24 relative z-10">
+                <div className="max-w-7xl mx-auto px-4">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -62,41 +57,27 @@ export default function SoftwareDevelopmentPage() {
                         transition={{ duration: 0.6 }}
                         className="text-center mb-16"
                     >
-                        <h2 className="text-3xl md:text-5xl font-bold mb-6">Built for <span className="text-primary">Scale.</span></h2>
+                        <h2 className="text-3xl md:text-5xl font-bold mb-6">Engineered for <span className="text-primary">Impact.</span></h2>
                         <p className="text-foreground/60 max-w-2xl mx-auto text-lg font-light">
-                            We build mission-critical backend systems and enterprise software that process millions of requests securely and efficiently.
+                            We don't just write code. We architect solutions that solve complex business challenges with precision and elegance.
                         </p>
                     </motion.div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {features.map((feature, idx) => (
-                            <motion.div
-                                key={idx}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                            >
-                                <TiltCard className="h-full">
-                                    <div className="p-8 h-full flex flex-col relative z-10">
-                                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-primary/20 to-transparent flex items-center justify-center text-accent mb-6 shadow-[inset_0_0_20px_rgba(27,109,133,0.3)]">
-                                            {feature.icon}
-                                        </div>
-                                        <h3 className="text-2xl font-bold mb-4 text-white hover:text-accent transition-colors">
-                                            {feature.title}
-                                        </h3>
-                                        <p className="text-foreground/60 leading-relaxed font-light">
-                                            {feature.desc}
-                                        </p>
-                                    </div>
-                                </TiltCard>
-                            </motion.div>
+                    <BentoGrid>
+                        {features.map((item, i) => (
+                            <BentoGridItem
+                                key={i}
+                                title={item.title}
+                                description={item.description}
+                                icon={item.icon}
+                                className={item.className}
+                            />
                         ))}
-                    </div>
+                    </BentoGrid>
                 </div>
             </section>
 
-            {/* Matrix Data Flow Section */}
+            {/* Modern Stack Section */}
             <section className="w-full relative py-24 bg-black/50 border-y border-white/5 overflow-hidden">
                 <div className="absolute inset-x-0 h-[1px] top-0 bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
                 <div className="max-w-7xl mx-auto px-4 relative z-10">
@@ -107,28 +88,26 @@ export default function SoftwareDevelopmentPage() {
                             viewport={{ once: true }}
                             transition={{ duration: 0.8 }}
                         >
-                            <h2 className="text-4xl md:text-5xl font-bold mb-6">Data <span className="gradient-text">In Motion</span></h2>
+                            <h2 className="text-4xl md:text-5xl font-bold mb-6">Robust <span className="gradient-text">Foundations</span></h2>
                             <p className="text-foreground/60 text-lg mb-8 leading-relaxed font-light">
-                                Modern software requires complex data orchestration. Our architectures are designed to stream, process, and analyze data in real-time, giving your business a decisive operational advantage.
+                                Our engineering team specializes in modern languages and frameworks, ensuring your software is not only performant today but maintainable for years to come.
                             </p>
-
-                            <div className="pl-6 border-l-2 border-primary/30 space-y-8">
-                                <div className="relative">
-                                    <div className="absolute -left-[27px] w-4 h-4 rounded-full bg-background border-2 border-primary" />
-                                    <h4 className="text-white font-bold text-xl mb-2">Discovery & Architecture</h4>
-                                    <p className="text-foreground/60 font-light">Deep mapping of your technical requirements to design an optimal, scalable infrastructure.</p>
-                                </div>
-                                <div className="relative">
-                                    <div className="absolute -left-[27px] w-4 h-4 rounded-full bg-background border-2 border-accent" />
-                                    <h4 className="text-white font-bold text-xl mb-2">Agile Development</h4>
-                                    <p className="text-foreground/60 font-light">Sprint-based engineering ensuring rapid iteration and transparent progress tracking.</p>
-                                </div>
-                                <div className="relative">
-                                    <div className="absolute -left-[27px] w-4 h-4 rounded-full bg-primary shadow-[0_0_15px_rgba(27,109,133,0.8)]" />
-                                    <h4 className="text-white font-bold text-xl mb-2">CI/CD Deployment</h4>
-                                    <p className="text-foreground/60 font-light">Automated testing and deployment pipelines for zero-downtime releases.</p>
-                                </div>
-                            </div>
+                            <ul className="space-y-6">
+                                {[
+                                    { step: "01", title: "Strategic Analysis", desc: "Understanding the core business logic and integration points." },
+                                    { step: "02", title: "System Architecture", desc: "Designing for horizontal scale and fault tolerance." },
+                                    { step: "03", title: "Agile Development", desc: "Iterative cycles with continuous integration and testing." },
+                                    { step: "04", title: "Global Deployment", desc: "Securing and optimizing infra for worldwide availability." }
+                                ].map((item, i) => (
+                                    <li key={i} className="flex gap-6 items-start">
+                                        <span className="text-primary font-black text-xl shrink-0 mt-1">{item.step}</span>
+                                        <div>
+                                            <h4 className="text-white font-bold text-lg mb-1">{item.title}</h4>
+                                            <p className="text-foreground/60 font-light text-sm">{item.desc}</p>
+                                        </div>
+                                    </li>
+                                ))}
+                            </ul>
                         </motion.div>
 
                         <div className="relative w-full hidden lg:block">
@@ -138,7 +117,6 @@ export default function SoftwareDevelopmentPage() {
                 </div>
             </section>
 
-            {/* Partner Logos Strip */}
             <PartnerLogos />
 
             {/* CTA Section */}
@@ -147,24 +125,26 @@ export default function SoftwareDevelopmentPage() {
                     initial={{ opacity: 0, scale: 0.95 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    className="max-w-5xl mx-auto bg-gradient-to-br from-[#050B14] to-background border border-primary/20 rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden shadow-[0_0_50px_rgba(27,109,133,0.1)]"
+                    className="max-w-5xl mx-auto bg-gradient-to-br from-primary/20 via-background to-accent/10 border border-white/10 rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden"
                 >
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(27,109,133,0.1),transparent_70%)] pointer-events-none" />
+                    <div className="absolute top-0 right-0 w-96 h-96 bg-accent/20 blur-[100px] rounded-full mix-blend-screen pointer-events-none" />
 
-                    <h2 className="text-4xl md:text-6xl font-black mb-8 relative z-10">Architecting <span className="gradient-text">The Future</span></h2>
+                    <h2 className="text-4xl md:text-6xl font-black mb-8 relative z-10">Build the <span className="gradient-text">Future</span></h2>
                     <p className="text-xl text-foreground/70 mb-12 max-w-2xl mx-auto font-light relative z-10">
-                        Stop adapting your business to off-the-shelf software. Let us build the exact system your enterprise needs to dominate.
+                        Stop struggling with technical debt. Let's engineer a solution that scales with your ambition.
                     </p>
 
-                    <Link
-                        href="/contact"
-                        className="inline-flex relative px-8 py-4 overflow-hidden rounded-full bg-primary text-white font-bold text-lg hover:scale-105 transition-all shadow-[0_0_30px_rgba(27,109,133,0.5)] items-center justify-center gap-3 z-10 group"
-                    >
-                        <span className="relative z-10 flex items-center gap-2">
-                            Request Architecture Review
-                        </span>
-                        <div className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    </Link>
+                    <MagneticButton>
+                        <Link
+                            href="/contact"
+                            className="inline-flex relative px-10 py-5 overflow-hidden rounded-full bg-primary text-white font-bold text-xl hover:scale-105 transition-all shadow-[0_0_40px_rgba(27,109,133,0.5)] items-center justify-center gap-3 z-10 group"
+                        >
+                            <span className="relative z-10 flex items-center gap-2">
+                                Initialize Engineering
+                            </span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-primary via-accent to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        </Link>
+                    </MagneticButton>
                 </motion.div>
             </section>
         </div>

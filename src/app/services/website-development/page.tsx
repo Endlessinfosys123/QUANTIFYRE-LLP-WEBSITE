@@ -2,44 +2,39 @@
 
 import { motion } from "framer-motion";
 import PageHeader from "@/components/ui/PageHeader";
-import TiltCard from "@/components/ui/TiltCard";
-import { Zap, Layout, Box, ShoppingCart, MousePointer2, ShieldCheck } from "lucide-react";
+import { Zap, Box, MousePointer2, ShieldCheck, ShoppingCart, Layout } from "lucide-react";
 import Link from "next/link";
 import PartnerLogos from "@/components/ui/PartnerLogos";
 import TechFloatingIcons from "@/components/ui/TechFloatingIcons";
 import ThreeDTechStack from "@/components/ui/services/3DTechStack";
+import { BentoGrid, BentoGridItem } from "@/components/ui/BentoGrid";
+import MagneticButton from "@/components/ui/MagneticButton";
 
 export default function WebsiteDevelopmentPage() {
     const features = [
         {
             title: "Ultra-Fast Performance",
-            desc: "Next.js and Edge caching architectures ensuring sub-second load times worldwide.",
-            icon: <Zap className="w-8 h-8" />
+            description: "Next.js and Edge caching architectures ensuring sub-second load times worldwide.",
+            icon: <Zap className="w-6 h-6" />,
+            className: "md:col-span-2",
         },
         {
             title: "Immersive 3D UI",
-            desc: "Interactive WebGL and Framer Motion experiences that captivate and retain users.",
-            icon: <Box className="w-8 h-8" />
+            description: "Interactive WebGL and Framer Motion experiences that captivate users.",
+            icon: <Box className="w-6 h-6" />,
+            className: "md:col-span-1",
         },
         {
             title: "Conversion-Centric UX",
-            desc: "Psychology-backed interfaces designed specifically to guide visitors toward action.",
-            icon: <MousePointer2 className="w-8 h-8" />
-        },
-        {
-            title: "Enterprise E-Commerce",
-            desc: "Scalable headless commerce solutions to handle massive traffic and transaction volumes.",
-            icon: <ShoppingCart className="w-8 h-8" />
-        },
-        {
-            title: "Responsive Layouts",
-            desc: "Flawless rendering and interactions across all device ecosystems seamlessly.",
-            icon: <Layout className="w-8 h-8" />
+            description: "Psychology-backed interfaces designed specifically to guide visitors toward action.",
+            icon: <MousePointer2 className="w-6 h-6" />,
+            className: "md:col-span-1",
         },
         {
             title: "Bank-Grade Security",
-            desc: "Advanced encryption, DDOS mitigation, and secure authentication by default.",
-            icon: <ShieldCheck className="w-8 h-8" />
+            description: "Advanced encryption, DDOS mitigation, and secure authentication by default.",
+            icon: <ShieldCheck className="w-6 h-6" />,
+            className: "md:col-span-2",
         }
     ];
 
@@ -52,9 +47,9 @@ export default function WebsiteDevelopmentPage() {
                 subtitle="Neural web architectures built for performance, scale, and exceptional user experiences."
             />
 
-            {/* Core Features Grid */}
-            <section className="w-full py-24 relative z-10 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto">
+            {/* Core Features Grid - Bento Style */}
+            <section className="w-full py-24 relative z-10">
+                <div className="max-w-7xl mx-auto px-4">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -64,35 +59,21 @@ export default function WebsiteDevelopmentPage() {
                     >
                         <h2 className="text-3xl md:text-5xl font-bold mb-6">Digital <span className="text-accent">Masterpieces.</span></h2>
                         <p className="text-foreground/60 max-w-2xl mx-auto text-lg font-light">
-                            We discard templates. Every platform we build is a custom-engineered web application designed to outperform your competition in speed and aesthetics.
+                            We discard templates. Every platform we build is a custom-engineered web application designed to outperform competition.
                         </p>
                     </motion.div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {features.map((feature, idx) => (
-                            <motion.div
-                                key={idx}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                            >
-                                <TiltCard className="h-full">
-                                    <div className="p-8 h-full flex flex-col relative z-10">
-                                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent/20 to-transparent flex items-center justify-center text-primary mb-6 shadow-[inset_0_0_20px_rgba(60,207,109,0.3)]">
-                                            {feature.icon}
-                                        </div>
-                                        <h3 className="text-2xl font-bold mb-4 text-white hover:text-primary transition-colors">
-                                            {feature.title}
-                                        </h3>
-                                        <p className="text-foreground/60 leading-relaxed font-light">
-                                            {feature.desc}
-                                        </p>
-                                    </div>
-                                </TiltCard>
-                            </motion.div>
+                    <BentoGrid>
+                        {features.map((item, i) => (
+                            <BentoGridItem
+                                key={i}
+                                title={item.title}
+                                description={item.description}
+                                icon={item.icon}
+                                className={item.className}
+                            />
                         ))}
-                    </div>
+                    </BentoGrid>
                 </div>
             </section>
 
@@ -114,21 +95,17 @@ export default function WebsiteDevelopmentPage() {
                         >
                             <h2 className="text-4xl md:text-5xl font-bold mb-6">Built on the <span className="gradient-text">Edge</span></h2>
                             <p className="text-foreground/60 text-lg mb-8 leading-relaxed font-light">
-                                We utilize modern Jamstack and serverless architectures to deliver websites that don't just look incredible, but score perfect 100s on Google Lighthouse out of the box.
+                                We utilize modern Jamstack and serverless architectures to deliver websites that don't just look incredible, but score perfect 100s on Google Lighthouse.
                             </p>
 
                             <div className="space-y-8 mt-12">
                                 <div className="border border-white/10 p-6 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors">
                                     <h4 className="text-accent font-bold text-xl mb-2">Frontend Experience</h4>
-                                    <p className="text-sm text-foreground/60 font-light">React, Next.js, and Framer Motion create app-like fluid transitions and state management.</p>
+                                    <p className="text-sm text-foreground/60 font-light">React, Next.js, and Framer Motion create app-like fluid transitions.</p>
                                 </div>
                                 <div className="border border-white/10 p-6 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors">
                                     <h4 className="text-primary font-bold text-xl mb-2">Backend & APIs</h4>
-                                    <p className="text-sm text-foreground/60 font-light">Node.js and modern GraphQL/REST APIs ensure scalable data delivery and third-party integrations.</p>
-                                </div>
-                                <div className="border border-white/10 p-6 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors">
-                                    <h4 className="text-white font-bold text-xl mb-2">Global Content Delivery</h4>
-                                    <p className="text-sm text-foreground/60 font-light">Deployed to the Edge via Vercel or AWS, serving your users from the data center closest to them.</p>
+                                    <p className="text-sm text-foreground/60 font-light">Node.js and GraphQL ensure scalable data delivery and integrations.</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -137,7 +114,6 @@ export default function WebsiteDevelopmentPage() {
                 </div>
             </section>
 
-            {/* Partner Logos Strip */}
             <PartnerLogos />
 
             {/* CTA Section */}
@@ -152,18 +128,20 @@ export default function WebsiteDevelopmentPage() {
 
                     <h2 className="text-4xl md:text-6xl font-black mb-8 relative z-10">Reimagine your <span className="gradient-text">Web Presence</span></h2>
                     <p className="text-xl text-foreground/70 mb-12 max-w-2xl mx-auto font-light relative z-10">
-                        Join the next generation of the internet. Let's build a platform that turns your visitors into lifelong customers.
+                        Join the next generation of the internet. Let's build a platform that turns your visitors into customers.
                     </p>
 
-                    <Link
-                        href="/contact"
-                        className="inline-flex relative px-8 py-4 overflow-hidden rounded-full bg-accent text-background font-bold text-lg hover:scale-105 transition-all shadow-[0_0_30px_rgba(60,207,109,0.4)] items-center justify-center gap-3 z-10 group"
-                    >
-                        <span className="relative z-10 flex items-center gap-2">
-                            Start Your Build
-                        </span>
-                        <div className="absolute inset-0 bg-gradient-to-l from-accent via-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    </Link>
+                    <MagneticButton>
+                        <Link
+                            href="/contact"
+                            className="inline-flex relative px-10 py-5 overflow-hidden rounded-full bg-accent text-background font-bold text-xl hover:scale-105 transition-all shadow-[0_0_40px_rgba(60,207,109,0.5)] items-center justify-center gap-3 z-10 group"
+                        >
+                            <span className="relative z-10 flex items-center gap-2">
+                                Start Your Build
+                            </span>
+                            <div className="absolute inset-0 bg-gradient-to-l from-accent via-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        </Link>
+                    </MagneticButton>
                 </motion.div>
             </section>
         </div>

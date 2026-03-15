@@ -1,15 +1,16 @@
 "use client";
 
-import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
+import { motion, useMotionValue, useSpring, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import {
     ArrowRight, BarChart2, Globe, Code2, Smartphone,
-    Zap, Bot, Sparkles, TrendingUp, Shield
+    Zap, Bot, Sparkles, TrendingUp, Shield, Rocket, ChevronDown, CheckCircle2, Star, Orbit
 } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import { useTheme } from "@/components/layout/ThemeProvider";
 import TechParticles from "./TechParticles";
 import TechFloatingIcons from "./TechFloatingIcons";
+import MagneticButton from "./MagneticButton";
 
 /* ─── rotating words ─── */
 const rotatingWords = ["Faster.", "Smarter.", "Bolder.", "Greater."];
@@ -92,10 +93,6 @@ function OrbitalRing({ radius, reverse, isLight, duration }: { radius: number; r
     );
 }
 
-/* ─── always-upright orbital icon ───
-   The outer span rotates around the ring center using transform-origin.
-   The inner icon counter-rotates at the same speed — net rotation = 0 = always upright.
-*/
 function OrbitalIcon({
     Icon, label, color, radius, startAngle, duration, isLight,
 }: {
@@ -103,7 +100,7 @@ function OrbitalIcon({
     radius: number; startAngle: number; duration: number; isLight: boolean;
 }) {
     const delay = (startAngle / 360) * duration;
-    const tilt = (startAngle % 90) - 45; // Varying tilt for volume
+    const tilt = (startAngle % 90) - 45;
 
     return (
         <motion.div
@@ -131,10 +128,8 @@ function OrbitalIcon({
                     background: isLight ? "rgba(255,255,255,0.9)" : "rgba(255,255,255,0.1)",
                     border: `1.5px solid ${color}80`,
                     boxShadow: `0 8px 32px ${color}40`,
-                    rotateY: 0, // Keep icon facing user
+                    rotateY: 0,
                 }}
-                /* Counter-rotate to keep icon perpendicular to viewer if possible, 
-                   but simpler is to just let it rotate for more '3D' feel */
             >
                 <Icon style={{ color, width: 28, height: 28 }} />
                 <span style={{
@@ -151,19 +146,16 @@ function OrbitalIcon({
     );
 }
 
-/* ═══════════════════════════════════════════════ MAIN HERO ═══ */
 export default function AnimatedHero() {
     const { theme } = useTheme();
     const isLight = theme === "light";
 
-    /* word cycle */
     const [wordIdx, setWordIdx] = useState(0);
     useEffect(() => {
         const t = setInterval(() => setWordIdx(p => (p + 1) % rotatingWords.length), 2400);
         return () => clearInterval(t);
     }, []);
 
-    /* smooth mouse parallax */
     const rawX = useMotionValue(0);
     const rawY = useMotionValue(0);
     const springX = useSpring(rawX, { stiffness: 60, damping: 25 });
@@ -178,7 +170,6 @@ export default function AnimatedHero() {
         return () => window.removeEventListener("mousemove", onMove);
     }, [rawX, rawY]);
 
-    /* word colour cycle */
     const wordColors = ["#3CCF6D", "#1B6D85", "#FF8C00", "#A020F0"];
 
     return (
@@ -186,12 +177,10 @@ export default function AnimatedHero() {
             className="relative min-h-[100vh] w-full flex items-center justify-center overflow-hidden pt-20"
             style={{ background: "var(--color-background)" }}
         >
-            {/* ── Dot Grid ── */}
             <div className="absolute inset-0 pointer-events-none">
                 <DotGrid isLight={isLight} />
             </div>
 
-            {/* ── Mesh gradient layer ── */}
             <div
                 className="absolute inset-0 pointer-events-none"
                 style={{
@@ -201,12 +190,10 @@ export default function AnimatedHero() {
                 }}
             />
 
-            {/* ── Background layers ── */}
             <TechParticles />
             <TechFloatingIcons />
             <div className="tech-grid opacity-20" />
             
-            {/* ── Mouse-parallax orbs ── */}
             <motion.div
                 style={{ x: springX, y: springY }}
                 className="absolute inset-0 pointer-events-none"
@@ -229,24 +216,13 @@ export default function AnimatedHero() {
                         animation: "breathe 8s ease-in-out infinite reverse",
                     }}
                 />
-                <div
-                    className="absolute rounded-full blur-[80px]"
-                    style={{
-                        width: 300, height: 300,
-                        top: "50%", right: "20%",
-                        background: isLight ? "rgba(160,32,240,0.07)" : "rgba(160,32,240,0.14)",
-                        animation: "breathe 7s ease-in-out infinite 2s",
-                    }}
-                />
             </motion.div>
 
-            {/* ── 3D Tech Sphere / Orbital (desktop only) ── */}
             <motion.div 
                 className="absolute inset-0 pointer-events-none hidden xl:flex items-center justify-center overflow-hidden preserve-3d"
                 animate={{ rotateY: [0, 360], rotateX: [20, -20, 20] }}
                 transition={{ duration: 100, repeat: Infinity, ease: "linear" }}
             >
-                {/* Visual dashed rings with 3D tilts */}
                 <div style={{ transform: "rotateX(75deg) rotateY(15deg)", transformStyle: "preserve-3d" }} className="absolute inset-0 flex items-center justify-center">
                     <OrbitalRing radius={450} duration={60} isLight={isLight} />
                     <OrbitalRing radius={300} duration={40} reverse isLight={isLight} />
@@ -256,7 +232,6 @@ export default function AnimatedHero() {
                     <OrbitalRing radius={400} duration={50} isLight={isLight} />
                 </div>
 
-                {/* Service icon nodes — with 3D orbit logic */}
                 {orbitals.map(({ Icon, label, color, angle }, i) => (
                     <OrbitalIcon
                         key={i}
@@ -270,7 +245,6 @@ export default function AnimatedHero() {
                     />
                 ))}
 
-                {/* Central Core Glow */}
                 <div
                     className="absolute rounded-full"
                     style={{
@@ -283,10 +257,7 @@ export default function AnimatedHero() {
                 />
             </motion.div>
 
-            {/* ── Main Content ── */}
             <div className="relative z-10 max-w-4xl mx-auto text-center px-4 sm:px-6 flex flex-col items-center gap-7">
-
-                {/* Badge */}
                 <motion.div
                     initial={{ opacity: 0, y: -24, scale: 0.85 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -308,7 +279,6 @@ export default function AnimatedHero() {
                     </div>
                 </motion.div>
 
-                {/* Headline */}
                 <motion.div
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -322,14 +292,12 @@ export default function AnimatedHero() {
                         The Future,
                     </h1>
 
-                    {/* Rotating Gradient Word */}
                     <div className="h-[1.2rem] sm:h-[1.5rem] md:h-[1.8rem] flex items-center justify-center mt-4 mb-2">
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={wordIdx}
                                 className="flex relative"
                             >
-                                {/* Glow reflection behind text */}
                                 <div 
                                     className="absolute inset-0 blur-[60px] opacity-30"
                                     style={{ background: wordColors[wordIdx] }}
@@ -361,7 +329,6 @@ export default function AnimatedHero() {
                     </div>
                 </motion.div>
 
-                {/* Subheadline */}
                 <motion.p
                     initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -373,53 +340,34 @@ export default function AnimatedHero() {
                     <span style={{ color: "var(--color-accent)", fontWeight: 600 }}>quantifies growth</span>.
                 </motion.p>
 
-                {/* CTA Buttons */}
                 <motion.div
                     initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.5 }}
-                    className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto items-center"
+                    className="flex flex-col sm:flex-row gap-6 items-center"
                 >
-                    <Link
-                        href="/contact"
-                        className="group relative w-full sm:w-auto px-9 py-4 rounded-full font-bold text-lg text-white flex items-center justify-center gap-3 overflow-hidden transition-all hover:scale-105"
-                        style={{
-                            background: "linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 50%, var(--color-accent) 100%)",
-                            backgroundSize: "200% 100%",
-                            boxShadow: "0 0 30px rgba(27,109,133,0.45), 0 4px 20px rgba(0,0,0,0.15)",
-                        }}
-                    >
-                        {/* shimmer overlay */}
-                        <span
-                            className="absolute inset-0 pointer-events-none"
-                            style={{
-                                background: "linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.22) 50%, transparent 60%)",
-                                backgroundSize: "200% 100%",
-                                animation: "shimmerBtn 2.4s linear infinite",
-                            }}
-                        />
-                        <span className="relative z-10 flex items-center gap-2">
-                            Start Your Journey
-                            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                        </span>
-                    </Link>
+                    <MagneticButton>
+                        <Link
+                            href="/services"
+                            className="px-10 py-5 rounded-full bg-accent text-background font-black text-xl hover:scale-105 transition-all shadow-[0_0_40px_rgba(60,207,109,0.5)] flex items-center gap-3 group relative overflow-hidden"
+                        >
+                            <span className="relative z-10">Explore Our Tech</span>
+                            <Rocket className="w-6 h-6 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform relative z-10" />
+                            <div className="absolute inset-0 bg-gradient-to-r from-accent via-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        </Link>
+                    </MagneticButton>
 
-                    <Link
-                        href="/services"
-                        className="group w-full sm:w-auto px-9 py-4 rounded-full font-bold text-lg flex items-center justify-center gap-2 transition-all hover:scale-105"
-                        style={{
-                            background: isLight ? "rgba(255,255,255,0.7)" : "rgba(255,255,255,0.05)",
-                            border: `1.5px solid ${isLight ? "rgba(27,109,133,0.22)" : "rgba(255,255,255,0.12)"}`,
-                            color: "var(--color-foreground)",
-                            backdropFilter: "blur(10px)",
-                        }}
-                    >
-                        Explore Services
-                        <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
-                    </Link>
+                    <MagneticButton>
+                        <Link
+                            href="/contact"
+                            className="px-10 py-5 rounded-full bg-white/5 border border-white/10 text-white font-bold text-xl hover:bg-white/10 transition-all backdrop-blur-xl flex items-center gap-3 group"
+                        >
+                            Book a Consultation
+                            <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                    </MagneticButton>
                 </motion.div>
 
-                {/* Stats Bar */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -444,7 +392,6 @@ export default function AnimatedHero() {
                                         : "none",
                                 }}
                             >
-                                {/* subtle colour accent at top */}
                                 <div
                                     className="absolute top-0 left-0 right-0 h-[2px] rounded-full"
                                     style={{ background: `linear-gradient(90deg, transparent, ${stat.color}, transparent)` }}
@@ -471,7 +418,6 @@ export default function AnimatedHero() {
                 </motion.div>
             </div>
 
-            {/* ── Scroll indicator ── */}
             <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -494,7 +440,6 @@ export default function AnimatedHero() {
                 </div>
             </motion.div>
 
-            {/* ── keyframes ── */}
             <style jsx>{`
                 @keyframes orbitCW  { from { transform: rotate(0deg); }   to { transform: rotate(360deg); } }
                 @keyframes orbitCCW { from { transform: rotate(0deg); }   to { transform: rotate(-360deg); } }

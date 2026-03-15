@@ -2,49 +2,44 @@
 
 import { motion } from "framer-motion";
 import PageHeader from "@/components/ui/PageHeader";
-import TiltCard from "@/components/ui/TiltCard";
 import TechFloatingIcons from "@/components/ui/TechFloatingIcons";
 import ThreeDAppDevice from "@/components/ui/services/3DAppDevice";
 import { Smartphone, MonitorSmartphone, Layers, Fingerprint, Zap, Layers3 } from "lucide-react";
 import Link from "next/link";
 import PartnerLogos from "@/components/ui/PartnerLogos";
+import { BentoGrid, BentoGridItem } from "@/components/ui/BentoGrid";
+import MagneticButton from "@/components/ui/MagneticButton";
 
 export default function ApplicationDevelopmentPage() {
     const features = [
         {
             title: "Native iOS & Android",
-            desc: "High-performance applications written in Swift and Kotlin for ultimate device optimization.",
-            icon: <Smartphone className="w-8 h-8" />
+            description: "High-performance applications written in Swift and Kotlin for ultimate device optimization.",
+            icon: <Smartphone className="w-6 h-6" />,
+            className: "md:col-span-2",
         },
         {
             title: "Cross-Platform",
-            desc: "React Native and Flutter pipelines for rapid deployment across all app stores simultaneously.",
-            icon: <MonitorSmartphone className="w-8 h-8" />
+            description: "React Native and Flutter pipelines for rapid deployment across all app stores simultaneously.",
+            icon: <MonitorSmartphone className="w-6 h-6" />,
+            className: "md:col-span-1",
         },
         {
             title: "App Neural Architecture",
-            desc: "On-device machine learning integration for intelligent, offline-capable features.",
-            icon: <Layers3 className="w-8 h-8" />
+            description: "On-device machine learning integration for intelligent, offline-capable features.",
+            icon: <Layers3 className="w-6 h-6" />,
+            className: "md:col-span-1",
         },
         {
             title: "Biometric Security",
-            desc: "FaceID and fingerprint authentication mapped to secure server-side tokens.",
-            icon: <Fingerprint className="w-8 h-8" />
-        },
-        {
-            title: "Fluid Animations",
-            desc: "60FPS interface transitions that feel natural, responsive, and completely seamless.",
-            icon: <Zap className="w-8 h-8" />
-        },
-        {
-            title: "Micro-Interactions",
-            desc: "Delightful UX details that increase user engagement and extend session duration.",
-            icon: <Layers className="w-8 h-8" />
+            description: "FaceID and fingerprint authentication mapped to secure server-side tokens.",
+            icon: <Fingerprint className="w-6 h-6" />,
+            className: "md:col-span-2",
         }
     ];
 
     return (
-        <div className="flex flex-col items-center overflow-x-hidden min-h-screen bg-background pt-20">
+        <div className="flex flex-col items-center overflow-x-hidden min-h-screen bg-background">
             <TechFloatingIcons />
             <PageHeader
                 title="Application"
@@ -52,9 +47,9 @@ export default function ApplicationDevelopmentPage() {
                 subtitle="Mobile-first applications with AI-enhanced experiences for iOS and Android platforms."
             />
 
-            {/* Core Features Grid */}
-            <section className="w-full py-24 relative z-10 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto">
+            {/* Core Features Grid - Bento Style */}
+            <section className="w-full py-24 relative z-10">
+                <div className="max-w-7xl mx-auto px-4">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -68,31 +63,17 @@ export default function ApplicationDevelopmentPage() {
                         </p>
                     </motion.div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {features.map((feature, idx) => (
-                            <motion.div
-                                key={idx}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                            >
-                                <TiltCard className="h-full">
-                                    <div className="p-8 h-full flex flex-col relative z-10">
-                                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent/20 to-transparent flex items-center justify-center text-primary mb-6 shadow-[inset_0_0_20px_rgba(60,207,109,0.3)]">
-                                            {feature.icon}
-                                        </div>
-                                        <h3 className="text-2xl font-bold mb-4 text-white hover:text-primary transition-colors">
-                                            {feature.title}
-                                        </h3>
-                                        <p className="text-foreground/60 leading-relaxed font-light">
-                                            {feature.desc}
-                                        </p>
-                                    </div>
-                                </TiltCard>
-                            </motion.div>
+                    <BentoGrid>
+                        {features.map((item, i) => (
+                            <BentoGridItem
+                                key={i}
+                                title={item.title}
+                                description={item.description}
+                                icon={item.icon}
+                                className={item.className}
+                            />
                         ))}
-                    </div>
+                    </BentoGrid>
                 </div>
             </section>
 
@@ -118,25 +99,18 @@ export default function ApplicationDevelopmentPage() {
                             </p>
 
                             <div className="space-y-8 mt-12">
-                                <div className="flex gap-4">
+                                <div className="flex gap-4 p-6 border border-white/5 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors">
                                     <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary shrink-0">1</div>
                                     <div>
                                         <h4 className="text-white font-bold text-xl mb-1">Human-Centered Design</h4>
                                         <p className="text-sm text-foreground/60 font-light">Tailoring typography, gestures, and thumb-zones specifically for mobile ergonomics.</p>
                                     </div>
                                 </div>
-                                <div className="flex gap-4">
+                                <div className="flex gap-4 p-6 border border-white/5 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors">
                                     <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center text-accent shrink-0">2</div>
                                     <div>
                                         <h4 className="text-white font-bold text-xl mb-1">Offline Resilience</h4>
                                         <p className="text-sm text-foreground/60 font-light">Background sync and local databases ensure the app functions perfectly even in dead zones.</p>
-                                    </div>
-                                </div>
-                                <div className="flex gap-4">
-                                    <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-white shrink-0">3</div>
-                                    <div>
-                                        <h4 className="text-white font-bold text-xl mb-1">Store Mastery</h4>
-                                        <p className="text-sm text-foreground/60 font-light">Navigating complex ASO (App Store Optimization) and strict review guidelines for fast approval.</p>
                                     </div>
                                 </div>
                             </div>
@@ -146,7 +120,6 @@ export default function ApplicationDevelopmentPage() {
                 </div>
             </section>
 
-            {/* Partner Logos Strip */}
             <PartnerLogos />
 
             {/* CTA Section */}
@@ -164,15 +137,17 @@ export default function ApplicationDevelopmentPage() {
                         Turn your software vision into a tangible reality downloaded by millions worldwide.
                     </p>
 
-                    <Link
-                        href="/contact"
-                        className="inline-flex relative px-8 py-4 overflow-hidden rounded-full bg-accent text-background font-bold text-lg hover:scale-105 transition-all shadow-[0_0_30px_rgba(60,207,109,0.4)] items-center justify-center gap-3 z-10 group"
-                    >
-                        <span className="relative z-10 flex items-center gap-2">
-                            Discuss Your Project
-                        </span>
-                        <div className="absolute inset-0 bg-gradient-to-l from-accent via-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    </Link>
+                    <MagneticButton>
+                        <Link
+                            href="/contact"
+                            className="inline-flex relative px-10 py-5 overflow-hidden rounded-full bg-accent text-background font-bold text-xl hover:scale-105 transition-all shadow-[0_0_40px_rgba(60,207,109,0.5)] items-center justify-center gap-3 z-10 group"
+                        >
+                            <span className="relative z-10 flex items-center gap-2">
+                                Discuss Your Project
+                            </span>
+                            <div className="absolute inset-0 bg-gradient-to-l from-accent via-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        </Link>
+                    </MagneticButton>
                 </motion.div>
             </section>
         </div>

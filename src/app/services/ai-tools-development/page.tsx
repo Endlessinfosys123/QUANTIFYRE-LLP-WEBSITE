@@ -2,50 +2,45 @@
 
 import { motion } from "framer-motion";
 import PageHeader from "@/components/ui/PageHeader";
-import TiltCard from "@/components/ui/TiltCard";
 import TechParticles from "@/components/ui/TechParticles";
 import TechFloatingIcons from "@/components/ui/TechFloatingIcons";
 import ThreeDAICore from "@/components/ui/services/3DAICore";
 import { BrainCircuit, Cpu, Binary, Eye, Speech, Component } from "lucide-react";
 import Link from "next/link";
 import PartnerLogos from "@/components/ui/PartnerLogos";
+import { BentoGrid, BentoGridItem } from "@/components/ui/BentoGrid";
+import MagneticButton from "@/components/ui/MagneticButton";
 
 export default function AIToolsDevelopmentPage() {
     const features = [
         {
             title: "Custom LLM Development",
-            desc: "Fine-tuning large language models on your proprietary datasets for specialized domain knowledge.",
-            icon: <BrainCircuit className="w-8 h-8" />
+            description: "Fine-tuning large language models on your proprietary datasets for specialized domain knowledge.",
+            icon: <BrainCircuit className="w-6 h-6" />,
+            className: "md:col-span-2",
         },
         {
             title: "Computer Vision",
-            desc: "Image and video analysis models for quality control, security, and retail insights.",
-            icon: <Eye className="w-8 h-8" />
+            description: "Image and video analysis models for quality control, security, and retail insights.",
+            icon: <Eye className="w-6 h-6" />,
+            className: "md:col-span-1",
         },
         {
             title: "Predictive Analytics",
-            desc: "Neural networks that forecast market trends, inventory needs, and customer churn.",
-            icon: <Cpu className="w-8 h-8" />
+            description: "Neural networks that forecast market trends, inventory needs, and customer churn.",
+            icon: <Cpu className="w-6 h-6" />,
+            className: "md:col-span-1",
         },
         {
             title: "Natural Language Processing",
-            desc: "Advanced sentiment analysis, voice recognition, and semantic search algorithms.",
-            icon: <Speech className="w-8 h-8" />
-        },
-        {
-            title: "Algorithmic Trading",
-            desc: "High-frequency models designed to exploit micro-inefficiencies in complex data markets.",
-            icon: <Binary className="w-8 h-8" />
-        },
-        {
-            title: "API Productization",
-            desc: "Turning your custom AI models into scalable SaaS products you can monetize.",
-            icon: <Component className="w-8 h-8" />
+            description: "Advanced sentiment analysis, voice recognition, and semantic search algorithms.",
+            icon: <Speech className="w-6 h-6" />,
+            className: "md:col-span-2",
         }
     ];
 
     return (
-        <div className="flex flex-col items-center overflow-x-hidden min-h-screen bg-background pt-20">
+        <div className="flex flex-col items-center overflow-x-hidden min-h-screen bg-background">
             <TechFloatingIcons />
             <TechParticles />
             <PageHeader
@@ -54,9 +49,9 @@ export default function AIToolsDevelopmentPage() {
                 subtitle="Custom intelligent models that transform your abstract data into concrete strategic advantages."
             />
 
-            {/* Core Features Grid */}
-            <section className="w-full py-24 relative z-10 px-4 sm:px-6 lg:px-8">
-                <div className="max-w-7xl mx-auto">
+            {/* Core Features Grid - Bento Style */}
+            <section className="w-full py-24 relative z-10">
+                <div className="max-w-7xl mx-auto px-4">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -70,31 +65,17 @@ export default function AIToolsDevelopmentPage() {
                         </p>
                     </motion.div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {features.map((feature, idx) => (
-                            <motion.div
-                                key={idx}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                            >
-                                <TiltCard className="h-full">
-                                    <div className="p-8 h-full flex flex-col relative z-10">
-                                        <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent/20 to-transparent flex items-center justify-center text-primary mb-6 shadow-[inset_0_0_20px_rgba(60,207,109,0.3)]">
-                                            {feature.icon}
-                                        </div>
-                                        <h3 className="text-2xl font-bold mb-4 text-white hover:text-primary transition-colors">
-                                            {feature.title}
-                                        </h3>
-                                        <p className="text-foreground/60 leading-relaxed font-light">
-                                            {feature.desc}
-                                        </p>
-                                    </div>
-                                </TiltCard>
-                            </motion.div>
+                    <BentoGrid>
+                        {features.map((item, i) => (
+                            <BentoGridItem
+                                key={i}
+                                title={item.title}
+                                description={item.description}
+                                icon={item.icon}
+                                className={item.className}
+                            />
                         ))}
-                    </div>
+                    </BentoGrid>
                 </div>
             </section>
 
@@ -121,16 +102,12 @@ export default function AIToolsDevelopmentPage() {
 
                             <div className="space-y-8 mt-12">
                                 <div className="border border-white/10 p-6 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors">
-                                    <h4 className="text-white font-bold text-xl mb-2">1. Data Sanitization & Enrichment</h4>
+                                    <h4 className="text-white font-bold text-xl mb-2">1. Vector Enrichment</h4>
                                     <p className="text-sm text-foreground/60 font-light">We capture, clean, and structure your messy raw data into high-quality vector embeddings ready for neural ingestion.</p>
                                 </div>
                                 <div className="border border-white/10 p-6 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors">
-                                    <h4 className="text-primary font-bold text-xl mb-2">2. Architecture Selection & Tuning</h4>
-                                    <p className="text-sm text-foreground/60 font-light">Choosing the absolute best base model (Transformers, CNNs, GANs) and running thousands of hyperparameter tuning epochs.</p>
-                                </div>
-                                <div className="border border-white/10 p-6 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors">
-                                    <h4 className="text-accent font-bold text-xl mb-2">3. Inference Optimization</h4>
-                                    <p className="text-sm text-foreground/60 font-light">Compressing and quantizing the final models to ensure they run with millisecond latency and minimal compute costs in production.</p>
+                                    <h4 className="text-primary font-bold text-xl mb-2">2. Architecture Tuning</h4>
+                                    <p className="text-sm text-foreground/60 font-light">Choosing the absolute best base model and running thousands of hyperparameter tuning epochs.</p>
                                 </div>
                             </div>
                         </motion.div>
@@ -139,7 +116,6 @@ export default function AIToolsDevelopmentPage() {
                 </div>
             </section>
 
-            {/* Partner Logos Strip */}
             <PartnerLogos />
 
             {/* CTA Section */}
@@ -157,15 +133,17 @@ export default function AIToolsDevelopmentPage() {
                         The companies that train their own models today will own their industries tomorrow.
                     </p>
 
-                    <Link
-                        href="/contact"
-                        className="inline-flex relative px-8 py-4 overflow-hidden rounded-full bg-accent text-background font-bold text-lg hover:scale-105 transition-all shadow-[0_0_30px_rgba(60,207,109,0.4)] items-center justify-center gap-3 z-10 group"
-                    >
-                        <span className="relative z-10 flex items-center gap-2">
-                            Initialize Project
-                        </span>
-                        <div className="absolute inset-0 bg-gradient-to-l from-accent via-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    </Link>
+                    <MagneticButton>
+                        <Link
+                            href="/contact"
+                            className="inline-flex relative px-10 py-5 overflow-hidden rounded-full bg-accent text-background font-bold text-xl hover:scale-105 transition-all shadow-[0_0_40px_rgba(60,207,109,0.5)] items-center justify-center gap-3 z-10 group"
+                        >
+                            <span className="relative z-10 flex items-center gap-2">
+                                Initialize Project
+                            </span>
+                            <div className="absolute inset-0 bg-gradient-to-l from-accent via-primary to-accent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        </Link>
+                    </MagneticButton>
                 </motion.div>
             </section>
         </div>
