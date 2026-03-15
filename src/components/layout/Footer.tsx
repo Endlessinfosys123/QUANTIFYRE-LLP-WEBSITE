@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Mail, Phone, MapPin, Twitter, Linkedin, Instagram, Github } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTheme } from "@/components/layout/ThemeProvider";
+import MagneticButton from "@/components/ui/MagneticButton";
 
 export default function Footer() {
     const { theme } = useTheme();
@@ -55,21 +56,22 @@ export default function Footer() {
                         {/* Social Links */}
                         <div className="flex items-center gap-3">
                             {socialLinks.map(({ Icon, href, label }) => (
-                                <motion.a
-                                    key={label}
-                                    href={href}
-                                    aria-label={label}
-                                    whileHover={{ scale: 1.15, y: -2 }}
-                                    whileTap={{ scale: 0.9 }}
-                                    className="w-9 h-9 rounded-xl flex items-center justify-center border transition-all"
-                                    style={{
-                                        background: isLight ? "rgba(255,255,255,0.8)" : "rgba(255,255,255,0.04)",
-                                        borderColor: "var(--color-card-border)",
-                                        color: "var(--color-foreground-muted)",
-                                    }}
-                                >
-                                    <Icon className="w-4 h-4" />
-                                </motion.a>
+                                <MagneticButton key={label}>
+                                    <motion.a
+                                        href={href}
+                                        aria-label={label}
+                                        whileHover={{ scale: 1.1, y: -2 }}
+                                        whileTap={{ scale: 0.9 }}
+                                        className="w-9 h-9 rounded-xl flex items-center justify-center border transition-all"
+                                        style={{
+                                            background: isLight ? "rgba(255,255,255,0.8)" : "rgba(255,255,255,0.04)",
+                                            borderColor: "var(--color-card-border)",
+                                            color: "var(--color-foreground-muted)",
+                                        }}
+                                    >
+                                        <Icon className="w-4 h-4" />
+                                    </motion.a>
+                                </MagneticButton>
                             ))}
                         </div>
                     </div>

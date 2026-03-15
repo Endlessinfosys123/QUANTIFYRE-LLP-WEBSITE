@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "@/components/layout/ThemeProvider";
+import MagneticButton from "@/components/ui/MagneticButton";
 
 export default function Navbar() {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -114,16 +115,18 @@ export default function Navbar() {
                             </AnimatePresence>
                         </button>
 
-                        <Link
-                            href="/contact"
-                            className="px-6 py-2 rounded-full text-white font-semibold text-sm transition-all"
-                            style={{
-                                background: "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
-                                boxShadow: "var(--shadow-glow-primary)",
-                            }}
-                        >
-                            Get Started
-                        </Link>
+                        <MagneticButton>
+                            <Link
+                                href="/contact"
+                                className="px-6 py-2 rounded-full text-white font-semibold text-sm transition-all"
+                                style={{
+                                    background: "linear-gradient(135deg, var(--color-primary), var(--color-secondary))",
+                                    boxShadow: "var(--shadow-glow-primary)",
+                                }}
+                            >
+                                Get Started
+                            </Link>
+                        </MagneticButton>
                     </nav>
 
                     {/* Mobile Right Controls */}

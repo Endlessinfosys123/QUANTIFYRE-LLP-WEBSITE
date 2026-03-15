@@ -2,11 +2,13 @@
 
 import { motion } from "framer-motion";
 import PageHeader from "@/components/ui/PageHeader";
-import TiltCard from "@/components/ui/TiltCard";
 import FloatingServiceOrbs from "@/components/ui/FloatingServiceOrbs";
 import PartnerLogos from "@/components/ui/PartnerLogos";
-import { Presentation, Globe, Code, Brain, Zap, Bot, CheckCircle2 } from "lucide-react";
+import { Presentation, Globe, Code, Brain, Zap, Bot } from "lucide-react";
+import { BentoGrid, BentoGridItem } from "@/components/ui/BentoGrid";
+import MagneticButton from "@/components/ui/MagneticButton";
 import { useTheme } from "@/components/layout/ThemeProvider";
+import Link from "next/link";
 
 const serviceAccents = ["#FF8C00", "#1B6D85", "#A020F0", "#3CCF6D", "#FF3C50", "#00B4FF"];
 const serviceGlowClass = [
@@ -25,45 +27,51 @@ export default function ServicesPage() {
     const services = [
         {
             title: 'Digital Marketing',
-            desc: 'AI-driven analytics and marketing strategies that maximise ROI and accelerate your brand growth with real-time data intelligence.',
-            icon: <Presentation className="w-12 h-12" />,
+            description: 'AI-driven analytics and marketing strategies that maximise ROI and accelerate brand growth.',
+            icon: <Presentation className="w-8 h-8" />,
             link: "/services/digital-marketing",
-            features: ['AI SEO & SEM', 'Social Media Intelligence', 'ROI Analytics', 'Brand Growth Strategy'],
+            className: "md:col-span-2",
+            color: "#FF8C00"
         },
         {
             title: 'Website Development',
-            desc: 'Neural web architectures built for performance, scale, and exceptional user experiences powered by the latest frameworks.',
-            icon: <Globe className="w-12 h-12" />,
+            description: 'Neural web architectures built for performance and scale.',
+            icon: <Globe className="w-8 h-8" />,
             link: "/services/website-development",
-            features: ['Next.js & React', 'CMS Integration', 'Performance-First', 'SEO Architecture'],
+            className: "md:col-span-1",
+            color: "#1B6D85"
         },
         {
             title: 'Software Development',
-            desc: 'Custom software solutions powered by intelligent design, robust cloud-native architecture, and seamless integrations.',
-            icon: <Code className="w-12 h-12" />,
+            description: 'Custom software solutions powered by intelligent design and robust cloud-native architecture.',
+            icon: <Code className="w-8 h-8" />,
             link: "/services/software-development",
-            features: ['Cloud-Native Apps', 'API Development', 'DevOps CI/CD', 'Microservices'],
+            className: "md:col-span-1",
+            color: "#A020F0"
         },
         {
             title: 'Application Development',
-            desc: 'Mobile-first applications with AI-enhanced experiences delivered for iOS and Android with native performance.',
-            icon: <Brain className="w-12 h-12" />,
+            description: 'Mobile-first applications with AI-enhanced experiences for iOS and Android.',
+            icon: <Brain className="w-8 h-8" />,
             link: "/services/application-development",
-            features: ['React Native', 'Flutter', 'AI-Enhanced UX', 'Cross-Platform'],
+            className: "md:col-span-2",
+            color: "#3CCF6D"
         },
         {
             title: 'AI Automations',
-            desc: 'Workflow automation that learns and adapts to your unique business processes, eliminating repetitive tasks at scale.',
-            icon: <Zap className="w-12 h-12" />,
+            description: 'Workflow automation that learns and adapts to your unique business processes.',
+            icon: <Zap className="w-8 h-8" />,
             link: "/services/ai-automations",
-            features: ['Process Automation', 'Smart Integrations', 'Real-time Triggers', 'No-code Flows'],
+            className: "md:col-span-2",
+            color: "#FF3C50"
         },
         {
             title: 'AI Tools Development',
-            desc: 'Custom AI tools, intelligent agents, and LLM-powered applications that transform your operations and unlock new revenue.',
-            icon: <Bot className="w-12 h-12" />,
+            description: 'Custom AI tools and intelligent agents that transform your operations.',
+            icon: <Bot className="w-8 h-8" />,
             link: "/services/ai-tools-development",
-            features: ['LLM Integration', 'Custom AI Models', 'Intelligent Agents', 'RAG Systems'],
+            className: "md:col-span-1",
+            color: "#00B4FF"
         }
     ];
 
@@ -93,76 +101,35 @@ export default function ServicesPage() {
 
             {/* Main Services Grid */}
             <section className="w-full py-28 relative z-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
-                <FloatingServiceOrbs indices={[0, 1, 4, 5]} />
-                <div className="max-w-7xl mx-auto relative z-10">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <FloatingServiceOrbs indices={[0, 1, 4, 5]} />                <div className="max-w-7xl mx-auto relative z-10">
+                    <BentoGrid>
                         {services.map((service, idx) => (
-                            <TiltCard key={idx} className="h-full" accentColor={serviceAccents[idx]}>
-                                <div className="flex flex-col md:flex-row gap-7 items-start relative z-10 h-full">
-                                    {/* Icon */}
-                                    <div
-                                        className={`p-5 rounded-2xl shrink-0 ${serviceGlowClass[idx]} group-hover:scale-110 transition-transform duration-500`}
-                                        style={{
-                                            background: isLight ? `${serviceAccents[idx]}14` : `${serviceAccents[idx]}18`,
-                                            color: serviceAccents[idx],
-                                        }}
-                                    >
-                                        {service.icon}
-                                    </div>
-
-                                    {/* Content */}
-                                    <div className="flex flex-col justify-between h-full flex-1">
-                                        <div>
-                                            <h3
-                                                className="text-2xl font-bold mb-3 transition-colors"
-                                                style={{ color: "var(--color-foreground)" }}
+                            <BentoGridItem
+                                key={idx}
+                                title={service.title}
+                                description={service.description}
+                                icon={service.icon}
+                                className={service.className}
+                                header={
+                                    <div className="flex justify-end mt-2">
+                                        <MagneticButton>
+                                            <Link
+                                                href={service.link}
+                                                className="inline-flex items-center gap-2 text-xs font-bold px-4 py-2 rounded-full border transition-all"
+                                                style={{
+                                                    color: service.color,
+                                                    borderColor: `${service.color}50`,
+                                                    background: `${service.color}10`,
+                                                }}
                                             >
-                                                {service.title}
-                                            </h3>
-                                            <p
-                                                className="leading-relaxed font-light text-sm mb-5"
-                                                style={{ color: "var(--color-foreground-muted)" }}
-                                            >
-                                                {service.desc}
-                                            </p>
-
-                                            {/* Feature Checklist */}
-                                            <div className="grid grid-cols-2 gap-y-2 gap-x-4 mb-6">
-                                                {service.features.map((feat, fi) => (
-                                                    <div key={fi} className="flex items-center gap-2">
-                                                        <CheckCircle2
-                                                            className="w-3.5 h-3.5 shrink-0"
-                                                            style={{ color: serviceAccents[idx] }}
-                                                        />
-                                                        <span
-                                                            className="text-xs font-medium"
-                                                            style={{ color: "var(--color-foreground-muted)" }}
-                                                        >
-                                                            {feat}
-                                                        </span>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        </div>
-
-                                        <motion.a
-                                            href={service.link}
-                                            whileHover={{ scale: 1.04 }}
-                                            whileTap={{ scale: 0.96 }}
-                                            className="inline-flex items-center gap-2 self-start text-sm font-bold px-5 py-2 rounded-full border transition-all"
-                                            style={{
-                                                color: serviceAccents[idx],
-                                                borderColor: `${serviceAccents[idx]}50`,
-                                                background: `${serviceAccents[idx]}10`,
-                                            }}
-                                        >
-                                            Learn More <span className="group-hover:translate-x-1 transition-transform inline-block">→</span>
-                                        </motion.a>
+                                                Details →
+                                            </Link>
+                                        </MagneticButton>
                                     </div>
-                                </div>
-                            </TiltCard>
+                                }
+                            />
                         ))}
-                    </div>
+                    </BentoGrid>
                 </div>
             </section>
 
