@@ -7,6 +7,7 @@ import { Check, ShieldAlert, Sparkles, Terminal, ArrowRight } from "lucide-react
 import PartnerLogos from "@/components/ui/PartnerLogos";
 import Link from 'next/link';
 import { useTheme } from "@/components/layout/ThemeProvider";
+import { BentoGrid } from "@/components/ui/BentoGrid";
 
 export default function PricingPage() {
     const { theme } = useTheme();
@@ -68,7 +69,7 @@ export default function PricingPage() {
                 <FloatingServiceOrbs indices={[0, 1, 4, 5]} />
 
                 <div className="max-w-7xl mx-auto relative z-10">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
+                    <BentoGrid className="max-w-7xl mx-auto">
                         {plans.map((plan, idx) => (
                             <motion.div
                                 key={idx}
@@ -76,7 +77,7 @@ export default function PricingPage() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: idx * 0.12 }}
-                                className={`relative rounded-3xl p-8 flex flex-col transition-all duration-500 overflow-hidden ${plan.featured ? "lg:-translate-y-4 shadow-2xl" : ""
+                                className={`relative rounded-3xl p-8 flex flex-col transition-all duration-500 overflow-hidden ${plan.featured ? "md:col-span-2 shadow-2xl" : "md:col-span-1"
                                     }`}
                                 style={{
                                     background: plan.featured
@@ -172,7 +173,7 @@ export default function PricingPage() {
                                 </Link>
                             </motion.div>
                         ))}
-                    </div>
+                    </BentoGrid>
                 </div>
             </section>
 

@@ -3,9 +3,10 @@
 import { motion } from "framer-motion";
 import PageHeader from "@/components/ui/PageHeader";
 import FloatingServiceOrbs from "@/components/ui/FloatingServiceOrbs";
-import { Target, Eye, Zap, Shield, Users } from "lucide-react";
+import { Target, Eye, Zap, Shield, Users, BarChart } from "lucide-react";
 import { useTheme } from "@/components/layout/ThemeProvider";
 import PartnerLogos from "@/components/ui/PartnerLogos";
+import { BentoGrid, BentoGridItem } from "@/components/ui/BentoGrid";
 
 export default function AboutPage() {
     const { theme } = useTheme();
@@ -14,18 +15,31 @@ export default function AboutPage() {
     const values = [
         {
             title: "Cutting-Edge Technology",
-            desc: "Leveraging the latest AI advancements to deliver solutions that keep you ahead of the curve.",
-            icon: <Zap className="w-8 h-8" />, color: "#FF8C00"
+            description: "Leveraging the latest AI advancements to deliver solutions that keep you ahead of the curve.",
+            icon: <Zap className="w-8 h-8" />, 
+            color: "#FF8C00",
+            className: "md:col-span-2"
         },
         {
             title: "Client-Centric",
-            desc: "Your success is our priority. We work closely with every client to exceed expectations every time.",
-            icon: <Users className="w-8 h-8" />, color: "#1B6D85"
+            description: "Your success is our priority. We work closely with every client to exceed expectations.",
+            icon: <Users className="w-8 h-8" />, 
+            color: "#1B6D85",
+            className: "md:col-span-1"
         },
         {
             title: "Secure & Scalable",
-            desc: "Enterprise-grade architecture built with security and scalability at its core, growing with you.",
-            icon: <Shield className="w-8 h-8" />, color: "#3CCF6D"
+            description: "Enterprise-grade architecture built with security and infinite scalability at its core.",
+            icon: <Shield className="w-8 h-8" />, 
+            color: "#3CCF6D",
+            className: "md:col-span-1"
+        },
+        {
+            title: "Data Driven",
+            description: "We use predictive analytics and real-time data to quantify your digital performance.",
+            icon: <BarChart className="w-8 h-8" />, 
+            color: "#A020F0",
+            className: "md:col-span-2"
         }
     ];
 
@@ -227,35 +241,17 @@ export default function AboutPage() {
                         <p style={{ color: "var(--color-foreground-muted)" }}>The principles that drive our innovation and fuel our passion.</p>
                     </motion.div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 preserve-3d">
+                    <BentoGrid className="max-w-7xl mx-auto">
                         {values.map((v, i) => (
-                            <motion.div
+                            <BentoGridItem
                                 key={i}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: i * 0.12 }}
-                                className="glass-3d p-8 group"
-                            >
-                                <div
-                                    className="mb-6 p-4 rounded-2xl inline-block"
-                                    style={{
-                                        background: `${v.color}15`,
-                                        border: `1px solid ${v.color}35`,
-                                        color: v.color,
-                                    }}
-                                >
-                                    {v.icon}
-                                </div>
-                                <h3 className="text-xl font-bold mb-3" style={{ color: "var(--color-foreground)" }}>
-                                    {v.title}
-                                </h3>
-                                <p className="leading-relaxed text-sm" style={{ color: "var(--color-foreground-muted)" }}>
-                                    {v.desc}
-                                </p>
-                            </motion.div>
+                                title={v.title}
+                                description={v.description}
+                                icon={v.icon}
+                                className={v.className}
+                            />
                         ))}
-                    </div>
+                    </BentoGrid>
                 </div>
             </section>
 

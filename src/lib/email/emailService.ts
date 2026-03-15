@@ -26,6 +26,8 @@ export class EmailService {
         name: string;
         email: string;
         company?: string;
+        mobile?: string;
+        service?: string;
         message: string;
     }) {
         if (!isEmailConfigured) {
@@ -43,6 +45,8 @@ export class EmailService {
                         <p><strong>Name:</strong> ${data.name}</p>
                         <p><strong>Email:</strong> ${data.email}</p>
                         ${data.company ? `<p><strong>Company:</strong> ${data.company}</p>` : ''}
+                        ${data.mobile ? `<p><strong>Mobile:</strong> ${data.mobile}</p>` : ''}
+                        ${data.service ? `<p><strong>Service Interest:</strong> ${data.service}</p>` : ''}
                         <div style="background: #f9f9f9; padding: 15px; border-left: 4px solid #1b6d85; margin: 20px 0;">
                             <p><strong>Message:</strong></p>
                             <p style="white-space: pre-wrap;">${data.message}</p>

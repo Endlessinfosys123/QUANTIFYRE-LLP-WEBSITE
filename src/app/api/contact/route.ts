@@ -25,6 +25,8 @@ export async function POST(request: Request) {
                     name: data.name,
                     email: data.email,
                     company: data.company,
+                    mobile: data.mobile,
+                    service: data.service,
                     message: data.message,
                 });
             } catch (emailErr: any) {

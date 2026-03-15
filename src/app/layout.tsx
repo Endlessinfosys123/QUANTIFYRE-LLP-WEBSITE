@@ -11,8 +11,27 @@ import PageTransition from '@/components/layout/PageTransition';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'QUANTIFYRE | AI-Powered Digital Solutions',
-  description: 'Transform your business with AI-powered digital marketing, website development, software solutions, and intelligent automation. The Future, Faster.',
+  title: {
+    default: 'QUANTIFYRE | AI-Powered Digital Solutions',
+    template: '%s | QUANTIFYRE'
+  },
+  description: 'Quantum-scale digital transformation powered by AI. We specialise in AI Automations, Custom Software, High-Performance Websites, and Digital Marketing Strategies.',
+  keywords: ['AI Automations', 'Software Engineering', 'Digital Marketing', 'Website Development', 'Machine Learning Solutions', 'Custom AI Tools', 'QUANTIFYRE LLP'],
+  authors: [{ name: 'QUANTIFYRE' }],
+  creator: 'QUANTIFYRE',
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://quantifyre.ai',
+    title: 'QUANTIFYRE | The Future, Faster.',
+    description: 'Bespoke AI solutions and digital engineering for high-growth enterprises.',
+    siteName: 'QUANTIFYRE',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'QUANTIFYRE | AI-Powered Digital Solutions',
+    description: 'Transforming businesses with intelligent automation and cutting-edge tech.',
+  },
   icons: {
     icon: '/favicon.png',
     shortcut: '/favicon.png',

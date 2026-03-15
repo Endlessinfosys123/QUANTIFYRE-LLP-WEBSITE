@@ -13,8 +13,9 @@ export class DbManager {
                 {
                     name: data.name,
                     email: data.email,
-                    company: data.company, // Added company field
-                    phone: data.phone || null, // Handle missing phone
+                    company: data.company,
+                    phone: data.mobile || data.phone || null, // Capture mobile
+                    service: data.service || null,           // Capture selected service
                     message: data.message,
                     created_at: new Date().toISOString(),
                 },

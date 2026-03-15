@@ -24,6 +24,8 @@ export default function ContactPage() {
             name: formData.get("name"),
             email: formData.get("email"),
             company: formData.get("company"),
+            mobile: `${formData.get("countryCode")} ${formData.get("mobile")}`,
+            service: formData.get("service"),
             message: formData.get("message"),
         };
 
@@ -36,7 +38,6 @@ export default function ContactPage() {
 
             if (response.ok) {
                 setSubmitted(true);
-                // Reset form implicit via setSubmitted hiding the form
             } else {
                 const errData = await response.json();
                 setError(errData.error || "Failed to send message. Please try again.");
@@ -135,22 +136,66 @@ export default function ContactPage() {
                                     </div>
                                 </div>
 
-                                <div className="space-y-2">
-                                    <label className="text-sm font-semibold pl-1" style={{ color: "var(--color-foreground-muted)" }}>
-                                        Company / Organization
-                                    </label>
-                                    <input
-                                        name="company" type="text" placeholder="Your Company Ltd."
-                                        className="theme-input"
-                                    />
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-semibold pl-1" style={{ color: "var(--color-foreground-muted)" }}>
+                                            Company Name
+                                        </label>
+                                        <input
+                                            name="company" required type="text" placeholder="Quantifyre Inc."
+                                            className="theme-input"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-sm font-semibold pl-1" style={{ color: "var(--color-foreground-muted)" }}>
+                                            Mobile Number
+                                        </label>
+                                        <div className="flex gap-2">
+                                            <select 
+                                                name="countryCode" 
+                                                className="theme-input w-[100px] text-xs px-2"
+                                                defaultValue="+91"
+                                            >
+                                                <option value="+91">+91 (IN)</option>
+                                                <option value="+1">+1 (US)</option>
+                                                <option value="+44">+44 (UK)</option>
+                                                <option value="+971">+971 (UAE)</option>
+                                                <option value="+61">+61 (AU)</option>
+                                                <option value="+65">+65 (SG)</option>
+                                            </select>
+                                            <input
+                                                name="mobile" required type="tel" placeholder="9876543210"
+                                                className="theme-input flex-1"
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div className="space-y-2">
                                     <label className="text-sm font-semibold pl-1" style={{ color: "var(--color-foreground-muted)" }}>
-                                        How can we help you?
+                                        Interested Service
+                                    </label>
+                                    <select
+                                        name="service" required
+                                        className="theme-input appearance-none cursor-pointer"
+                                    >
+                                        <option value="">Select a Service</option>
+                                        <option value="Website Development">Website Development</option>
+                                        <option value="Software Development">Software Development</option>
+                                        <option value="AI Automations">AI Automations</option>
+                                        <option value="AI Tools Development">AI Tools Development</option>
+                                        <option value="Application Development">Application Development</option>
+                                        <option value="Digital Marketing">Digital Marketing</option>
+                                        <option value="Other">Other / Custom Solution</option>
+                                    </select>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <label className="text-sm font-semibold pl-1" style={{ color: "var(--color-foreground-muted)" }}>
+                                        Project Description
                                     </label>
                                     <textarea
-                                        name="message" required rows={4} placeholder="Describe your project, goals, or the solutions you are looking for..."
+                                        name="message" required rows={4} placeholder="Tell us about your project or vision..."
                                         className="theme-input resize-none"
                                     />
                                 </div>
