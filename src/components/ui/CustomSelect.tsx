@@ -56,17 +56,17 @@ export default function CustomSelect({
             <button
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
-                className={`flex items-center justify-between text-left transition-all ${className.includes('theme-input') ? '' : 'theme-input'} ${className}`}
+                className={`flex items-center justify-between text-left transition-all px-4 py-3 ${className.includes('theme-input') ? '' : 'theme-input'} ${className}`}
                 style={{
                     borderColor: isOpen ? "var(--color-primary)" : "var(--color-input-border)",
                     boxShadow: (isOpen && !className.includes('border-none')) ? "0 0 0 2px rgba(27,109,133,0.2)" : "none",
                 }}
             >
-                <span className={selected ? "text-fg" : "text-muted"}>
+                <span className={`${selected ? "text-fg" : "text-muted"} truncate pr-2`}>
                     {selectedOption ? selectedOption.label : placeholder}
                 </span>
                 <ChevronDown
-                    className={`w-4 h-4 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
+                    className={`w-4 h-4 shrink-0 transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
                     style={{ color: "var(--color-foreground-muted)" }}
                 />
             </button>

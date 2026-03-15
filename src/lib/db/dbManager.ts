@@ -7,35 +7,43 @@ export class DbManager {
      * Attempts Supabase first. If it fails or times out, falls back to MongoDB.
      */
     static async saveContactSubmission(data: any): Promise<{ success: boolean; source: string; error?: any }> {
+        const payload: any = {
+            name: data.name,
+            email: data.email,
+            company: data.company,
+            phone: data.mobile || data.phone || null,
+            message: data.message,
+            created_at: new Date().toISOString(),
+        };
+
+        // Add service if provided
+        if (data.service) {
+            payload.service = data.service;
+        }
+
         try {
-            // 1. Try Supabase
-            const { error } = await supabase.from('contacts').insert([
-                {
-                    name: data.name,
-                    email: data.email,
-                    company: data.company,
-                    phone: data.mobile || data.phone || null, // Capture mobile
-                    service: data.service || null,           // Capture selected service
-                    message: data.message,
-                    created_at: new Date().toISOString(),
-                },
-            ]);
+            // 1. Try Supabase with full payload
+            const { error } = await supabase.from('contacts').insert([payload]);
 
             if (error) {
+                // If the error is "column not found" for 'service', retry without it
+                if (error.message.includes("column 'service' not found") || error.details?.includes("column \"service\" of relation \"contacts\" does not exist")) {
+                    console.warn('Supabase "service" column missing. Retrying with augmented message...');
+                    
+                    const fallbackPayload = { ...payload };
+                    delete fallbackPayload.service;
+                    fallbackPayload.message = `[Service: ${payload.service}]\n${payload.message}`;
+                    
+                    const { error: retryError } = await supabase.from('contacts').insert([fallbackPayload]);
+                    if (!retryError) {
+                        console.log('Supabase insertion successful after service column fallback');
+                        return { success: true, source: 'supabase' };
+                    }
+                    throw retryError;
+                }
+                
                 const isRLSError = error.code === '42501';
-                console.error('Supabase Insertion Error:', {
-                    message: error.message,
-                    details: error.details,
-                    hint: error.hint,
-                    code: error.code,
-                    diagnostics: isRLSError ? 'CRITICAL: Row Level Security (RLS) is blocking inserts. Check Supabase Policies.' : 'Standard database error.'
-                });
-                
-                const errorMessage = isRLSError 
-                    ? `RLS Policy Violation: Enable "anon" insert permissions on "contacts" table. (${error.message})`
-                    : `Supabase Error: ${error.message}`;
-                
-                throw new Error(errorMessage); // Trigger failover
+                throw new Error(isRLSError ? `RLS Policy Blocking: ${error.message}` : error.message);
             }
 
             console.log('Supabase insertion successful');
