@@ -32,19 +32,26 @@ export default function AboutPage() {
     const timeline = [
         {
             phase: "Phase 1", title: "Foundation",
-            desc: "Founded with a bold vision — democratize AI technology and make it accessible for every business.",
+            desc: "Founded with a bold vision — democratize AI technology and make it accessible for every business. Launched our first neural web engine.",
             color: "#1B6D85"
         },
         {
             phase: "Phase 2", title: "Growth & Expansion",
-            desc: "Expanded service offerings, grew the team, and delivered 200+ projects across multiple industries.",
+            desc: "Expanded service offerings, grew the team, and delivered 200+ projects across multiple industries including FinTech and E-commerce.",
             color: "#A020F0"
         },
         {
             phase: "Phase 3", title: "IRIS Launch",
-            desc: "Building QUANTIFYRE IRIS — our groundbreaking AI-powered geo-fencing marketing intelligence platform.",
+            desc: "Building QUANTIFYRE IRIS — our groundbreaking AI-powered geo-fencing marketing intelligence platform. Redefining location-based marketing.",
             color: "#3CCF6D"
         }
+    ];
+
+    const expertise = [
+        { skill: "Neural Architectures", level: 95 },
+        { skill: "Predictive Analytics", level: 90 },
+        { skill: "Full-Stack AI", level: 88 },
+        { skill: "Ethical AI Models", level: 92 },
     ];
 
     return (
@@ -146,6 +153,53 @@ export default function AboutPage() {
                             />
                         </motion.div>
                     </motion.div>
+                </div>
+            </section>
+
+            {/* Core Expertise */}
+            <section className="w-full py-28 px-4 sm:px-6 lg:px-8" style={{ background: "rgba(255,255,255,0.02)" }}>
+                <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                    >
+                        <h2 className="text-4xl font-black mb-8" style={{ color: "var(--color-foreground)" }}>
+                            Technical <span className="gradient-text">Excellence</span>
+                        </h2>
+                        <p className="text-lg mb-10 leading-relaxed font-light" style={{ color: "var(--color-foreground-muted)" }}>
+                            Our team consists of researchers and world-class engineers dedicated to pushing the boundaries of what AI can achieve. We don't just use AI; we build its future.
+                        </p>
+                        <div className="space-y-6">
+                            {expertise.map((item, i) => (
+                                <div key={i}>
+                                    <div className="flex justify-between mb-2">
+                                        <span className="font-bold text-sm tracking-wide" style={{ color: "var(--color-foreground)" }}>{item.skill}</span>
+                                        <span className="text-accent font-black text-xs" style={{ color: "var(--color-accent)" }}>{item.level}%</span>
+                                    </div>
+                                    <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden">
+                                        <motion.div
+                                            initial={{ width: 0 }}
+                                            whileInView={{ width: `${item.level}%` }}
+                                            transition={{ duration: 1, delay: i * 0.1 }}
+                                            className="h-full bg-gradient-to-r from-primary to-accent"
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </motion.div>
+                    <div className="relative group grayscale hover:grayscale-0 transition-all duration-700">
+                        <div 
+                            className="absolute -inset-1 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"
+                            style={{ background: "linear-gradient(to right, var(--color-primary), var(--color-accent))" }}
+                        ></div>
+                        <img 
+                            src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" 
+                            alt="Innovation Lab" 
+                            className="relative rounded-2xl border border-white/10"
+                        />
+                    </div>
                 </div>
             </section>
 

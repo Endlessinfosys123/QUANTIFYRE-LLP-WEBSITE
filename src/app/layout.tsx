@@ -4,6 +4,8 @@ import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import ThemeProvider from '@/components/layout/ThemeProvider';
+import MouseFollower from '@/components/ui/MouseFollower';
+import { motion } from 'framer-motion';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -26,9 +28,17 @@ export default function RootLayout({
     <html lang="en" className="dark" suppressHydrationWarning>
       <body className={`${inter.className} min-h-screen flex flex-col`} style={{ backgroundColor: 'var(--color-background)', color: 'var(--color-foreground)' }}>
         <ThemeProvider>
+          <MouseFollower />
           <Navbar />
           <main className="flex-grow pt-0">
-            {children}
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+            >
+              {children}
+            </motion.div>
           </main>
           <Footer />
         </ThemeProvider>

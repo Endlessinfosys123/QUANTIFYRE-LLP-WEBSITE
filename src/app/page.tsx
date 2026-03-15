@@ -66,12 +66,12 @@ export default function Home() {
   }, []);
 
   const services = [
-    { title: 'Digital Marketing', desc: 'AI-driven analytics and strategies that maximise ROI and accelerate brand growth.', icon: <Presentation className="w-10 h-10" />, features: ['SEO & SEM Campaigns', 'Social Media AI', 'Data Analytics'] },
-    { title: 'Website Development', desc: 'Neural web architectures built for performance, scale, and exceptional UX.', icon: <Globe className="w-10 h-10" />, features: ['Next.js & React', 'CMS Integration', 'Performance-first'] },
-    { title: 'Software Development', desc: 'Custom software solutions powered by intelligent design and cutting-edge tech.', icon: <Code className="w-10 h-10" />, features: ['Cloud-native Apps', 'API Architecture', 'DevOps CI/CD'] },
-    { title: 'Application Development', desc: 'Mobile-first applications with AI-enhanced experiences for iOS and Android.', icon: <Brain className="w-10 h-10" />, features: ['React Native', 'Flutter Apps', 'AI-enhanced UX'] },
-    { title: 'AI Automations', desc: 'Workflow automation that learns and adapts to your business processes.', icon: <Zap className="w-10 h-10" />, features: ['Process Automation', 'Smart Integrations', 'Real-time Triggers'] },
-    { title: 'AI Tools Development', desc: 'Custom AI tools that transform your operations and unlock new possibilities.', icon: <Bot className="w-10 h-10" />, features: ['LLM Integration', 'Custom AI Models', 'Intelligent Agents'] },
+    { title: 'Digital Marketing', desc: 'AI-driven analytics and strategies that maximise ROI and accelerate brand growth.', icon: <Presentation className="w-10 h-10" />, features: ['SEO & SEM Campaigns', 'Social Media AI', 'Data Analytics'], metric: 'Avg. 40% Increase in Lead Gen' },
+    { title: 'Website Development', desc: 'Neural web architectures built for performance, scale, and exceptional UX.', icon: <Globe className="w-10 h-10" />, features: ['Next.js & React', 'CMS Integration', 'Performance-first'], metric: 'Sub-second Load Times' },
+    { title: 'Software Development', desc: 'Custom software solutions powered by intelligent design and cutting-edge tech.', icon: <Code className="w-10 h-10" />, features: ['Cloud-native Apps', 'API Architecture', 'DevOps CI/CD'], metric: '99.9% System Uptime' },
+    { title: 'Application Development', desc: 'Mobile-first applications with AI-enhanced experiences for iOS and Android.', icon: <Brain className="w-10 h-10" />, features: ['React Native', 'Flutter Apps', 'AI-enhanced UX'], metric: '4.8+ Avg. App Store Rating' },
+    { title: 'AI Automations', desc: 'Workflow automation that learns and adapts to your business processes.', icon: <Zap className="w-10 h-10" />, features: ['Process Automation', 'Smart Integrations', 'Real-time Triggers'], metric: '70% Reduction in Manual Tasks' },
+    { title: 'AI Tools Development', desc: 'Custom AI tools that transform your operations and unlock new possibilities.', icon: <Bot className="w-10 h-10" />, features: ['LLM Integration', 'Custom AI Models', 'Intelligent Agents'], metric: 'Custom LLM Training Expert' },
   ];
 
   return (
@@ -150,6 +150,24 @@ export default function Home() {
                     </span>
                   ))}
                 </div>
+
+                {/* Success Metric Badge */}
+                {service.metric && (
+                  <div 
+                    className="mt-3 py-1 px-3 rounded-lg inline-block self-start"
+                    style={{ 
+                      background: `${serviceAccents[idx]}10`, 
+                      border: `1px solid ${serviceAccents[idx]}30` 
+                    }}
+                  >
+                    <span 
+                      className="text-[10px] font-bold uppercase tracking-wider"
+                      style={{ color: serviceAccents[idx] }}
+                    >
+                      Impact: {service.metric}
+                    </span>
+                  </div>
+                )}
 
                 <div
                   className="mt-auto pt-5 flex justify-between items-center group/btn cursor-pointer"

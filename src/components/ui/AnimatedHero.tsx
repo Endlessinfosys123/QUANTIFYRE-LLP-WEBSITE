@@ -311,8 +311,13 @@ export default function AnimatedHero() {
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={wordIdx}
-                                className="flex"
+                                className="flex relative"
                             >
+                                {/* Glow reflection behind text */}
+                                <div 
+                                    className="absolute inset-0 blur-[60px] opacity-30"
+                                    style={{ background: wordColors[wordIdx] }}
+                                />
                                 {rotatingWords[wordIdx].split("").map((char, i) => (
                                     <motion.span
                                         key={i}
@@ -324,12 +329,12 @@ export default function AnimatedHero() {
                                             delay: i * 0.04,
                                             ease: [0.22, 1, 0.36, 1]
                                         }}
-                                        className="text-5xl sm:text-7xl md:text-[5.5rem] font-black tracking-tighter leading-none"
+                                        className="text-5xl sm:text-7xl md:text-[5.5rem] font-black tracking-tighter leading-none relative z-10"
                                         style={{
                                             color: wordColors[wordIdx],
                                             textShadow: isLight
                                                 ? `0 0 20px ${wordColors[wordIdx]}20`
-                                                : `0 0 30px ${wordColors[wordIdx]}40`,
+                                                : `0 0 40px ${wordColors[wordIdx]}60`,
                                         }}
                                     >
                                         {char}

@@ -5,31 +5,34 @@
    ========================================= */
 :root,
 .dark {
-  --color-background: #080C12;
-  --color-background-2: #0D1420;
-  --color-foreground: #E8F0FF;
-  --color-foreground-muted: rgba(232, 240, 255, 0.55);
+  --color-background: #05080D;
+  --color-background-2: #0A0F1A;
+  --color-foreground: #F0F5FF;
+  --color-foreground-muted: rgba(240, 245, 255, 0.65);
   --color-primary: #1B6D85;
   --color-primary-foreground: #ffffff;
   --color-secondary: #0E4D5C;
   --color-accent: #3CCF6D;
   --color-accent-foreground: #000000;
-  --color-card-bg: rgba(255, 255, 255, 0.025);
-  --color-card-border: rgba(27, 109, 133, 0.22);
-  --color-card-hover-bg: rgba(27, 109, 133, 0.1);
+  --color-card-bg: rgba(255, 255, 255, 0.03);
+  --color-card-border: rgba(255, 255, 255, 0.08);
+  --color-card-hover-bg: rgba(27, 109, 133, 0.12);
   --color-card-hover-border: rgba(60, 207, 109, 0.5);
-  --color-glass-bg: rgba(8, 12, 18, 0.82);
-  --color-glass-border: rgba(255, 255, 255, 0.06);
-  --color-divider: rgba(255, 255, 255, 0.07);
-  --color-badge-bg: rgba(60, 207, 109, 0.08);
+  --color-glass-bg: rgba(5, 8, 13, 0.75);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --color-divider: rgba(255, 255, 255, 0.1);
+  --color-badge-bg: rgba(60, 207, 109, 0.1);
   --color-badge-border: rgba(60, 207, 109, 0.35);
   --color-input-bg: rgba(255, 255, 255, 0.05);
   --color-input-border: rgba(255, 255, 255, 0.1);
-  --color-input-text: #E8F0FF;
-  --color-input-placeholder: rgba(232, 240, 255, 0.25);
-  --color-section-alt: rgba(0, 0, 0, 0.35);
-  --shadow-glow-primary: 0 0 40px rgba(27, 109, 133, 0.4);
-  --shadow-glow-accent: 0 0 30px rgba(60, 207, 109, 0.3);
+  --color-input-text: #F0F5FF;
+  --color-input-placeholder: rgba(240, 245, 255, 0.3);
+  --color-section-alt: rgba(255, 255, 255, 0.02);
+  --shadow-glow-primary: 0 0 50px rgba(27, 109, 133, 0.4);
+  --shadow-glow-accent: 0 0 40px rgba(60, 207, 109, 0.3);
+  --mesh-gradient: radial-gradient(at 0% 0%, hsla(196,80%,15%,1) 0, transparent 50%), 
+                   radial-gradient(at 50% 0%, hsla(142,60%,10%,1) 0, transparent 50%), 
+                   radial-gradient(at 100% 0%, hsla(196,80%,15%,1) 0, transparent 50%);
 }
 
 /* =========================================

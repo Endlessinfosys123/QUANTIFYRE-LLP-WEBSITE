@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import PageHeader from "@/components/ui/PageHeader";
 import TiltCard from "@/components/ui/TiltCard";
-import { Workflow, Bot, Network, Clock, ShieldAlert, Sparkles } from "lucide-react";
+import { Workflow, Bot, Network, Clock, ShieldAlert, Sparkles, Zap, Globe, Code } from "lucide-react";
 import Link from "next/link";
 import PartnerLogos from "@/components/ui/PartnerLogos";
 
@@ -163,6 +163,62 @@ export default function AIAutomationsPage() {
                             </div>
 
                         </div>
+                    </div>
+                </div>
+            </section>
+            {/* Tech Stack & Use Cases */}
+            <section className="w-full py-28 px-4 sm:px-6 lg:px-8 bg-black/40">
+                <div className="max-w-7xl mx-auto">
+                    <div className="grid lg:grid-cols-2 gap-16">
+                        {/* Use Cases */}
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            className="glass-card p-10"
+                            style={{ borderColor: "rgba(60, 207, 109, 0.2)" }}
+                        >
+                            <h3 className="text-3xl font-black mb-8 flex items-center gap-3">
+                                <Zap className="text-accent w-8 h-8" />
+                                <span className="gradient-text">Use Cases</span>
+                            </h3>
+                            <div className="space-y-6">
+                                {[
+                                    { title: "Financial Reporting", desc: "Automating end-of-month reconciliation for a global logistics firm, saving 40+ man-hours per month." },
+                                    { title: "Supply Chain Logistics", desc: "AI-driven route optimization reducing fuel costs by 18% through real-time traffic and load data." },
+                                    { title: "Customer Support L1", desc: "Deploying cognitive agents that resolved 65% of common queries without human intervention." }
+                                ].map((uc, i) => (
+                                    <div key={i} className="pb-6 border-b border-white/5 last:border-0 last:pb-0">
+                                        <h4 className="font-bold text-white mb-2">{uc.title}</h4>
+                                        <p className="text-sm text-foreground/60 font-light leading-relaxed">{uc.desc}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </motion.div>
+
+                        {/* Tech Stack */}
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.95 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true }}
+                            className="p-10"
+                        >
+                            <h3 className="text-3xl font-black mb-10 flex items-center gap-3">
+                                <Globe className="text-primary w-8 h-8" />
+                                <span>The <span className="gradient-text">Stack</span></span>
+                            </h3>
+                            <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
+                                {['Python', 'TensorFlow', 'PyTorch', 'OpenAI', 'LangChain', 'Node.js', 'PostgreSQL', 'Docker', 'AWS'].map((tech, i) => (
+                                    <div 
+                                        key={i} 
+                                        className="h-24 glass-card flex items-center justify-center font-bold text-xs tracking-widest uppercase hover:bg-primary/20 transition-all"
+                                        style={{ borderColor: "rgba(255, 255, 255, 0.05)" }}
+                                    >
+                                        {tech}
+                                    </div>
+                                ))}
+                            </div>
+                        </motion.div>
                     </div>
                 </div>
             </section>

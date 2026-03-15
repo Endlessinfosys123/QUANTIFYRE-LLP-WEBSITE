@@ -77,11 +77,11 @@ export default function TiltCard({ children, className = "", accentColor }: Tilt
                     className="absolute top-0 left-8 right-8 h-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 shimmer-line"
                 />
 
-                {/* Spotlight glow on hover */}
-                <div
+                {/* Spotlight glow on hover - following mouse */}
+                <motion.div
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                     style={{
-                        background: `radial-gradient(circle at 50% 0%, ${accent}15, transparent 70%)`,
+                        background: `radial-gradient(circle 350px at ${mouseX}px ${-mouseY}px, ${accent}15, transparent 70%)`,
                         borderRadius: "1.5rem",
                     }}
                 />
