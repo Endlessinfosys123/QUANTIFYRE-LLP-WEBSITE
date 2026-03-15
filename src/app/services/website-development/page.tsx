@@ -6,6 +6,7 @@ import TiltCard from "@/components/ui/TiltCard";
 import { Zap, Layout, Box, ShoppingCart, MousePointer2, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import PartnerLogos from "@/components/ui/PartnerLogos";
+import TechFloatingIcons from "@/components/ui/TechFloatingIcons";
 
 export default function WebsiteDevelopmentPage() {
     const features = [
@@ -42,7 +43,8 @@ export default function WebsiteDevelopmentPage() {
     ];
 
     return (
-        <div className="flex flex-col items-center overflow-x-hidden min-h-screen bg-background pt-20">
+        <div className="flex flex-col items-center">
+            <TechFloatingIcons />
             <PageHeader
                 title="Website"
                 gradientText="Development"

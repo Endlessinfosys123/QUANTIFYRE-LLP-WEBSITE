@@ -7,6 +7,7 @@ import TechParticles from "@/components/ui/TechParticles";
 import { Workflow, Bot, Network, Clock, ShieldAlert, Sparkles, Zap, Globe, Code } from "lucide-react";
 import Link from "next/link";
 import PartnerLogos from "@/components/ui/PartnerLogos";
+import TechFloatingIcons from "@/components/ui/TechFloatingIcons";
 
 export default function AIAutomationsPage() {
     const features = [
@@ -44,7 +45,7 @@ export default function AIAutomationsPage() {
 
     return (
         <div className="flex flex-col items-center">
-            <TechParticles />
+            <TechFloatingIcons />
             <PageHeader
                 title="AI"
                 gradientText="Automations"
