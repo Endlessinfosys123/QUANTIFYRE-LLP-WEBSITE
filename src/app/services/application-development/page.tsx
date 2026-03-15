@@ -3,6 +3,8 @@
 import { motion } from "framer-motion";
 import PageHeader from "@/components/ui/PageHeader";
 import TiltCard from "@/components/ui/TiltCard";
+import TechFloatingIcons from "@/components/ui/TechFloatingIcons";
+import ThreeDAppDevice from "@/components/ui/services/3DAppDevice";
 import { Smartphone, MonitorSmartphone, Layers, Fingerprint, Zap, Layers3 } from "lucide-react";
 import Link from "next/link";
 import PartnerLogos from "@/components/ui/PartnerLogos";
@@ -43,6 +45,7 @@ export default function ApplicationDevelopmentPage() {
 
     return (
         <div className="flex flex-col items-center overflow-x-hidden min-h-screen bg-background pt-20">
+            <TechFloatingIcons />
             <PageHeader
                 title="Application"
                 gradientText="Development"
@@ -99,52 +102,8 @@ export default function ApplicationDevelopmentPage() {
                 <div className="max-w-7xl mx-auto px-4 relative z-10">
                     <div className="grid lg:grid-cols-2 gap-16 items-center flex-col-reverse lg:flex-row">
 
-                        <div className="relative h-[600px] w-full flex items-center justify-center hidden lg:flex">
-                            {/* Abstract Phone visualization */}
-                            <motion.div
-                                animate={{ y: [-15, 15, -15] }}
-                                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                                className="relative w-[300px] h-[600px] rounded-[3rem] border-8 border-white/10 bg-black shadow-[0_30px_60px_rgba(0,0,0,0.8),_0_0_50px_rgba(27,109,133,0.3)] overflow-hidden"
-                            >
-                                {/* Notch */}
-                                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[40%] h-6 bg-white/10 rounded-b-xl z-20 backdrop-blur-md border-b border-white/5"></div>
-
-                                {/* Screen Content */}
-                                <div className="absolute inset-0 bg-gradient-to-br from-[#0a1118] to-background pt-12 px-6">
-                                    <div className="flex justify-between items-center mb-8">
-                                        <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10"></div>
-                                        <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-accent"></div>
-                                    </div>
-
-                                    <div className="space-y-4 mb-8">
-                                        <div className="h-8 w-3/4 bg-white/10 rounded-lg"></div>
-                                        <div className="h-4 w-1/2 bg-white/5 rounded-lg"></div>
-                                    </div>
-
-                                    <div className="grid grid-cols-2 gap-4">
-                                        <div className="h-32 rounded-2xl bg-gradient-to-br from-primary/20 to-transparent border border-white/5"></div>
-                                        <div className="h-32 rounded-2xl bg-gradient-to-br from-accent/20 to-transparent border border-white/5"></div>
-                                        <div className="col-span-2 h-40 rounded-2xl bg-white/5 border border-white/10 relative overflow-hidden">
-                                            <div className="absolute bottom-0 w-full h-1/2 bg-gradient-to-t from-primary/30 to-transparent"></div>
-                                            <svg className="absolute bottom-0 w-full h-full text-primary" preserveAspectRatio="none" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M0 100 Q 25 20, 50 80 T 100 0 L 100 100 Z" fill="currentColor" fillOpacity="0.2" />
-                                                <path d="M0 100 Q 25 20, 50 80 T 100 0" stroke="currentColor" strokeWidth="2" />
-                                            </svg>
-                                        </div>
-                                    </div>
-
-                                    {/* Dock */}
-                                    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[80%] h-16 bg-white/10 backdrop-blur-md rounded-2xl border border-white/5 flex items-center justify-around px-2">
-                                        {[1, 2, 3, 4].map(i => (
-                                            <div key={i} className="w-10 h-10 rounded-xl bg-white/10"></div>
-                                        ))}
-                                    </div>
-                                </div>
-                            </motion.div>
-
-                            {/* Floating elements behind phone */}
-                            <motion.div animate={{ rotate: 360 }} transition={{ duration: 100, repeat: Infinity, ease: "linear" }} className="absolute -z-10 w-[500px] h-[500px] rounded-full border border-white/5 border-dashed" />
-                            <motion.div animate={{ rotate: -360 }} transition={{ duration: 80, repeat: Infinity, ease: "linear" }} className="absolute -z-10 w-[400px] h-[400px] rounded-full border border-primary/20" />
+                        <div className="relative w-full hidden lg:block">
+                            <ThreeDAppDevice />
                         </div>
 
                         <motion.div

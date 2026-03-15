@@ -3,9 +3,11 @@
 import { motion } from "framer-motion";
 import PageHeader from "@/components/ui/PageHeader";
 import TiltCard from "@/components/ui/TiltCard";
+import PartnerLogos from "@/components/ui/PartnerLogos";
+import TechFloatingIcons from "@/components/ui/TechFloatingIcons";
+import ThreeDGrowthHelix from "@/components/ui/services/3DGrowthHelix";
 import { Target, TrendingUp, BarChart, Megaphone, Users, Search } from "lucide-react";
 import Link from "next/link";
-import PartnerLogos from "@/components/ui/PartnerLogos";
 
 export default function DigitalMarketingPage() {
     const features = [
@@ -43,6 +45,7 @@ export default function DigitalMarketingPage() {
 
     return (
         <div className="flex flex-col items-center overflow-x-hidden min-h-screen bg-background pt-20">
+            <TechFloatingIcons />
             <PageHeader
                 title="Digital"
                 gradientText="Marketing"
@@ -126,33 +129,8 @@ export default function DigitalMarketingPage() {
                             </ul>
                         </motion.div>
 
-                        <div className="relative h-[600px] w-full rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md hidden lg:block">
-                            {/* Abstract 3D visualization placeholder */}
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                <motion.div
-                                    animate={{ rotate: 360 }}
-                                    transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
-                                    className="w-[400px] h-[400px] border-[1px] border-accent/20 rounded-full border-dashed flex items-center justify-center"
-                                >
-                                    <motion.div
-                                        animate={{ rotate: -360 }}
-                                        transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-                                        className="w-[300px] h-[300px] border-[1px] border-primary/40 rounded-full border-dotted flex items-center justify-center shadow-[0_0_50px_rgba(27,109,133,0.2)]"
-                                    >
-                                        <div className="w-[150px] h-[150px] bg-gradient-to-tr from-primary to-accent rounded-full blur-2xl opacity-40 animate-pulse" />
-                                    </motion.div>
-                                </motion.div>
-                            </div>
-
-                            <div className="absolute top-8 left-8 p-4 bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl">
-                                <div className="text-xs text-accent mb-1 uppercase tracking-wider font-bold">Optimization Rate</div>
-                                <div className="text-3xl font-black text-white">+84.2%</div>
-                            </div>
-
-                            <div className="absolute bottom-8 right-8 p-4 bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl text-right">
-                                <div className="text-xs text-primary mb-1 uppercase tracking-wider font-bold">Cost Per Acq</div>
-                                <div className="text-3xl font-black text-white">-41.5%</div>
-                            </div>
+                        <div className="relative w-full hidden lg:block">
+                            <ThreeDGrowthHelix />
                         </div>
                     </div>
                 </div>

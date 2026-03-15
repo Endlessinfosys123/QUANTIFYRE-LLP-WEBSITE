@@ -3,6 +3,9 @@
 import { motion } from "framer-motion";
 import PageHeader from "@/components/ui/PageHeader";
 import TiltCard from "@/components/ui/TiltCard";
+import TechParticles from "@/components/ui/TechParticles";
+import TechFloatingIcons from "@/components/ui/TechFloatingIcons";
+import ThreeDAICore from "@/components/ui/services/3DAICore";
 import { BrainCircuit, Cpu, Binary, Eye, Speech, Component } from "lucide-react";
 import Link from "next/link";
 import PartnerLogos from "@/components/ui/PartnerLogos";
@@ -43,6 +46,8 @@ export default function AIToolsDevelopmentPage() {
 
     return (
         <div className="flex flex-col items-center overflow-x-hidden min-h-screen bg-background pt-20">
+            <TechFloatingIcons />
+            <TechParticles />
             <PageHeader
                 title="AI Tools"
                 gradientText="Development"
@@ -99,65 +104,8 @@ export default function AIToolsDevelopmentPage() {
                 <div className="max-w-7xl mx-auto px-4 relative z-10">
                     <div className="grid lg:grid-cols-2 gap-16 items-center flex-col-reverse lg:flex-row">
 
-                        <div className="relative h-[600px] w-full rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md hidden lg:block group">
-                            {/* Abstract Machine Learning Matrix visualization */}
-                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(60,207,109,0.1),rgba(0,0,0,0))]"></div>
-
-                            <div className="absolute inset-0 flex flex-col items-center justify-center">
-                                {/* Input Layer */}
-                                <div className="flex gap-4 mb-12">
-                                    {[1, 2, 3, 4, 5].map((node) => (
-                                        <motion.div
-                                            key={`input-${node}`}
-                                            animate={{ opacity: [0.3, 1, 0.3] }}
-                                            transition={{ duration: 2, repeat: Infinity, delay: node * 0.2 }}
-                                            className="w-4 h-4 rounded-full bg-white/30 border border-white/50"
-                                        />
-                                    ))}
-                                </div>
-
-                                {/* Hidden Layers */}
-                                <div className="flex gap-8 mb-12 relative">
-                                    {/* connecting lines background */}
-                                    <div className="absolute inset-0 top-[-2rem] bottom-[-2rem] left-[-2rem] right-[-2rem] opacity-20 hidden md:block"
-                                        style={{ backgroundImage: 'linear-gradient(rgba(27,109,133,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(60,207,109,0.5) 1px, transparent 1px)', backgroundSize: '1rem 1rem' }}
-                                    ></div>
-
-                                    {[1, 2, 3, 4, 5, 6, 7].map((node) => (
-                                        <motion.div
-                                            key={`hidden1-${node}`}
-                                            animate={{ opacity: [0.2, 1, 0.2], scale: [1, 1.2, 1] }}
-                                            transition={{ duration: 1.5, repeat: Infinity, delay: Math.random() * 2 }}
-                                            className="w-6 h-6 rounded-full bg-primary/80 shadow-[0_0_15px_rgba(27,109,133,0.8)] relative z-10"
-                                        />
-                                    ))}
-                                </div>
-
-                                <div className="flex gap-6 mb-12">
-                                    {[1, 2, 3, 4, 5].map((node) => (
-                                        <motion.div
-                                            key={`hidden2-${node}`}
-                                            animate={{ opacity: [0.2, 1, 0.2], scale: [1, 1.2, 1] }}
-                                            transition={{ duration: 1.5, repeat: Infinity, delay: Math.random() * 2 }}
-                                            className="w-5 h-5 rounded-full bg-accent/80 shadow-[0_0_15px_rgba(60,207,109,0.8)] relative z-10"
-                                        />
-                                    ))}
-                                </div>
-
-                                {/* Output Layer */}
-                                <div className="flex gap-16">
-                                    {[1, 2].map((node) => (
-                                        <motion.div
-                                            key={`output-${node}`}
-                                            animate={{ opacity: [0.5, 1, 0.5] }}
-                                            transition={{ duration: 3, repeat: Infinity, delay: node * 0.5 }}
-                                            className="w-12 h-12 rounded-lg bg-white shadow-[0_0_30px_rgba(255,255,255,0.8)] flex items-center justify-center text-black font-bold text-xs"
-                                        >
-                                            Out
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            </div>
+                        <div className="relative w-full hidden lg:block">
+                            <ThreeDAICore />
                         </div>
 
                         <motion.div

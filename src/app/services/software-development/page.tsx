@@ -7,6 +7,7 @@ import { Code2, Cpu, Cloud, Database, Lock, Terminal } from "lucide-react";
 import Link from "next/link";
 import PartnerLogos from "@/components/ui/PartnerLogos";
 import TechFloatingIcons from "@/components/ui/TechFloatingIcons";
+import ThreeDServerBlades from "@/components/ui/services/3DServerBlades";
 
 export default function SoftwareDevelopmentPage() {
     const features = [
@@ -130,44 +131,8 @@ export default function SoftwareDevelopmentPage() {
                             </div>
                         </motion.div>
 
-                        <div className="relative h-[600px] w-full rounded-3xl overflow-hidden border border-white/10 bg-[#050B14] backdrop-blur-md hidden lg:block">
-                            {/* Server Rack / Data Flow visualization */}
-                            <div className="absolute inset-0 flex flex-col justify-center items-center gap-4 p-8">
-                                {[1, 2, 3, 4, 5].map((rack, i) => (
-                                    <motion.div
-                                        key={rack}
-                                        className="w-full h-16 bg-black border border-white/10 rounded-lg flex items-center px-6 gap-4 relative overflow-hidden"
-                                    >
-                                        {/* Blinking lights */}
-                                        <div className="flex gap-2 w-12 shrink-0">
-                                            <motion.div
-                                                animate={{ opacity: [0.2, 1, 0.2] }}
-                                                transition={{ duration: Math.random() * 2 + 1, repeat: Infinity, ease: "linear", delay: i * 0.2 }}
-                                                className="w-2 h-2 rounded-full bg-accent"
-                                            />
-                                            <motion.div
-                                                animate={{ opacity: [0.2, 1, 0.2] }}
-                                                transition={{ duration: Math.random() * 2 + 1, repeat: Infinity, ease: "linear", delay: i * 0.5 }}
-                                                className="w-2 h-2 rounded-full bg-primary"
-                                            />
-                                        </div>
-
-                                        {/* Server ID */}
-                                        <div className="text-xs font-mono text-white/30 truncate">
-                                            NODE-{1024 + i * 4}_{Math.random().toString(36).substring(7).toUpperCase()}
-                                        </div>
-
-                                        {/* Data Stream */}
-                                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/5 to-transparent -translate-x-full">
-                                            <motion.div
-                                                animate={{ translateX: ["0%", "200%"] }}
-                                                transition={{ duration: 3, repeat: Infinity, ease: "linear", delay: i * 0.7 }}
-                                                className="w-1/2 h-full bg-gradient-to-r from-transparent via-primary/20 to-transparent"
-                                            />
-                                        </div>
-                                    </motion.div>
-                                ))}
-                            </div>
+                        <div className="relative w-full hidden lg:block">
+                            <ThreeDServerBlades />
                         </div>
                     </div>
                 </div>

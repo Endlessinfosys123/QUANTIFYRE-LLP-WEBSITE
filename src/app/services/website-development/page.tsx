@@ -7,6 +7,7 @@ import { Zap, Layout, Box, ShoppingCart, MousePointer2, ShieldCheck } from "luci
 import Link from "next/link";
 import PartnerLogos from "@/components/ui/PartnerLogos";
 import TechFloatingIcons from "@/components/ui/TechFloatingIcons";
+import ThreeDTechStack from "@/components/ui/services/3DTechStack";
 
 export default function WebsiteDevelopmentPage() {
     const features = [
@@ -101,33 +102,8 @@ export default function WebsiteDevelopmentPage() {
                 <div className="max-w-7xl mx-auto px-4 relative z-10">
                     <div className="grid lg:grid-cols-2 gap-16 items-center flex-col-reverse lg:flex-row">
 
-                        <div className="relative h-[600px] w-full rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md hidden lg:block group">
-                            {/* Abstract Code/Tech visualization */}
-                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(60,207,109,0.1),rgba(0,0,0,0))]"></div>
-
-                            <motion.div
-                                className="absolute inset-0 flex flex-col justify-center items-center gap-6"
-                            >
-                                {[1, 2, 3].map((layer, i) => (
-                                    <motion.div
-                                        key={i}
-                                        animate={{ y: [0, -10, 0] }}
-                                        transition={{ duration: 4, delay: i * 0.5, repeat: Infinity, ease: "easeInOut" }}
-                                        className="w-[80%] h-32 border border-white/10 bg-black/60 backdrop-blur-md rounded-xl p-4 shadow-[0_20px_40px_rgba(0,0,0,0.5)] transform -rotate-6 hover:rotate-0 transition-transform duration-500 cursor-pointer"
-                                    >
-                                        <div className="flex items-center gap-3 mb-4">
-                                            <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
-                                            <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
-                                            <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
-                                        </div>
-                                        <div className="space-y-2">
-                                            <div className="h-2 w-3/4 bg-white/10 rounded-full"></div>
-                                            <div className="h-2 w-1/2 bg-white/10 rounded-full"></div>
-                                            <div className="h-2 w-5/6 bg-accent/30 rounded-full"></div>
-                                        </div>
-                                    </motion.div>
-                                ))}
-                            </motion.div>
+                        <div className="relative w-full hidden lg:block">
+                            <ThreeDTechStack />
                         </div>
 
                         <motion.div

@@ -8,6 +8,7 @@ import { Workflow, Bot, Network, Clock, ShieldAlert, Sparkles, Zap, Globe, Code 
 import Link from "next/link";
 import PartnerLogos from "@/components/ui/PartnerLogos";
 import TechFloatingIcons from "@/components/ui/TechFloatingIcons";
+import ThreeDNeuralSynapse from "@/components/ui/services/3DNeuralSynapse";
 
 export default function AIAutomationsPage() {
     const features = [
@@ -130,45 +131,13 @@ export default function AIAutomationsPage() {
                             </ul>
                         </motion.div>
 
-                        <div className="relative h-[600px] w-full rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-md hidden lg:block">
-                            {/* Abstract 3D Network Node visualization */}
-                            <div className="absolute inset-0 flex items-center justify-center">
-                                <motion.div
-                                    animate={{ rotate: 360 }}
-                                    transition={{ duration: 60, repeat: Infinity, ease: "linear" }}
-                                    className="relative w-[400px] h-[400px]"
-                                >
-                                    {/* Central Node */}
-                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-gradient-to-br from-primary to-accent rounded-full blur-[8px] animate-pulse"></div>
-                                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-white rounded-full flex items-center justify-center text-black font-black">AI</div>
-
-                                    {/* Orbiting Nodes */}
-                                    {[0, 60, 120, 180, 240, 300].map((deg) => (
-                                        <motion.div
-                                            key={deg}
-                                            className="absolute top-1/2 left-1/2 w-32 origin-left"
-                                            style={{ rotate: `${deg}deg` }}
-                                        >
-                                            <div className="absolute right-0 w-12 h-12 -translate-y-1/2 translate-x-1/2 bg-black border border-white/20 rounded-xl backdrop-blur-md flex items-center justify-center shadow-[0_0_15px_rgba(27,109,133,0.5)]">
-                                                <div className="w-4 h-4 rounded-full bg-accent animate-ping opacity-50 absolute"></div>
-                                                <div className="w-2 h-2 rounded-full bg-primary relative z-10"></div>
-                                            </div>
-                                            {/* Connecting Line */}
-                                            <div className="w-full h-[1px] bg-gradient-to-r from-primary to-transparent opacity-50 relative -top-[0.5px]"></div>
-                                        </motion.div>
-                                    ))}
-                                </motion.div>
-                            </div>
-
-                            <div className="absolute top-8 left-8 p-4 bg-black/40 backdrop-blur-md border border-white/10 rounded-2xl">
-                                <div className="text-xs text-accent mb-1 uppercase tracking-wider font-bold">Hours Saved</div>
-                                <div className="text-3xl font-black text-white">10,000+</div>
-                            </div>
-
+                        <div className="relative w-full hidden lg:block">
+                            <ThreeDNeuralSynapse />
                         </div>
                     </div>
                 </div>
             </section>
+
             {/* Tech Stack & Use Cases */}
             <section className="w-full py-28 px-4 sm:px-6 lg:px-8 bg-black/40">
                 <div className="max-w-7xl mx-auto">
