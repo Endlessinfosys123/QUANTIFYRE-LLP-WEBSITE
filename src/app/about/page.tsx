@@ -227,7 +227,7 @@ export default function AboutPage() {
                         <p style={{ color: "var(--color-foreground-muted)" }}>The principles that drive our innovation and fuel our passion.</p>
                     </motion.div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 preserve-3d">
                         {values.map((v, i) => (
                             <motion.div
                                 key={i}
@@ -235,7 +235,7 @@ export default function AboutPage() {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.5, delay: i * 0.12 }}
-                                className="glass-card p-8 group"
+                                className="glass-3d p-8 group"
                             >
                                 <div
                                     className="mb-6 p-4 rounded-2xl inline-block"

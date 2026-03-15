@@ -8,6 +8,8 @@ import {
 } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import { useTheme } from "@/components/layout/ThemeProvider";
+import TechParticles from "./TechParticles";
+import TechFloatingIcons from "./TechFloatingIcons";
 
 /* ─── rotating words ─── */
 const rotatingWords = ["Faster.", "Smarter.", "Bolder.", "Greater."];
@@ -201,6 +203,11 @@ export default function AnimatedHero() {
                 }}
             />
 
+            {/* ── Background layers ── */}
+            <TechParticles />
+            <TechFloatingIcons />
+            <div className="tech-grid opacity-20" />
+            
             {/* ── Mouse-parallax orbs ── */}
             <motion.div
                 style={{ x: springX, y: springY }}
@@ -235,34 +242,41 @@ export default function AnimatedHero() {
                 />
             </motion.div>
 
-            {/* ── Orbital Rings (desktop only) ── */}
-            <div className="absolute inset-0 pointer-events-none hidden xl:flex items-center justify-center overflow-hidden">
-                {/* Visual dashed rings */}
-                <OrbitalRing radius={360} duration={40} isLight={isLight} />
-                <OrbitalRing radius={240} duration={28} reverse isLight={isLight} />
+            {/* ── 3D Tech Sphere / Orbital (desktop only) ── */}
+            <div className="absolute inset-0 pointer-events-none hidden xl:flex items-center justify-center overflow-hidden preserve-3d">
+                {/* Visual dashed rings with 3D tilts */}
+                <div style={{ transform: "rotateX(75deg) rotateY(15deg)" }} className="absolute inset-0 flex items-center justify-center">
+                    <OrbitalRing radius={450} duration={60} isLight={isLight} />
+                    <OrbitalRing radius={300} duration={40} reverse isLight={isLight} />
+                </div>
 
-                {/* Service icon nodes — always upright */}
+                <div style={{ transform: "rotateX(-60deg) rotateY(-20deg)" }} className="absolute inset-0 flex items-center justify-center">
+                    <OrbitalRing radius={400} duration={50} isLight={isLight} />
+                </div>
+
+                {/* Service icon nodes — with 3D orbit logic */}
                 {orbitals.map(({ Icon, label, color, angle }, i) => (
                     <OrbitalIcon
                         key={i}
                         Icon={Icon}
                         label={label}
                         color={color}
-                        radius={360}
+                        radius={380 + (i % 2) * 40}
                         startAngle={angle}
-                        duration={44}
+                        duration={40 + i * 2}
                         isLight={isLight}
                     />
                 ))}
 
-                {/* Innermost glow ring */}
+                {/* Central Core Glow */}
                 <div
                     className="absolute rounded-full"
                     style={{
-                        width: 160, height: 160,
+                        width: 200, height: 200,
                         border: `1px solid ${isLight ? "rgba(27,109,133,0.3)" : "rgba(27,109,133,0.4)"}`,
-                        boxShadow: `0 0 40px rgba(27,109,133,0.15)`,
-                        animation: "pulseRing 3s ease-in-out infinite",
+                        boxShadow: `0 0 60px rgba(27,109,133,0.25)`,
+                        background: "radial-gradient(circle, rgba(27,109,133,0.1) 0%, transparent 70%)",
+                        animation: "pulseRing 4s ease-in-out infinite",
                     }}
                 />
             </div>

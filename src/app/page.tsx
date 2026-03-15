@@ -108,81 +108,86 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 preserve-3d">
             {services.map((service, idx) => (
-              <TiltCard key={idx} className="h-full" accentColor={serviceAccents[idx]}>
-                {/* Service Icon */}
-                <div
-                  className={`mb-6 p-4 rounded-2xl inline-block shrink-0 ${serviceGlowClass[idx]}`}
-                  style={{
-                    background: isLight
-                      ? `${serviceAccents[idx]}15`
-                      : `${serviceAccents[idx]}18`,
-                    color: serviceAccents[idx],
-                  }}
+              <div key={idx} className="relative group preserve-3d">
+                <TiltCard 
+                  className="h-full glass-3d"
+                  accentColor={serviceAccents[idx]}
                 >
-                  {service.icon}
-                </div>
-
-                <h3
-                  className="text-xl font-bold mb-3 transition-colors"
-                  style={{ color: "var(--color-foreground)" }}
-                >
-                  {service.title}
-                </h3>
-                <p className="text-sm leading-relaxed font-light mb-5" style={{ color: "var(--color-foreground-muted)" }}>
-                  {service.desc}
-                </p>
-
-                {/* Feature Tags */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {service.features.map((f, fi) => (
-                    <span
-                      key={fi}
-                      className="text-[11px] font-semibold px-3 py-1 rounded-full"
-                      style={{
-                        background: isLight ? `${serviceAccents[idx]}12` : `${serviceAccents[idx]}18`,
-                        color: serviceAccents[idx],
-                        border: `1px solid ${serviceAccents[idx]}35`,
-                      }}
-                    >
-                      {f}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Success Metric Badge */}
-                {service.metric && (
-                  <div 
-                    className="mt-3 py-1 px-3 rounded-lg inline-block self-start"
-                    style={{ 
-                      background: `${serviceAccents[idx]}10`, 
-                      border: `1px solid ${serviceAccents[idx]}30` 
+                  {/* Service Icon */}
+                  <div
+                    className={`mb-6 p-4 rounded-2xl inline-block shrink-0 ${serviceGlowClass[idx]}`}
+                    style={{
+                      background: isLight
+                        ? `${serviceAccents[idx]}15`
+                        : `${serviceAccents[idx]}18`,
+                      color: serviceAccents[idx],
                     }}
                   >
-                    <span 
-                      className="text-[10px] font-bold uppercase tracking-wider"
+                    {service.icon}
+                  </div>
+
+                  <h3
+                    className="text-xl font-bold mb-3 transition-colors underline-offset-4 group-hover:underline"
+                    style={{ color: "var(--color-foreground)" }}
+                  >
+                    {service.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed font-light mb-5" style={{ color: "var(--color-foreground-muted)" }}>
+                    {service.desc}
+                  </p>
+
+                  {/* Feature Tags */}
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {service.features.map((f, fi) => (
+                      <span
+                        key={fi}
+                        className="text-[11px] font-semibold px-3 py-1 rounded-full"
+                        style={{
+                          background: isLight ? `${serviceAccents[idx]}12` : `${serviceAccents[idx]}18`,
+                          color: serviceAccents[idx],
+                          border: `1px solid ${serviceAccents[idx]}35`,
+                        }}
+                      >
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Success Metric Badge */}
+                  {service.metric && (
+                    <div 
+                      className="mt-3 py-1 px-3 rounded-lg inline-block self-start"
+                      style={{ 
+                        background: `${serviceAccents[idx]}10`, 
+                        border: `1px solid ${serviceAccents[idx]}30` 
+                      }}
+                    >
+                      <span 
+                        className="text-[10px] font-bold uppercase tracking-wider"
+                        style={{ color: serviceAccents[idx] }}
+                      >
+                        Impact: {service.metric}
+                      </span>
+                    </div>
+                  )}
+
+                  <div
+                    className="mt-auto pt-5 flex justify-between items-center group/btn cursor-pointer"
+                    style={{ borderTop: `1px solid var(--color-divider)` }}
+                  >
+                    <Link
+                      href="/services"
+                      className="text-sm font-semibold flex items-center gap-1.5 transition-colors"
                       style={{ color: serviceAccents[idx] }}
                     >
-                      Impact: {service.metric}
-                    </span>
+                      Explore Module
+                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                    </Link>
                   </div>
-                )}
-
-                <div
-                  className="mt-auto pt-5 flex justify-between items-center group/btn cursor-pointer"
-                  style={{ borderTop: `1px solid var(--color-divider)` }}
-                >
-                  <Link
-                    href="/services"
-                    className="text-sm font-semibold flex items-center gap-1.5 transition-colors"
-                    style={{ color: serviceAccents[idx] }}
-                  >
-                    Explore Module
-                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-              </TiltCard>
+                </TiltCard>
+              </div>
             ))}
           </div>
         </div>
@@ -370,7 +375,8 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="w-full py-32 relative overflow-hidden" style={{ borderTop: `1px solid var(--color-divider)` }}>
+      <section className="w-full py-32 relative overflow-hidden preserve-3d" style={{ borderTop: `1px solid var(--color-divider)` }}>
+        <div className="tech-grid opacity-10" />
         {/* Animated mesh */}
         <div className="absolute inset-0">
           <div

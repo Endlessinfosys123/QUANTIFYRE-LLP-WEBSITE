@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import PageHeader from "@/components/ui/PageHeader";
 import TiltCard from "@/components/ui/TiltCard";
+import TechParticles from "@/components/ui/TechParticles";
 import { Workflow, Bot, Network, Clock, ShieldAlert, Sparkles, Zap, Globe, Code } from "lucide-react";
 import Link from "next/link";
 import PartnerLogos from "@/components/ui/PartnerLogos";
@@ -42,7 +43,8 @@ export default function AIAutomationsPage() {
     ];
 
     return (
-        <div className="flex flex-col items-center overflow-x-hidden min-h-screen bg-background pt-20">
+        <div className="flex flex-col items-center">
+            <TechParticles />
             <PageHeader
                 title="AI"
                 gradientText="Automations"
