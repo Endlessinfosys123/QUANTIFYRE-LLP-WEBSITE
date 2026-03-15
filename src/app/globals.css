@@ -148,6 +148,15 @@
   outline: none;
 }
 
+/* Fix browser autofill backgrounds */
+.theme-input:-webkit-autofill,
+.theme-input:-webkit-autofill:hover,
+.theme-input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--color-input-text);
+  -webkit-box-shadow: 0 0 0px 1000px var(--color-input-bg) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 .theme-input option {
   display: none; /* Hide native options as we use CustomSelect */
 }

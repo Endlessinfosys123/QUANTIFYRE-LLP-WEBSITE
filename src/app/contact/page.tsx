@@ -41,7 +41,7 @@ export default function ContactPage() {
                 setSubmitted(true);
             } else {
                 const errData = await response.json();
-                setError(errData.error || "Failed to send message. Please try again.");
+                setError(errData.details || errData.error || "Failed to send message. Please try again.");
             }
         } catch (err) {
             setError("A network error occurred. Please check your connection.");
@@ -151,13 +151,13 @@ export default function ContactPage() {
                                         <label className="text-sm font-semibold pl-1" style={{ color: "var(--color-foreground-muted)" }}>
                                             Mobile Number
                                         </label>
-                                        <div 
-                                            className="flex items-center theme-input p-0 overflow-hidden group transition-all"
+                                        <div
+                                            className="flex items-center theme-input p-0 overflow-hidden group transition-all h-[52px]"
                                             style={{ borderColor: "var(--color-input-border)" }}
                                         >
-                                            <CustomSelect 
+                                            <CustomSelect
                                                 name="countryCode"
-                                                className="w-[105px] border-r border-white/10"
+                                                className="w-[110px] h-full border-r border-white/10 shrink-0 !bg-transparent !border-none !rounded-none !py-0 !px-3"
                                                 placeholder="+91"
                                                 value="+91"
                                                 options={[
@@ -171,7 +171,7 @@ export default function ContactPage() {
                                             />
                                             <input
                                                 name="mobile" required type="tel" placeholder="9876543210"
-                                                className="bg-transparent flex-1 px-4 py-3 outline-none"
+                                                className="bg-transparent flex-1 px-4 h-full outline-none"
                                                 style={{ color: "var(--color-input-text)" }}
                                             />
                                         </div>

@@ -56,10 +56,10 @@ export default function CustomSelect({
             <button
                 type="button"
                 onClick={() => setIsOpen(!isOpen)}
-                className={`theme-input flex items-center justify-between text-left group transition-all ${name === "countryCode" ? "!bg-transparent !border-none !rounded-none h-full" : ""}`}
+                className={`flex items-center justify-between text-left transition-all ${className.includes('theme-input') ? '' : 'theme-input'} ${className}`}
                 style={{
                     borderColor: isOpen ? "var(--color-primary)" : "var(--color-input-border)",
-                    boxShadow: (isOpen && name !== "countryCode") ? "0 0 0 2px rgba(27,109,133,0.2)" : "none",
+                    boxShadow: (isOpen && !className.includes('border-none')) ? "0 0 0 2px rgba(27,109,133,0.2)" : "none",
                 }}
             >
                 <span className={selected ? "text-fg" : "text-muted"}>
