@@ -101,10 +101,10 @@ export default function Home() {
               className="text-4xl md:text-6xl font-black mb-5 tracking-tight"
               style={{ color: "var(--color-foreground)" }}
             >
-              Our <span className="gradient-text">Neural</span> Services
+              Enterprise <span className="gradient-text">AI & Software</span> Solutions
             </h2>
             <p className="max-w-2xl mx-auto text-lg font-light" style={{ color: "var(--color-foreground-muted)" }}>
-              Comprehensive AI-powered solutions designed to accelerate your digital transformation.
+              Specialised AI-powered digital transformation and high-performance software engineering designed to accelerate your business growth.
             </p>
           </motion.div>
 
@@ -419,9 +419,7 @@ export default function Home() {
               className="text-5xl md:text-7xl font-black mb-6 tracking-tight"
               style={{ color: "var(--color-foreground)" }}
             >
-              Ready to{" "}
-              <span className="gradient-text">Quantify</span>{" "}
-              Growth?
+              Scale Your <span className="gradient-text">Digital</span> Impact
             </h2>
             <p
               className="text-lg mb-12 font-light max-w-2xl mx-auto"
