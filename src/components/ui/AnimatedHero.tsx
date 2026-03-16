@@ -179,57 +179,62 @@ export default function AnimatedHero() {
         >
             <div className="absolute inset-0 pointer-events-none">
                 <DotGrid isLight={isLight} />
+                <div className="neural-surface opacity-[0.05]" />
+                <motion.div 
+                    className="glow-cursor-follow"
+                    style={{ x: springX, y: springY, left: "50%", top: "50%", marginLeft: -300, marginTop: -300 }}
+                />
             </div>
 
             <div
                 className="absolute inset-0 pointer-events-none"
                 style={{
                     background: isLight
-                        ? "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(27,109,133,0.10) 0%, transparent 70%), radial-gradient(ellipse 60% 50% at 80% 80%, rgba(60,207,109,0.07) 0%, transparent 70%)"
-                        : "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(27,109,133,0.18) 0%, transparent 70%), radial-gradient(ellipse 60% 50% at 80% 80%, rgba(60,207,109,0.10) 0%, transparent 70%)",
+                        ? "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(27,109,133,0.12) 0%, transparent 70%), radial-gradient(ellipse 60% 50% at 80% 80%, rgba(60,207,109,0.08) 0%, transparent 70%)"
+                        : "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(27,109,133,0.22) 0%, transparent 70%), radial-gradient(ellipse 60% 50% at 80% 80%, rgba(60,207,109,0.12) 0%, transparent 70%)",
                 }}
             />
 
             <TechParticles />
             <TechFloatingIcons />
-            <div className="tech-grid opacity-20" />
+            <div className="tech-grid opacity-[0.15]" />
             
             <motion.div
                 style={{ x: springX, y: springY }}
                 className="absolute inset-0 pointer-events-none"
             >
                 <div
-                    className="absolute rounded-full blur-[120px]"
+                    className="absolute rounded-full blur-[140px]"
                     style={{
-                        width: 520, height: 520,
-                        top: "15%", left: "10%",
-                        background: isLight ? "rgba(27,109,133,0.15)" : "rgba(27,109,133,0.28)",
-                        animation: "breathe 6s ease-in-out infinite",
+                        width: 600, height: 600,
+                        top: "10%", left: "5%",
+                        background: isLight ? "rgba(27,109,133,0.18)" : "rgba(27,109,133,0.35)",
+                        animation: "breathe 7s ease-in-out infinite",
                     }}
                 />
                 <div
-                    className="absolute rounded-full blur-[100px]"
+                    className="absolute rounded-full blur-[120px]"
                     style={{
-                        width: 400, height: 400,
-                        bottom: "10%", right: "8%",
-                        background: isLight ? "rgba(60,207,109,0.12)" : "rgba(60,207,109,0.20)",
-                        animation: "breathe 8s ease-in-out infinite reverse",
+                        width: 500, height: 500,
+                        bottom: "5%", right: "5%",
+                        background: isLight ? "rgba(60,207,109,0.15)" : "rgba(60,207,109,0.25)",
+                        animation: "breathe 9s ease-in-out infinite reverse",
                     }}
                 />
             </motion.div>
 
             <motion.div 
                 className="absolute inset-0 pointer-events-none hidden xl:flex items-center justify-center overflow-hidden preserve-3d"
-                animate={{ rotateY: [0, 360], rotateX: [20, -20, 20] }}
-                transition={{ duration: 100, repeat: Infinity, ease: "linear" }}
+                animate={{ rotateY: [0, 360], rotateX: [15, -15, 15] }}
+                transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
             >
-                <div style={{ transform: "rotateX(75deg) rotateY(15deg)", transformStyle: "preserve-3d" }} className="absolute inset-0 flex items-center justify-center">
-                    <OrbitalRing radius={450} duration={60} isLight={isLight} />
-                    <OrbitalRing radius={300} duration={40} reverse isLight={isLight} />
+                <div style={{ transform: "rotateX(70deg) rotateY(10deg)", transformStyle: "preserve-3d" }} className="absolute inset-0 flex items-center justify-center">
+                    <OrbitalRing radius={480} duration={50} isLight={isLight} />
+                    <OrbitalRing radius={320} duration={35} reverse isLight={isLight} />
                 </div>
 
-                <div style={{ transform: "rotateX(-60deg) rotateY(-20deg)", transformStyle: "preserve-3d" }} className="absolute inset-0 flex items-center justify-center">
-                    <OrbitalRing radius={400} duration={50} isLight={isLight} />
+                <div style={{ transform: "rotateX(-50deg) rotateY(-15deg)", transformStyle: "preserve-3d" }} className="absolute inset-0 flex items-center justify-center">
+                    <OrbitalRing radius={420} duration={45} isLight={isLight} />
                 </div>
 
                 {orbitals.map(({ Icon, label, color, angle }, i) => (
@@ -238,9 +243,9 @@ export default function AnimatedHero() {
                         Icon={Icon}
                         label={label}
                         color={color}
-                        radius={380 + (i % 2) * 40}
+                        radius={400 + (i % 2) * 50}
                         startAngle={angle}
-                        duration={40 + i * 2}
+                        duration={45 + i * 3}
                         isLight={isLight}
                     />
                 ))}
@@ -248,11 +253,11 @@ export default function AnimatedHero() {
                 <div
                     className="absolute rounded-full"
                     style={{
-                        width: 200, height: 200,
-                        border: `1px solid ${isLight ? "rgba(27,109,133,0.3)" : "rgba(27,109,133,0.4)"}`,
-                        boxShadow: `0 0 60px rgba(27,109,133,0.25)`,
-                        background: "radial-gradient(circle, rgba(27,109,133,0.1) 0%, transparent 70%)",
-                        animation: "pulseRing 4s ease-in-out infinite",
+                        width: 240, height: 240,
+                        border: `2px solid ${isLight ? "rgba(27,109,133,0.2)" : "rgba(27,109,133,0.3)"}`,
+                        boxShadow: `0 0 80px rgba(27,109,133,0.3)`,
+                        background: "radial-gradient(circle, rgba(27,109,133,0.15) 0%, transparent 80%)",
+                        animation: "pulseRing 5s ease-in-out infinite",
                     }}
                 />
             </motion.div>

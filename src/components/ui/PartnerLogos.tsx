@@ -20,31 +20,31 @@ export default function PartnerLogos() {
                 </span>
             </div>
 
-            <div className="flex relative overflow-hidden before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-20 before:bg-gradient-to-r before:from-[var(--color-background)] before:to-transparent after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:w-20 after:bg-gradient-to-l after:from-[var(--color-background)] after:to-transparent">
+            <div className="flex relative overflow-hidden before:absolute before:left-0 before:top-0 before:z-10 before:h-full before:w-32 before:bg-gradient-to-r before:from-[var(--color-background)] before:to-transparent after:absolute after:right-0 after:top-0 after:z-10 after:h-full after:w-32 after:bg-gradient-to-l after:from-[var(--color-background)] after:to-transparent py-4">
                 <motion.div
                     className="flex whitespace-nowrap"
                     animate={{
-                        x: [0, -1000],
+                        x: [0, -1200],
                     }}
                     transition={{
                         x: {
                             repeat: Infinity,
                             repeatType: "loop",
-                            duration: 20,
+                            duration: 30,
                             ease: "linear",
                         },
                     }}
                 >
-                    {/* Double the array for seamless looping */}
-                    {[...partners, ...partners].map((partner, idx) => (
+                    {/* Triple the array for extremely smooth long-duration looping */}
+                    {[...partners, ...partners, ...partners].map((partner, idx) => (
                         <div
                             key={idx}
-                            className="flex items-center justify-center px-12 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                            className="flex items-center justify-center mx-6 p-6 rounded-2xl grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 hover:scale-110 hover:bg-white/5 border border-transparent hover:border-white/10 glass-3d"
                         >
                             <img
                                 src={partner.logo}
                                 alt={partner.name}
-                                className="h-8 md:h-10 w-auto object-contain"
+                                className="h-7 md:h-9 w-auto object-contain"
                             />
                         </div>
                     ))}
