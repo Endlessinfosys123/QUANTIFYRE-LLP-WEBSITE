@@ -172,19 +172,30 @@ export default function AnimatedHero() {
 
     const wordColors = ["#3CCF6D", "#1B6D85", "#FF8C00", "#A020F0"];
 
+    const { scrollYProgress } = useScroll();
+    const rotateX = useTransform(scrollYProgress, [0, 0.2], [0, 15]);
+    const translateZ = useTransform(scrollYProgress, [0, 0.2], [0, -100]);
+    const opacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
+
     return (
         <section
             className="relative min-h-[100vh] w-full flex items-center justify-center overflow-hidden pt-20"
-            style={{ background: "var(--color-background)" }}
+            style={{ 
+                background: "var(--color-background)",
+                perspective: "1200px"
+            }}
         >
-            <div className="absolute inset-0 pointer-events-none">
+            <motion.div 
+                className="absolute inset-0 pointer-events-none"
+                style={{ rotateX, translateZ, opacity: 1 }}
+            >
                 <DotGrid isLight={isLight} />
                 <div className="neural-surface opacity-[0.05]" />
                 <motion.div 
                     className="glow-cursor-follow"
                     style={{ x: springX, y: springY, left: "50%", top: "50%", marginLeft: -300, marginTop: -300 }}
                 />
-            </div>
+            </motion.div>
 
             <div
                 className="absolute inset-0 pointer-events-none"
@@ -200,7 +211,7 @@ export default function AnimatedHero() {
             <div className="tech-grid opacity-[0.15]" />
             
             <motion.div
-                style={{ x: springX, y: springY }}
+                style={{ x: springX, y: springY, rotateX, translateZ }}
                 className="absolute inset-0 pointer-events-none"
             >
                 <div
@@ -225,7 +236,8 @@ export default function AnimatedHero() {
 
             <motion.div 
                 className="absolute inset-0 pointer-events-none hidden xl:flex items-center justify-center overflow-hidden preserve-3d"
-                animate={{ rotateY: [0, 360], rotateX: [15, -15, 15] }}
+                style={{ rotateX, translateZ, opacity }}
+                animate={{ rotateY: [0, 360] }}
                 transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
             >
                 <div style={{ transform: "rotateX(70deg) rotateY(10deg)", transformStyle: "preserve-3d" }} className="absolute inset-0 flex items-center justify-center">

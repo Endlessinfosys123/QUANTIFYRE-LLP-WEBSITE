@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const partners = [
     { name: "Google", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
@@ -41,10 +42,13 @@ export default function PartnerLogos() {
                             key={idx}
                             className="flex items-center justify-center mx-6 p-6 rounded-2xl grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-500 hover:scale-110 hover:bg-white/5 border border-transparent hover:border-white/10 glass-3d"
                         >
-                            <img
+                            <Image
                                 src={partner.logo}
                                 alt={partner.name}
+                                width={120}
+                                height={40}
                                 className="h-7 md:h-9 w-auto object-contain"
+                                unoptimized={true}
                             />
                         </div>
                     ))}

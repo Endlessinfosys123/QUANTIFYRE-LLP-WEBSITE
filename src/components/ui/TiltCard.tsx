@@ -22,6 +22,12 @@ export default function TiltCard({ children, className = "", accentColor }: Tilt
         const y = (clientY - top - height / 2) / 12;
         mouseX.set(x);
         mouseY.set(-y);
+
+        // Set CSS variables for the spotlight effect
+        const localX = clientX - left;
+        const localY = clientY - top;
+        (currentTarget as HTMLElement).style.setProperty("--mouse-x", `${localX}px`);
+        (currentTarget as HTMLElement).style.setProperty("--mouse-y", `${localY}px`);
     }
 
     function handleMouseLeave() {
@@ -46,47 +52,47 @@ export default function TiltCard({ children, className = "", accentColor }: Tilt
             transition={{ duration: 0.5 }}
             className={`relative group ${className}`}
         >
-            {/* Animated border glow */}
-            <div
-                className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm"
-                style={{
-                    background: `linear-gradient(135deg, ${accent}40, transparent, ${accent}20)`,
-                    transform: "translateZ(-1px)",
-                }}
-            />
-
-            <div
-                style={{
-                    transform: "translateZ(30px)",
-                    background: isLight
-                        ? "rgba(255,255,255,0.85)"
-                        : "rgba(255,255,255,0.025)",
-                    backdropFilter: "blur(14px)",
-                    WebkitBackdropFilter: "blur(14px)",
-                    border: `1px solid ${isLight ? "rgba(27,109,133,0.15)" : accent + "30"}`,
-                    borderRadius: "1.5rem",
-                    transition: "all 0.45s cubic-bezier(0.4, 0, 0.2, 1)",
-                    boxShadow: isLight
-                        ? `0 4px 20px rgba(27,109,133,0.08)`
-                        : `0 4px 20px ${accent}10`,
-                }}
-                className="w-full h-full p-8 flex flex-col relative overflow-hidden group-hover:border-opacity-60 group-hover:-translate-y-1 transition-transform"
+            <div 
+                className="running-glow-container h-full w-full"
+                style={{ "--glow-color": accent } as any}
             >
-                {/* Shimmer line at top */}
+                {/* Running Outer Glow Track */}
+                <div className="running-glow-track" />
+
+                {/* Main Card Content */}
                 <div
-                    className="absolute top-0 left-8 right-8 h-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 shimmer-line"
-                />
-
-                {/* Spotlight glow on hover - following mouse */}
-                <motion.div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
                     style={{
-                        background: `radial-gradient(circle 350px at ${mouseX}px ${-mouseY}px, ${accent}15, transparent 70%)`,
+                        transform: "translateZ(30px)",
+                        background: isLight
+                            ? "rgba(255,255,255,0.92)"
+                            : "rgba(5, 8, 13, 0.4)",
+                        backdropFilter: "blur(20px)",
+                        WebkitBackdropFilter: "blur(20px)",
+                        border: `1px solid ${isLight ? "rgba(27,109,133,0.1)" : "rgba(255,255,255,0.05)"}`,
                         borderRadius: "1.5rem",
+                        transition: "all 0.45s cubic-bezier(0.4, 0, 0.2, 1)",
                     }}
-                />
+                    className="w-full h-full p-8 flex flex-col relative overflow-hidden glass-card"
+                >
+                    {/* Shimmer line at top */}
+                    <div
+                        className="absolute top-0 left-8 right-8 h-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 shimmer-line"
+                    />
 
-                {children}
+                    {/* Spotlight glow on hover - following mouse cursor more smoothly */}
+                    <motion.div
+                        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                        style={{
+                            background: `radial-gradient(circle 400px at var(--mouse-x, 50%) var(--mouse-y, 50%), ${accent}15, transparent 80%)`,
+                            borderRadius: "1.5rem",
+                        }}
+                    />
+
+                    {/* Content Container */}
+                    <div className="relative z-10 flex flex-col h-full">
+                        {children}
+                    </div>
+                </div>
             </div>
         </motion.div>
     );

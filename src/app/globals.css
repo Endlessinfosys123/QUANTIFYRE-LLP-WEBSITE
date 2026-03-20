@@ -129,9 +129,9 @@
 
 .glass-card:hover {
   background: var(--color-card-hover-bg);
-  border-color: var(--color-card-hover-border);
-  box-shadow: 0 12px 40px rgba(27, 109, 133, 0.15), 0 0 20px rgba(60, 207, 109, 0.06);
-  transform: translateY(-5px);
+  border-color: transparent;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2), 0 0 30px var(--color-card-hover-border);
+  transform: translateY(-8px) scale(1.02);
 }
 
 /* =========================================
@@ -301,6 +301,51 @@
 
 .counter-number {
   font-variant-numeric: tabular-nums;
+}
+
+/* =========================================
+   GLOWING BORDER ANIMATION
+   ========================================= */
+@keyframes border-rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.running-glow-container {
+  position: relative;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  padding: 1px; /* The "border" width */
+  background: transparent;
+  z-index: 1;
+}
+
+.running-glow-track {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150%;
+  height: 150%;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    var(--glow-color, var(--color-primary)) 20%,
+    transparent 40%,
+    transparent 100%
+  );
+  animation: border-rotate 4s linear infinite;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: -1;
+}
+
+.group:hover .running-glow-track {
+  opacity: 1;
 }
 
 /* Glow orb backgrounds */

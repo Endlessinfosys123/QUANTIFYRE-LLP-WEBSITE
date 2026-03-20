@@ -110,22 +110,41 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-12 gap-6 auto-rows-[280px] lg:auto-rows-[300px] preserve-3d">
+          <motion.div 
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={{
+              hidden: { opacity: 0 },
+              show: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.1
+                }
+              }
+            }}
+            className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-12 gap-6 auto-rows-[280px] lg:auto-rows-[300px] preserve-3d"
+          >
             {services.map((service, idx) => {
-              // Bento span logic for visual variety
               let spanClass = "lg:col-span-4 lg:row-span-1";
-              if (idx === 0) spanClass = "md:col-span-2 lg:col-span-5 lg:row-span-2 h-full"; // Large feature
-              if (idx === 1) spanClass = "md:col-span-2 lg:col-span-7 lg:row-span-1"; // Wide feature
+              if (idx === 0) spanClass = "md:col-span-2 lg:col-span-5 lg:row-span-2 h-full";
+              if (idx === 1) spanClass = "md:col-span-2 lg:col-span-7 lg:row-span-1";
               if (idx === 4) spanClass = "md:col-span-2 lg:col-span-4 lg:row-span-1";
               if (idx === 5) spanClass = "md:col-span-2 lg:col-span-3 lg:row-span-1";
 
               return (
-                <div key={idx} className={`relative group preserve-3d ${spanClass}`}>
+                <motion.div 
+                  key={idx} 
+                  variants={{
+                    hidden: { opacity: 0, scale: 0.8, y: 30 },
+                    show: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", stiffness: 100, damping: 20 } }
+                  }}
+                  className={`relative group preserve-3d ${spanClass}`}
+                >
                   <TiltCard 
                     className="h-full glass-3d"
                     accentColor={serviceAccents[idx]}
                   >
-                    {/* Service Icon */}
                     <div
                       className={`mb-6 p-4 rounded-2xl inline-block shrink-0 ${serviceGlowClass[idx]}`}
                       style={{
@@ -148,7 +167,6 @@ export default function Home() {
                       {service.desc}
                     </p>
 
-                    {/* Features or Extra Content for Larger Cards */}
                     <div className="mt-auto">
                       <div className="flex flex-wrap gap-2 mb-4">
                         {service.features.slice(0, idx === 0 ? 4 : 2).map((f, fi) => (
@@ -183,21 +201,25 @@ export default function Home() {
                       )}
                     </div>
                   </TiltCard>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Partner Logos */}
       <PartnerLogos />
 
-      {/* Process / How We Work Section */}
+      {/* Process Section */}
       <section
         ref={processRef}
-        className="w-full py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden skew-divider-top skew-divider-bottom"
-        style={{ background: isLight ? "rgba(27,109,133,0.06)" : "rgba(27,109,133,0.04)", borderTop: `1px solid var(--color-divider)`, borderBottom: `1px solid var(--color-divider)` }}
+        className="w-full py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+        style={{ 
+          background: isLight ? "rgba(27,109,133,0.06)" : "rgba(27,109,133,0.04)", 
+          borderTop: `1px solid var(--color-divider)`, 
+          borderBottom: `1px solid var(--color-divider)` 
+        }}
       >
         <div className="max-w-7xl mx-auto relative z-10">
           <motion.div
@@ -216,9 +238,7 @@ export default function Home() {
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
-            {/* Connecting line on desktop */}
             <div className="hidden lg:block absolute top-[60px] left-[10%] right-[10%] h-[2px] opacity-20" style={{ zIndex: 0, background: "var(--color-divider)" }} />
-            
             <div className="hidden lg:block absolute top-[60px] left-[10%] right-[10%] h-[2px]" style={{ zIndex: 1 }}>
               <motion.div
                 initial={{ scaleX: 0 }}
@@ -232,9 +252,10 @@ export default function Home() {
             {processSteps.map((step, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={processInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.6, delay: 0.2 + idx * 0.15 }}
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 * idx }}
                 className="relative z-10 flex flex-col items-center text-center p-8 rounded-3xl group transition-all duration-300 hover:-translate-y-2"
                 style={{
                   background: isLight ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.03)",
@@ -317,10 +338,10 @@ export default function Home() {
         
         <div className="max-w-5xl mx-auto text-center relative z-10">
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, y: 50, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           >
             <h2
               className="text-5xl md:text-8xl font-black mb-8 tracking-tighter"
@@ -341,13 +362,13 @@ export default function Home() {
                 style={{ backgroundColor: "var(--color-primary)" }}
               >
                 <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                <span className="relative z-10 flex items-center gap-2">
-                  Launch Your Project <ArrowRight className="w-5 h-5" />
+                <span className="relative z-10 flex items-center gap-2 text-xl">
+                  Launch Your Project <ArrowRight className="w-6 h-6" />
                 </span>
               </Link>
               <Link
                 href="/services"
-                className="px-10 py-5 glass-card font-bold rounded-2xl hover:bg-white/5 transition-colors border border-divider"
+                className="px-10 py-5 glass-card font-bold rounded-2xl hover:bg-white/5 transition-colors border border-divider text-xl"
               >
                 View Services
               </Link>
