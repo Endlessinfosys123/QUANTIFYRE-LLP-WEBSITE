@@ -59,7 +59,7 @@ export default function CustomSelect({
                 className={`flex items-center justify-between text-left transition-all px-4 py-3 ${className.includes('theme-input') ? '' : 'theme-input'} ${className}`}
                 style={{
                     borderColor: isOpen ? "var(--color-primary)" : "var(--color-input-border)",
-                    boxShadow: (isOpen && !className.includes('border-none')) ? "0 0 0 2px rgba(27,109,133,0.2)" : "none",
+                    boxShadow: isOpen ? "var(--shadow-glow-primary)" : "none",
                 }}
             >
                 <span className={`${selected ? "text-fg" : "text-muted"} truncate pr-2`}>
@@ -94,14 +94,15 @@ export default function CustomSelect({
                                     className="w-full px-4 py-2.5 text-left text-sm transition-colors hover:bg-primary/10 flex items-center justify-between group"
                                     style={{
                                         color: selected === option.value ? "var(--color-primary)" : "var(--color-foreground)",
-                                        background: selected === option.value ? "rgba(27,109,133,0.08)" : "transparent",
+                                        background: selected === option.value ? "var(--color-badge-bg)" : "transparent",
                                     }}
                                 >
                                     {option.label}
                                     {selected === option.value && (
                                         <motion.div
                                             layoutId="active-indicator"
-                                            className="w-1.5 h-1.5 rounded-full bg-primary"
+                                            className="w-1.5 h-1.5 rounded-full"
+                                            style={{ backgroundColor: "var(--color-primary)" }}
                                         />
                                     )}
                                 </button>

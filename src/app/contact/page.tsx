@@ -157,7 +157,7 @@ export default function ContactPage() {
                                         >
                                             <CustomSelect 
                                                 name="countryCode"
-                                                className="w-[125px] h-full border-none !bg-transparent !py-0 !px-2 shrink-0 border-r border-white/10 rounded-none shadow-none"
+                                                className="w-[125px] h-full border-none !bg-transparent !py-0 !px-2 shrink-0 rounded-none shadow-none"
                                                 placeholder="+91"
                                                 value="+91"
                                                 options={[
@@ -169,7 +169,7 @@ export default function ContactPage() {
                                                     { value: "+65", label: "+65 (SG)" },
                                                 ]}
                                             />
-                                            <div className="w-[1px] h-8 bg-white/10 shrink-0" />
+                                            <div className="w-[1px] h-8 bg-divider shrink-0" style={{ background: "var(--color-divider)" }} />
                                             <input
                                                 name="mobile" required type="tel" placeholder="9876543210"
                                                 className="bg-transparent flex-1 px-4 h-full outline-none text-base"

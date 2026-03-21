@@ -82,12 +82,12 @@ export default function PricingPage() {
                                 style={{
                                     background: plan.featured
                                         ? isLight
-                                            ? `linear-gradient(135deg, rgba(21,95,116,0.08), rgba(255,255,255,0.95), rgba(24,167,74,0.06))`
+                                            ? `linear-gradient(135deg, rgba(8,145,178,0.1), #FFFFFF, rgba(16,185,129,0.08))`
                                             : `linear-gradient(135deg, rgba(27,109,133,0.12), var(--color-background-2), rgba(60,207,109,0.08))`
                                         : "var(--color-card-bg)",
                                     backdropFilter: "blur(14px)",
                                     border: `1px solid ${plan.featured ? plan.color + "55" : "var(--color-card-border)"}`,
-                                    boxShadow: plan.featured ? `0 0 50px ${plan.color}30` : undefined,
+                                    boxShadow: plan.featured ? (isLight ? `0 20px 50px -12px ${plan.color}30` : `0 0 50px ${plan.color}30`) : undefined,
                                 }}
                             >
                                 {/* Featured glow orb */}

@@ -149,7 +149,7 @@ export default function Home() {
                       className={`mb-6 p-4 rounded-2xl inline-block shrink-0 ${serviceGlowClass[idx]}`}
                       style={{
                         background: isLight
-                          ? `${serviceAccents[idx]}15`
+                          ? `${serviceAccents[idx]}10`
                           : `${serviceAccents[idx]}18`,
                         color: serviceAccents[idx],
                       }}
@@ -173,11 +173,11 @@ export default function Home() {
                           <span
                             key={fi}
                             className="text-[10px] font-semibold px-2.5 py-1 rounded-full"
-                            style={{
-                              background: isLight ? `${serviceAccents[idx]}12` : `${serviceAccents[idx]}18`,
-                              color: serviceAccents[idx],
-                              border: `1px solid ${serviceAccents[idx]}30`,
-                            }}
+                          style={{
+                               background: isLight ? `${serviceAccents[idx]}10` : `${serviceAccents[idx]}18`,
+                               color: serviceAccents[idx],
+                               border: `1px solid ${serviceAccents[idx]}25`,
+                             }}
                           >
                             {f}
                           </span>
@@ -216,7 +216,7 @@ export default function Home() {
         ref={processRef}
         className="w-full py-32 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
         style={{ 
-          background: isLight ? "rgba(27,109,133,0.06)" : "rgba(27,109,133,0.04)", 
+          background: "var(--color-section-alt)", 
           borderTop: `1px solid var(--color-divider)`, 
           borderBottom: `1px solid var(--color-divider)` 
         }}
@@ -258,9 +258,10 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: 0.1 * idx }}
                 className="relative z-10 flex flex-col items-center text-center p-8 rounded-3xl group transition-all duration-300 hover:-translate-y-2"
                 style={{
-                  background: isLight ? "rgba(255,255,255,0.95)" : "rgba(255,255,255,0.03)",
+                  background: isLight ? "#FFFFFF" : "rgba(255,255,255,0.03)",
                   border: `1px solid var(--color-divider)`,
                   backdropFilter: "blur(16px)",
+                  boxShadow: isLight ? "0 10px 30px -10px rgba(0,0,0,0.05)" : "none",
                 }}
               >
                 <div

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, useSpring, useMotionValue } from "framer-motion";
+import { useTheme } from "@/components/layout/ThemeProvider";
 
 export default function MouseFollower() {
   const [mounted, setMounted] = useState(false);
@@ -32,14 +33,17 @@ export default function MouseFollower() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [mouseX, mouseY]);
 
+  const { theme } = useTheme();
+  const isLight = theme === "light";
+
   if (!mounted) return null;
 
   return (
     <>
       <motion.div
-        className="fixed inset-0 pointer-events-none z-[100] opacity-30 mix-blend-screen"
+        className={`fixed inset-0 pointer-events-none z-[100] ${isLight ? "opacity-40" : "opacity-30 mix-blend-screen"}`}
         style={{
-          background: `radial-gradient(600px circle at 0px 0px, rgba(27, 109, 133, 0.1), transparent 80%)`,
+          background: `radial-gradient(600px circle at 0px 0px, ${isLight ? "rgba(8, 145, 178, 0.08)" : "rgba(27, 109, 133, 0.1)"}, transparent 80%)`,
           left: smoothX,
           top: smoothY,
           transform: 'translate(-50%, -50%)'

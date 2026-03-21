@@ -201,7 +201,7 @@ export default function AnimatedHero() {
                 className="absolute inset-0 pointer-events-none"
                 style={{
                     background: isLight
-                        ? "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(27,109,133,0.12) 0%, transparent 70%), radial-gradient(ellipse 60% 50% at 80% 80%, rgba(60,207,109,0.08) 0%, transparent 70%)"
+                        ? "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(8,145,178,0.1) 0%, transparent 80%), radial-gradient(ellipse 60% 50% at 80% 80%, rgba(16,185,129,0.06) 0%, transparent 70%)"
                         : "radial-gradient(ellipse 80% 60% at 50% 0%, rgba(27,109,133,0.22) 0%, transparent 70%), radial-gradient(ellipse 60% 50% at 80% 80%, rgba(60,207,109,0.12) 0%, transparent 70%)",
                 }}
             />
@@ -219,7 +219,7 @@ export default function AnimatedHero() {
                     style={{
                         width: 600, height: 600,
                         top: "10%", left: "5%",
-                        background: isLight ? "rgba(27,109,133,0.18)" : "rgba(27,109,133,0.35)",
+                        background: isLight ? "rgba(8,145,178,0.12)" : "rgba(27,109,133,0.35)",
                         animation: "breathe 7s ease-in-out infinite",
                     }}
                 />
@@ -228,7 +228,7 @@ export default function AnimatedHero() {
                     style={{
                         width: 500, height: 500,
                         bottom: "5%", right: "5%",
-                        background: isLight ? "rgba(60,207,109,0.15)" : "rgba(60,207,109,0.25)",
+                        background: isLight ? "rgba(16,185,129,0.1)" : "rgba(60,207,109,0.25)",
                         animation: "breathe 9s ease-in-out infinite reverse",
                     }}
                 />
@@ -377,7 +377,12 @@ export default function AnimatedHero() {
                     <MagneticButton>
                         <Link
                             href="/contact"
-                            className="px-10 py-5 rounded-full bg-white/5 border border-white/10 text-white font-bold text-xl hover:bg-white/10 transition-all backdrop-blur-xl flex items-center gap-3 group"
+                            className="px-10 py-5 rounded-full border text-lg font-bold transition-all backdrop-blur-xl flex items-center gap-3 group"
+                            style={{
+                                background: isLight ? "rgba(15,23,42,0.03)" : "rgba(255,255,255,0.05)",
+                                borderColor: isLight ? "rgba(15,23,42,0.15)" : "rgba(255,255,255,0.1)",
+                                color: "var(--color-foreground)",
+                            }}
                         >
                             Book a Consultation
                             <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
