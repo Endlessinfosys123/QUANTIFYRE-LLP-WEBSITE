@@ -8,6 +8,7 @@ import ThemeProvider from '@/components/layout/ThemeProvider';
 import MouseFollower from '@/components/ui/MouseFollower';
 import NoiseOverlay from '@/components/ui/NoiseOverlay';
 import PageTransition from '@/components/layout/PageTransition';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -130,6 +131,7 @@ export default function RootLayout({
           </main>
           <Footer />
         </ThemeProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
